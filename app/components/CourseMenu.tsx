@@ -1,0 +1,433 @@
+"use client";
+
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
+import api from "../utils/api";
+
+interface Category {
+  _id: string;
+  name: string;
+  slug?: string;
+  courses?: number;
+}
+
+interface Course {
+  _id: string;
+  title: string;
+  slug?: string;
+  description?: string;
+  price?: number;
+  discountPrice?: number;
+  image?: string;
+  rating?: number;
+  averageRating?: number;
+  totalReviews?: number;
+}
+
+interface CourseMenuProps {
+  isMobile?: boolean;
+  onItemClick?: () => void;
+}
+
+const CourseMenu = ({
+  isMobile = false,
+  onItemClick = () => {},
+}: CourseMenuProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [categoryCourses, setCategoryCourses] = useState<
+    Record<string, Course[]>
+  >({});
+  const [isLoadingCourses, setIsLoadingCourses] = useState<
+    Record<string, boolean>
+  >({});
+  const [dropdownPosition, setDropdownPosition] = useState<"top" | "bottom">(
+    "bottom",
+  );
+  const menuRef = useRef<HTMLDivElement>(null);
+  const dropdownRefs = useRef<Record<string, HTMLDivElement>>({});
+
+  // Fetch categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const response = await api.get("/categories", {
+          params: {
+            limit: 12,
+            fields: "_id,name,slug,courseCount,isActive",
+            sort: "name",
+          },
+        });
+
+        let categoriesData: Category[] = [];
+        if (response?.data?.data && Array.isArray(response.data.data)) {
+          categoriesData = response.data.data;
+        } else if (response?.data && Array.isArray(response.data)) {
+          categoriesData = response.data;
+        } else if (Array.isArray(response)) {
+          categoriesData = response;
+        }
+
+        const processedCategories = categoriesData
+          .filter((cat) => cat && cat._id && cat.name)
+          .map((category) => ({
+            _id: category._id,
+            name: category.name,
+            slug: category.slug || category._id,
+            courses: category.courses,
+          }));
+
+        setCategories(processedCategories);
+      } catch (err: any) {
+        console.error("Error fetching categories:", err);
+        setError("Failed to load categories. Please try again later.");
+        setCategories([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Fetch courses for a category
+  const fetchCategoryCourses = useCallback(async (categoryId: string) => {
+    if (!categoryId) return;
+
+    try {
+      setIsLoadingCourses((prev) => ({ ...prev, [categoryId]: true }));
+
+      const response = await api.get("/courses", {
+        params: {
+          limit: 5,
+          fields:
+            "_id,title,slug,description,price,discountPrice,image,rating,averageRating,totalReviews",
+          status: "published",
+          category: categoryId,
+        },
+      });
+
+      let courses: Course[] = [];
+      if (response?.data?.data && Array.isArray(response.data.data)) {
+        courses = response.data.data;
+      } else if (response?.data && Array.isArray(response.data)) {
+        courses = response.data;
+      } else if (Array.isArray(response)) {
+        courses = response;
+      }
+
+      setCategoryCourses((prev) => ({
+        ...prev,
+        [categoryId]: courses,
+      }));
+    } catch (err: any) {
+      console.error("Error fetching courses:", err);
+      setError("Failed to load courses. Please try again.");
+    } finally {
+      setIsLoadingCourses((prev) => ({ ...prev, [categoryId]: false }));
+    }
+  }, []);
+
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+        setActiveCategory(null);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Handle menu item click
+  const handleMenuItemClick = () => {
+    if (isMobile) {
+      setIsOpen(false);
+      onItemClick();
+    }
+  };
+
+  // Toggle category expansion and fetch courses if needed
+  const toggleCategory = (categoryId: string) => {
+    const newActiveCategory = activeCategory === categoryId ? null : categoryId;
+    setActiveCategory(newActiveCategory);
+
+    if (newActiveCategory && !categoryCourses[newActiveCategory]) {
+      fetchCategoryCourses(newActiveCategory);
+    }
+  };
+
+  // Handle category hover for desktop
+  const handleCategoryHover = (categoryId: string, event: React.MouseEvent) => {
+    if (!isMobile) {
+      setActiveCategory(categoryId);
+
+      if (event && event.currentTarget) {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - rect.bottom;
+        const spaceAbove = rect.top;
+        setDropdownPosition(
+          spaceBelow < 400 && spaceBelow < spaceAbove ? "top" : "bottom",
+        );
+      }
+
+      if (!categoryCourses[categoryId]) {
+        fetchCategoryCourses(categoryId);
+      }
+    }
+  };
+
+  // Set dropdown ref for a category
+  const setDropdownRef = (
+    element: HTMLDivElement | null,
+    categoryId: string,
+  ) => {
+    if (element) {
+      dropdownRefs.current[categoryId] = element;
+    }
+  };
+
+  return (
+    <div className={`relative mb-5 ${isMobile ? "w-full" : ""}`} ref={menuRef}>
+      {/* Main Menu Button - Only show in desktop or as a toggle in mobile */}
+      {!isMobile && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen(!isOpen);
+          }}
+          className="flex items-center text-sm px-1 py-1 md:mt-5 text-blue-900 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-400 bg-blue-200 dark:bg-blue-900/30 rounded transition-colors duration-200 font-medium"
+          aria-expanded={isOpen}
+          aria-haspopup="true"
+          aria-controls="course-menu-dropdown"
+        >
+          <span>Course Menu</span>
+          <svg
+            className={`w-3 h-3 transition-transform duration-200 ${
+              isOpen ? "transform rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+      )}
+
+      {/* Dropdown Menu */}
+      <div
+        id="course-menu-dropdown"
+        className={`${isOpen || isMobile ? "block" : "hidden"} ${
+          isMobile
+            ? "w-full bg-white dark:bg-gray-800 rounded-lg shadow-md mt-1 py-1"
+            : "absolute left-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700"
+        }`}
+        role="menu"
+        aria-orientation="vertical"
+        aria-labelledby="course-menu-button"
+      >
+        {isMobile && (
+          <div className="sticky top-0 z-40 bg-white dark:bg-gray-800 px-2 py-2 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between">
+              <h3 className="text-md font-semibold text-gray-800 dark:text-white">
+                Browse Courses
+              </h3>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpen(false);
+                  if (onItemClick) onItemClick();
+                }}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-1 -mr-1"
+                aria-label="Close menu"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className={isMobile ? "p-2 relative z-10" : "p-2"}>
+          {isLoading ? (
+            <div className="flex justify-center p-2">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+            </div>
+          ) : error ? (
+            <div className="p-2 text-center text-red-500 dark:text-red-400">
+              {error}
+            </div>
+          ) : categories.length > 0 ? (
+            <div
+              className={`space-y-0 ${
+                isMobile ? "divide-y divide-gray-200 dark:divide-gray-700" : ""
+              }`}
+            >
+              {categories
+                .sort((a, b) => {
+                  const order: Record<string, number> = {
+                    "ERP Academy": 1,
+                    "Professional Language": 2,
+                    "Data Science & ML": 3,
+                  };
+                  const aOrder = order[a.name] || 999;
+                  const bOrder = order[b.name] || 999;
+                  return aOrder - bOrder;
+                })
+                .map((category) => (
+                  <div
+                    key={category._id}
+                    className={`relative group ${isMobile ? "py-0.5" : "py-1"}`}
+                  >
+                    <div
+                      ref={(el) => setDropdownRef(el, category._id)}
+                      onClick={() => isMobile && toggleCategory(category._id)}
+                      onMouseEnter={(e) =>
+                        !isMobile && handleCategoryHover(category._id, e)
+                      }
+                      className={`cursor-pointer flex items-center justify-between rounded-lg transition-colors ${
+                        isMobile
+                          ? "pl-1 py-1 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          : "px-2 py-1 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center">
+                          <span
+                            className={`font-medium ${
+                              isMobile
+                                ? "text-base text-gray-800 dark:text-gray-100"
+                                : "text-sm text-gray-700 dark:text-gray-200"
+                            }`}
+                          >
+                            {category.name}
+                          </span>
+                        </div>
+                        {(isMobile || activeCategory === category._id) && (
+                          <svg
+                            className={`w-4 h-4 text-gray-500 dark:text-gray-400 transform transition-transform ${
+                              activeCategory === category._id
+                                ? "rotate-180"
+                                : ""
+                            }`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Course dropdown - shown on hover (desktop) or click (mobile) */}
+                    {activeCategory === category._id && (
+                      <div
+                        className={`${
+                          !isMobile
+                            ? `absolute left-full ml-1 w-[400px] max-h-[80vh] overflow-y-auto ${
+                                dropdownPosition === "top"
+                                  ? "bottom-0"
+                                  : "top-0"
+                              }`
+                            : "w-full mt-2"
+                        } bg-white dark:bg-gray-800 shadow-lg z-50`}
+                        onMouseEnter={(e) =>
+                          !isMobile && handleCategoryHover(category._id, e)
+                        }
+                        onMouseLeave={() =>
+                          !isMobile && setActiveCategory(null)
+                        }
+                      >
+                        <div className="p-2">
+                          <Link
+                            href={`/courses/${
+                              category.slug ||
+                              category.name.toLowerCase().replace(/\s+/g, "-")
+                            }`}
+                            className="block py-0.5 text-sm font-medium text-blue-600 dark:text-blue-400 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-t"
+                            onClick={() => {
+                              setIsOpen(false);
+                              setActiveCategory(null);
+                              if (onItemClick) onItemClick();
+                            }}
+                          >
+                            {category.name} courses
+                          </Link>
+
+                          {isLoadingCourses[category._id] ? (
+                            <div className="flex justify-center p-4">
+                              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+                            </div>
+                          ) : categoryCourses[category._id]?.length > 0 ? (
+                            <div className="py-1">
+                              {categoryCourses[category._id].map((course) => (
+                                <Link
+                                  key={course._id}
+                                  href={`/course/${course.slug || course._id}`}
+                                  className="block py-1 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded"
+                                  onClick={() => {
+                                    setIsOpen(false);
+                                    setActiveCategory(null);
+                                    if (onItemClick) onItemClick();
+                                  }}
+                                >
+                                  {course.title}
+                                </Link>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="p-2 text-sm text-gray-500 dark:text-gray-400">
+                              No courses found in this category.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+            </div>
+          ) : (
+            <div className="p-2 text-sm text-gray-500 dark:text-gray-400">
+              No categories found
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CourseMenu;

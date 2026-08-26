@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Banner from "./components/home/Banner";
 import PopularCourses from "./components/home/PopularCourses";
 import Categories from "./components/home/Categories";
@@ -12,41 +13,53 @@ import Testimonials from "./components/home/Testimonials";
 import Newsletter from "./components/home/Newsletter";
 import FAQ from "./components/home/FAQ";
 import ContactSection from "./components/home/ContactSection";
-import JsonLd from "./components/JsonLd";
+
+export const metadata: Metadata = {
+  title: "Eklabya - Online Learning Platform",
+  description: "Eklabya - Online Learning Platform",
+  alternates: {
+    canonical: "https://www.theeklavya.com",
+  },
+};
 
 export default function Home() {
-  const baseUrl = "https://www.theeklavya.com";
-
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "The Eklavya",
-      url: baseUrl,
-      potentialAction: {
-        "@type": "SearchAction",
-        target: `${baseUrl}/courses?search={search_term_string}`,
-        "query-input": "required name=search_term_string",
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.theeklavya.com/#website",
+        url: "https://www.theeklavya.com",
+        name: "The Eklabya",
+        potentialAction: {
+          "@type": "SearchAction",
+          target:
+            "https://www.theeklavya.com/courses?search={search_term_string}",
+          "query-input": "required name=search_term_string",
+        },
       },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "The Eklavya",
-      url: baseUrl,
-      logo: `${baseUrl}/images/eklabya-logo-fit-E.jpeg`,
-      sameAs: [
-        "https://x.com/eklabyaofficial",
-        "https://www.linkedin.com/company/eklabya-centre-of-excellence/",
-        "https://www.facebook.com/profile.php?id=61589473389916",
-        "https://www.instagram.com/eklabya_official",
-      ],
-    },
-  ];
+      {
+        "@type": "Organization",
+        "@id": "https://www.theeklavya.com/#organization",
+        name: "The Eklavya",
+        url: "https://www.theeklavya.com",
+        logo: "https://www.theeklavya.com/images/eklabya-logo-fit-E.jpeg",
+        sameAs: [
+          "https://x.com/eklabyaofficial",
+          "https://www.linkedin.com/company/eklabya-centre-of-excellence/",
+          "https://www.facebook.com/profile.php?id=61589473389916",
+          "https://www.instagram.com/eklabya_official",
+        ],
+      },
+    ],
+  };
 
   return (
-    <>
-      <JsonLd data={jsonLd} />
+    <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="flex flex-col min-h-screen">
         {/* Hero Banner */}
         <Banner />
@@ -90,6 +103,6 @@ export default function Home() {
         {/* Contact Section */}
         <ContactSection />
       </div>
-    </>
+    </main>
   );
 }

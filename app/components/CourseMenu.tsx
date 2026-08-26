@@ -162,27 +162,20 @@ const CourseMenu = ({
     const newActiveCategory = activeCategory === categoryId ? null : categoryId;
     setActiveCategory(newActiveCategory);
 
-    if (newActiveCategory && !categoryCourses[newActiveCategory]) {
-      fetchCategoryCourses(newActiveCategory);
-    }
-  };
+    if (newActiveCategory) {
+      if (!categoryCourses[newActiveCategory]) {
+        fetchCategoryCourses(newActiveCategory);
+      }
 
-  // Handle category hover for desktop
-  const handleCategoryHover = (categoryId: string, event: React.MouseEvent) => {
-    if (!isMobile) {
-      setActiveCategory(categoryId);
-
-      if (event && event.currentTarget) {
-        const rect = event.currentTarget.getBoundingClientRect();
+      // Calculate dropdown position
+      const element = dropdownRefs.current[newActiveCategory];
+      if (element) {
+        const rect = element.getBoundingClientRect();
         const spaceBelow = window.innerHeight - rect.bottom;
         const spaceAbove = rect.top;
         setDropdownPosition(
           spaceBelow < 400 && spaceBelow < spaceAbove ? "top" : "bottom",
         );
-      }
-
-      if (!categoryCourses[categoryId]) {
-        fetchCategoryCourses(categoryId);
       }
     }
   };
@@ -308,10 +301,7 @@ const CourseMenu = ({
                   >
                     <div
                       ref={(el) => setDropdownRef(el, category._id)}
-                      onClick={() => isMobile && toggleCategory(category._id)}
-                      onMouseEnter={(e) =>
-                        !isMobile && handleCategoryHover(category._id, e)
-                      }
+                      onClick={() => toggleCategory(category._id)}
                       className={`cursor-pointer flex items-center justify-between rounded-lg transition-colors ${
                         isMobile
                           ? "pl-1 py-1 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -364,12 +354,6 @@ const CourseMenu = ({
                               }`
                             : "w-full mt-2"
                         } bg-white dark:bg-gray-800 shadow-lg z-50`}
-                        onMouseEnter={(e) =>
-                          !isMobile && handleCategoryHover(category._id, e)
-                        }
-                        onMouseLeave={() =>
-                          !isMobile && setActiveCategory(null)
-                        }
                       >
                         <div className="p-2">
                           <Link

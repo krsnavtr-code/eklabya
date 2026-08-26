@@ -24,8 +24,9 @@ import { useAuth } from "../context/AuthContext";
 
 // TypeScript interfaces
 interface NavLink {
-  to: string;
+  to?: string;
   label: string;
+  children?: { to: string; label: string }[];
 }
 
 interface Course {
@@ -76,9 +77,15 @@ function Navbar() {
   // --- Effects ---
   useEffect(() => {
     // Initialize theme from localStorage on mount
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setTheme(savedTheme);
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+
+    // Apply theme class immediately
+    const element = document.documentElement;
+    if (savedTheme === "dark") {
+      element.classList.add("dark");
+    } else {
+      element.classList.remove("dark");
     }
   }, []);
 
@@ -193,9 +200,17 @@ function Navbar() {
   const navLinks = [
     { to: "/courses", label: "All Course" },
     { to: "/categories", label: "Categories" },
-    { to: "/testimonials", label: "Testimonials" },
-    { to: "/scholarship", label: "Scholarship" },
+    // { to: "/testimonials", label: "Testimonials" },
+    // { to: "/scholarship", label: "Scholarship" },
     ...(isAdmin ? [{ to: "/admin", label: "Admin" }] : []),
+    {
+      label: "Achievements",
+      children: [
+        { to: "/testimonials", label: "Testimonials" },
+        { to: "/awards", label: "Awards" },
+        { to: "/media-mentions", label: "Media Mentions" },
+      ],
+    },
   ];
 
   return (
@@ -204,19 +219,19 @@ function Navbar() {
           PART 1: TOP BAR (Utilities)
           Hidden on mobile, visible on desktop. Dark background.
       ================================================================== */}
-      <div className="bg-gray-900 text-gray-300 text-xs py-1 px-4 border-b border-gray-800">
+      <div className="bg-white text-blue-700 dark:bg-gray-900 dark:text-orange-500 font-bold text-xs py-1 px-4 border-b border-blue-100 dark:border-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Left Side: Contact / Info */}
           <div className="hidden md:inline-flex items-center gap-4">
             <a
               href="mailto:info@eklabya.com"
-              className="flex items-center gap-1 hover:text-white transition-colors"
+              className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               <FaEnvelope size={10} /> Mail Us
             </a>
             <a
               href="tel:+919891030303"
-              className="flex items-center gap-1 hover:text-white transition-colors"
+              className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               <FaPhoneAlt size={10} /> +91 9891030303
             </a>
@@ -226,13 +241,13 @@ function Navbar() {
           <div className="md:hidden flex items-center gap-4">
             <a
               href="mailto:info@eklabya.com"
-              className="flex items-center gap-1 hover:text-white transition-colors"
+              className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               <FaEnvelope size={10} />
             </a>
             <a
               href="tel:+919891030303"
-              className="flex items-center gap-1 hover:text-white transition-colors"
+              className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               <FaPhoneAlt size={10} />
             </a>
@@ -242,40 +257,52 @@ function Navbar() {
           <div className="hidden md:inline-flex items-center gap-2">
             {/* Theme Toggle */}
             <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="flex items-center gap-1 hover:text-white transition-colors"
+              onClick={() => {
+                const newTheme = theme === "dark" ? "light" : "dark";
+                setTheme(newTheme);
+
+                const element = document.documentElement;
+                if (newTheme === "dark") {
+                  element.classList.add("dark");
+                } else {
+                  element.classList.remove("dark");
+                }
+                localStorage.setItem("theme", newTheme);
+              }}
+              className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               {theme === "dark" ? <FaSun size={12} /> : <FaMoon size={12} />}
               <span>{theme === "dark" ? "" : ""}</span>
             </button>
 
-            <div className="h-3 w-px bg-gray-700 mx-1"></div>
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600 mx-1"></div>
 
             {/* Agent Register */}
             <a
               href="https://genlead.in/agent/register"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               Agent Register
             </a>
 
-            <div className="h-3 w-px bg-gray-700 mx-1"></div>
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600 mx-1"></div>
 
-            {/* SMART Board */}
+            {/* SMART Board
             <Link
               href="/smart-board"
               className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold hover:bg-blue-700 transition-colors"
             >
               SMART Board
             </Link>
+            */}
 
             {/* Payment Dropdown (Small Version) */}
             <div className="relative" ref={paymentDropdownRef}>
               <button
                 onClick={() => setShowPaymentDropdown(!showPaymentDropdown)}
-                className="flex items-center gap-1 hover:text-white transition-colors"
+                className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
               >
                 <FaCreditCard size={12} /> Make Payment{" "}
                 <FaChevronDown size={8} />
@@ -327,14 +354,14 @@ function Navbar() {
               )}
             </div>
 
-            <div className="h-3 w-px bg-gray-700 mx-1"></div>
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600 mx-1"></div>
 
             {/* Auth Section */}
             {isAuthenticated ? (
               <div className="relative" ref={profileMenuRef}>
                 <button
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                  className="flex items-center gap-2 hover:text-white font-semibold"
+                  className="flex items-center gap-2 hover:text-blue-900 dark:hover:text-orange-300 font-semibold"
                 >
                   <FaUser size={10} />
                   {currentUser?.name?.split(" ")[0] ||
@@ -345,7 +372,7 @@ function Navbar() {
                 {/* Profile Dropdown */}
                 {isProfileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 py-2 text-sm text-gray-700 dark:text-gray-200 z-50 animate-fade-in-down">
-                    <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
+                    <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-blue-300/50">
                       <p className="font-semibold">
                         {currentUser?.name || currentUser?.fullname}
                       </p>
@@ -355,14 +382,14 @@ function Navbar() {
                     </div>
                     <Link
                       href="/my-learning"
-                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-blue-300"
                       onClick={() => setIsProfileMenuOpen(false)}
                     >
                       My Learning
                     </Link>
                     <Link
                       href="/profile"
-                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-blue-300"
                       onClick={() => setIsProfileMenuOpen(false)}
                     >
                       Profile Settings
@@ -396,32 +423,43 @@ function Navbar() {
           <div className="md:hidden flex items-center gap-2">
             {/* Theme Toggle */}
             <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="flex items-center gap-1 hover:text-white transition-colors"
+              onClick={() => {
+                const newTheme = theme === "dark" ? "light" : "dark";
+                setTheme(newTheme);
+
+                const element = document.documentElement;
+                if (newTheme === "dark") {
+                  element.classList.add("dark");
+                } else {
+                  element.classList.remove("dark");
+                }
+                localStorage.setItem("theme", newTheme);
+              }}
+              className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               {theme === "dark" ? <FaSun size={12} /> : <FaMoon size={12} />}
               <span>{theme === "dark" ? "" : ""}</span>
             </button>
 
-            <div className="h-3 w-px bg-gray-700"></div>
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600"></div>
 
             {/* Agent Register */}
             <a
               href="https://genlead.in/agent/register"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               Agent Register
             </a>
 
-            <div className="h-3 w-px bg-gray-700"></div>
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600"></div>
 
             {/* Payment Dropdown (Small Version) */}
             <div className="relative" ref={mobilePaymentDropdownRef}>
               <button
                 onClick={() => setShowPaymentDropdown(!showPaymentDropdown)}
-                className="flex items-center gap-1 hover:text-white transition-colors"
+                className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
               >
                 Pay <FaChevronDown size={8} />
               </button>
@@ -472,14 +510,14 @@ function Navbar() {
               )}
             </div>
 
-            <div className="h-3 w-px bg-gray-700 mx-1"></div>
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600 mx-1"></div>
 
             {/* Auth Section */}
             {isAuthenticated ? (
               <div className="relative" ref={mobileProfileMenuRef}>
                 <button
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                  className="flex items-center gap-2 hover:text-white font-semibold"
+                  className="flex items-center gap-2 hover:text-blue-900 dark:hover:text-orange-300 font-semibold"
                 >
                   <FaUser size={10} />
                   {currentUser?.name?.split(" ")[0] ||
@@ -490,7 +528,7 @@ function Navbar() {
                 {/* Profile Dropdown */}
                 {isProfileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 py-2 text-sm text-gray-700 dark:text-gray-200 z-50 animate-fade-in-down">
-                    <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
+                    <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-blue-300/50">
                       <p className="font-semibold">
                         {currentUser?.name || currentUser?.fullname}
                       </p>
@@ -500,14 +538,14 @@ function Navbar() {
                     </div>
                     <Link
                       href="/my-learning"
-                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-blue-300"
                       onClick={() => setIsProfileMenuOpen(false)}
                     >
                       My Learning
                     </Link>
                     <Link
                       href="/profile"
-                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700"
+                      className="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-blue-300"
                       onClick={() => setIsProfileMenuOpen(false)}
                     >
                       Profile Settings
@@ -577,11 +615,32 @@ function Navbar() {
                 <CourseMenu />
               </div>
               {navLinks.map((link) => {
+                if (link.children) {
+                  return (
+                    <div key={link.label} className="relative group">
+                      <button className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 flex items-center gap-1">
+                        {link.label}
+                        <FaChevronDown size={10} />
+                      </button>
+                      <div className="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 py-2 z-50 hidden group-hover:flex flex-col">
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.to}
+                            href={child.to}
+                            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
                 const isActive = pathname === link.to;
                 return (
                   <Link
-                    key={link.to}
-                    href={link.to}
+                    key={link.to!}
+                    href={link.to!}
                     className={`text-sm font-semibold transition-all duration-300 relative ${
                       isActive
                         ? "text-blue-600 dark:text-blue-400 font-bold"
@@ -845,16 +904,34 @@ function Navbar() {
                 onItemClick={() => setIsMobileMenuOpen(false)}
               />
             </div>
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                href={link.to}
-                className={`flex items-center font-medium rounded-lg bg-gray-200 dark:bg-gray-800 px-2 py-2 hover:bg-gray-50 dark:hover:bg-gray-800`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.children ? (
+                <div key={link.label} className="space-y-1">
+                  <div className="px-2 py-2 font-medium rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+                    {link.label}
+                  </div>
+                  {link.children.map((child) => (
+                    <Link
+                      key={child.to}
+                      href={child.to}
+                      className="flex items-center font-medium rounded-lg bg-gray-100 dark:bg-gray-700 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={link.to!}
+                  href={link.to!}
+                  className={`flex items-center font-medium rounded-lg bg-gray-200 dark:bg-gray-800 px-2 py-2 hover:bg-gray-50 dark:hover:bg-gray-800`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
 
             {isAuthenticated && (
               <>

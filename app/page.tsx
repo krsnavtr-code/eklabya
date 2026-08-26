@@ -1,14 +1,62 @@
+import Banner from "./components/home/Banner";
+import PopularCourses from "./components/home/PopularCourses";
+import Categories from "./components/home/Categories";
+import Assessment from "./components/home/Assessment";
+import ScholarshipProgram from "./components/home/ScholarshipProgram";
+import WhyLearnWithEklabya from "./components/home/WhyLearnWithEklabya";
+import HowWillYourTrainingWork from "./components/home/HowWillYourTrainingWork";
+import Stats from "./components/home/Stats";
+import StudentPlacements from "./components/home/StudentPlacements";
+import Content from "./components/home/Content";
+import Testimonials from "./components/home/Testimonials";
+import Newsletter from "./components/home/Newsletter";
+import FAQ from "./components/home/FAQ";
+import ContactSection from "./components/home/ContactSection";
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-50 dark:bg-black">
-      <div className="text-center py-20">
-        <h1 className="text-4xl font-bold text-black dark:text-zinc-50 mb-4">
-          Welcome to Eklabya
-        </h1>
-        <p className="text-lg text-zinc-600 dark:text-zinc-400">
-          Online Learning Platform
-        </p>
-      </div>
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Banner */}
+      <Banner />
+
+      {/* Popular Courses */}
+      <PopularCourses />
+
+      {/* Categories Section */}
+      <Categories />
+
+      {/* Assessment / Scholarship Program */}
+      <Assessment />
+
+      {/* Scholarship Program */}
+      <ScholarshipProgram />
+
+      {/* Why Learn With Eklabya */}
+      <WhyLearnWithEklabya />
+
+      {/* How Will Your Training Work */}
+      <HowWillYourTrainingWork />
+
+      {/* Stats */}
+      <Stats />
+
+      {/* Student Placements */}
+      <StudentPlacements />
+
+      {/* Content */}
+      <Content />
+
+      {/* Testimonials */}
+      <Testimonials />
+
+      {/* Newsletter */}
+      <Newsletter />
+
+      {/* FAQ */}
+      <FAQ />
+
+      {/* Contact Section */}
+      <ContactSection />
     </div>
   );
 }

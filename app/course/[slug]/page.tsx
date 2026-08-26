@@ -680,9 +680,14 @@ const CourseDetail: React.FC = () => {
     `online course, e-learning, professional development`;
 
   const courseImage = course?.imageUrl || "/images/eklabya-logo-fit-E.jpeg";
+  const baseUrl =
+    typeof process !== "undefined"
+      ? process.env.NEXT_PUBLIC_SITE_URL
+      : undefined;
+  const siteBase = (baseUrl || "").replace(/\/$/, "");
   const canonicalUrl = course
-    ? `https://www.eklabya.com/course/${course.slug || course._id || id}`
-    : "https://www.eklabya.com/courses";
+    ? `${siteBase}/course/${course.slug || course._id || id}`
+    : `${siteBase}/courses`;
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">

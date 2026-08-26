@@ -72,13 +72,18 @@ export default function BlogDetailPage() {
         }
       } catch (err) {
         console.error("Error fetching blog post:", err);
-        setError("Failed to load blog post. It may have been moved or deleted.");
+        setError(
+          "Failed to load blog post. It may have been moved or deleted.",
+        );
       } finally {
         setIsLoading(false);
       }
     };
 
-    const fetchRelatedPosts = async (categoryId: string, excludePostId: string) => {
+    const fetchRelatedPosts = async (
+      categoryId: string,
+      excludePostId: string,
+    ) => {
       try {
         setIsRelatedLoading(true);
         const response = await getPostsByCategory(categoryId, {
@@ -165,7 +170,11 @@ export default function BlogDetailPage() {
   } = post;
 
   const seoTitle = `${title} | Eklabya Blog`;
-  const canonicalUrl = `https://eklabya.com/blog/${post.slug}`;
+  const baseUrl =
+    typeof process !== "undefined"
+      ? process.env.NEXT_PUBLIC_SITE_URL
+      : undefined;
+  const canonicalUrl = `${(baseUrl || "").replace(/\/$/, "")}/blog/${post.slug}`;
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">

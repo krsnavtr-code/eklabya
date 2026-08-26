@@ -115,7 +115,7 @@ function Footer() {
   return (
     <footer className="bg-slate-50 dark:bg-gray-900 text-slate-800 dark:text-gray-200 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300 text-xs sm:text-sm">
       {/* Footer Top for Popular Courses */}
-      <div className="bg-slate-50 dark:bg-gray-900 py-2">
+      {/* <div className="bg-slate-50 dark:bg-gray-900 py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white mb-6 uppercase tracking-wider text-center">
             Popular Course Categories
@@ -142,7 +142,7 @@ function Footer() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Footer Links & About */}
       <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">

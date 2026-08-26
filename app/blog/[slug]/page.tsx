@@ -14,6 +14,8 @@ import {
   FaTags,
 } from "react-icons/fa";
 import SEO from "../../components/SEO";
+import JsonLd from "../../components/JsonLd";
+import { getImageUrl } from "../../utils/imageUtils";
 import { getBlogPostBySlug, getPostsByCategory } from "../../api/blogApi";
 
 interface Author {
@@ -174,10 +176,41 @@ export default function BlogDetailPage() {
     typeof process !== "undefined"
       ? process.env.NEXT_PUBLIC_SITE_URL
       : undefined;
-  const canonicalUrl = `${(baseUrl || "").replace(/\/$/, "")}/blog/${post.slug}`;
+  const siteBase = (baseUrl || "").replace(/\/$/, "");
+  const canonicalUrl = `${siteBase}/blog/${post.slug}`;
+  const blogImage =
+    getImageUrl(imageUrl || featuredImage) ||
+    `${siteBase}${imageUrl || featuredImage || "/images/eklabya-logo-fit-E.jpeg"}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description: excerpt || "Read this article on Eklabya",
+    image: blogImage,
+    author: {
+      "@type": "Person",
+      name: author?.name || "Eklabya",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "The Eklavya",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteBase}/images/eklabya-logo-fit-E.jpeg`,
+      },
+    },
+    datePublished: createdAt,
+    dateModified: createdAt,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <JsonLd data={jsonLd} />
       <SEO
         title={seoTitle}
         description={excerpt || "Read this article on Eklabya"}

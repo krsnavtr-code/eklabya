@@ -34,6 +34,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 import SEO from "../../components/SEO";
+import JsonLd from "../../components/JsonLd";
 import { getCourseById } from "../../api/courseApi";
 import { checkRedirect } from "../../utils/redirectUtils";
 import { enrollInCourse } from "../../api/enrollmentApi";
@@ -689,8 +690,51 @@ const CourseDetail: React.FC = () => {
     ? `${siteBase}/course/${course.slug || course._id || id}`
     : `${siteBase}/courses`;
 
+  const courseImageUrl =
+    getImageUrl(courseImage) || `${siteBase}${courseImage}`;
+  const jsonLd = course
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        name: course.title,
+        description:
+          course.description || course.shortDescription || seoDescription,
+        provider: {
+          "@type": "Organization",
+          name: "The Eklavya",
+          sameAs: siteBase,
+        },
+        url: canonicalUrl,
+        image: courseImageUrl,
+        ...(course.price !== undefined && {
+          offers: {
+            "@type": "Offer",
+            price: course.price,
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            url: canonicalUrl,
+          },
+        }),
+        ...(course.rating && {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: course.rating,
+            reviewCount: course.reviews?.length || course.enrolledStudents || 0,
+          },
+        }),
+        ...(course.duration && {
+          timeRequired:
+            typeof course.duration === "number"
+              ? `PT${course.duration}H`
+              : course.duration,
+        }),
+        ...(course.level && { educationalLevel: course.level }),
+      }
+    : null;
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+      {jsonLd && <JsonLd data={jsonLd} />}
       <SEO
         title={seoTitle}
         description={seoDescription}

@@ -12,51 +12,79 @@ import Testimonials from "./components/home/Testimonials";
 import Newsletter from "./components/home/Newsletter";
 import FAQ from "./components/home/FAQ";
 import ContactSection from "./components/home/ContactSection";
+import JsonLd from "./components/JsonLd";
 
 export default function Home() {
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "").replace(/\/$/, "");
+
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "The Eklavya",
+      url: baseUrl,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${baseUrl}/courses?search={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "The Eklavya",
+      url: baseUrl,
+      logo: `${baseUrl}/images/eklabya-logo-fit-E.jpeg`,
+      sameAs: [baseUrl],
+    },
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Banner */}
-      <Banner />
+    <>
+      <JsonLd data={jsonLd} />
+      <div className="flex flex-col min-h-screen">
+        {/* Hero Banner */}
+        <Banner />
 
-      {/* Popular Courses */}
-      <PopularCourses />
+        {/* Popular Courses */}
+        <PopularCourses />
 
-      {/* Categories Section */}
-      <Categories />
+        {/* Categories Section */}
+        <Categories />
 
-      {/* Assessment / Scholarship Program */}
-      <Assessment />
+        {/* Assessment / Scholarship Program */}
+        <Assessment />
 
-      {/* Scholarship Program */}
-      <ScholarshipProgram />
+        {/* Scholarship Program */}
+        <ScholarshipProgram />
 
-      {/* Why Learn With Eklabya */}
-      <WhyLearnWithEklabya />
+        {/* Why Learn With Eklabya */}
+        <WhyLearnWithEklabya />
 
-      {/* How Will Your Training Work */}
-      <HowWillYourTrainingWork />
+        {/* How Will Your Training Work */}
+        <HowWillYourTrainingWork />
 
-      {/* Stats */}
-      <Stats />
+        {/* Stats */}
+        <Stats />
 
-      {/* Student Placements */}
-      <StudentPlacements />
+        {/* Student Placements */}
+        <StudentPlacements />
 
-      {/* Content */}
-      <Content />
+        {/* Content */}
+        <Content />
 
-      {/* Testimonials */}
-      <Testimonials />
+        {/* Testimonials */}
+        <Testimonials />
 
-      {/* Newsletter */}
-      <Newsletter />
+        {/* Newsletter */}
+        <Newsletter />
 
-      {/* FAQ */}
-      <FAQ />
+        {/* FAQ */}
+        <FAQ />
 
-      {/* Contact Section */}
-      <ContactSection />
-    </div>
+        {/* Contact Section */}
+        <ContactSection />
+      </div>
+    </>
   );
 }

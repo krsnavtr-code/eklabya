@@ -23,42 +23,44 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const jsonLd = {
+  // 1. WebSite Schema (Search Action ke sath)
+  const websiteSchema = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://www.theeklavya.com/#website",
-        url: "https://www.theeklavya.com",
-        name: "The Eklabya",
-        potentialAction: {
-          "@type": "SearchAction",
-          target:
-            "https://www.theeklavya.com/courses?search={search_term_string}",
-          "query-input": "required name=search_term_string",
-        },
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://www.theeklavya.com/#organization",
-        name: "The Eklavya",
-        url: "https://www.theeklavya.com",
-        logo: "https://www.theeklavya.com/images/eklabya-logo-fit-E.jpeg",
-        sameAs: [
-          "https://x.com/eklabyaofficial",
-          "https://www.linkedin.com/company/eklabya-centre-of-excellence/",
-          "https://www.facebook.com/profile.php?id=61589473389916",
-          "https://www.instagram.com/eklabya_official",
-        ],
-      },
+    "@type": "WebSite",
+    name: "The Eklavya",
+    url: "https://www.theeklavya.com",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://www.theeklavya.com/courses?search={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  // 2. Organization Schema (Social links aur Logo ke sath)
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "The Eklavya",
+    url: "https://www.theeklavya.com",
+    logo: "https://www.theeklavya.com/images/eklabya-logo-fit-E.jpeg",
+    sameAs: [
+      "https://x.com/eklabyaofficial",
+      "https://www.linkedin.com/company/eklabya-centre-of-excellence/",
+      "https://www.facebook.com/profile.php?id=61589473389916",
+      "https://www.instagram.com/eklabya_official",
     ],
   };
 
   return (
     <main>
+      {/* Search Engine Bots ke liye direct HTML mein inject hoga */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <div className="flex flex-col min-h-screen">
         {/* Hero Banner */}

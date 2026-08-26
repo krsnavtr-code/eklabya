@@ -8,14 +8,18 @@ interface JsonLdProps {
 }
 
 export default function JsonLd({ data, children }: JsonLdProps) {
+  const schemas = Array.isArray(data) ? data : [data];
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(data),
-        }}
-      />
+      {schemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schema),
+          }}
+        />
+      ))}
       {children}
     </>
   );

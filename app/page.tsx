@@ -15,7 +15,7 @@ import ContactSection from "./components/home/ContactSection";
 import JsonLd from "./components/JsonLd";
 
 export default function Home() {
-  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "").replace(/\/$/, "");
+  const baseUrl = "https://www.theeklavya.com";
 
   const jsonLd = [
     {
@@ -35,7 +35,12 @@ export default function Home() {
       name: "The Eklavya",
       url: baseUrl,
       logo: `${baseUrl}/images/eklabya-logo-fit-E.jpeg`,
-      sameAs: [baseUrl],
+      sameAs: [
+        "https://x.com/eklabyaofficial",
+        "https://www.linkedin.com/company/eklabya-centre-of-excellence/",
+        "https://www.facebook.com/profile.php?id=61589473389916",
+        "https://www.instagram.com/eklabya_official",
+      ],
     },
   ];
 

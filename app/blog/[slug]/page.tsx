@@ -182,35 +182,61 @@ export default function BlogDetailPage() {
     getImageUrl(imageUrl || featuredImage) ||
     `${siteBase}${imageUrl || featuredImage || "/images/eklabya-logo-fit-E.jpeg"}`;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: title,
-    description: excerpt || "Read this article on Eklabya",
-    image: blogImage,
-    author: {
-      "@type": "Person",
-      name: author?.name || "Eklabya",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "The Eklavya",
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteBase}/images/eklabya-logo-fit-E.jpeg`,
+  const schemas: Record<string, any>[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: title,
+      description: excerpt || "Read this article on Eklabya",
+      image: blogImage,
+      author: {
+        "@type": "Person",
+        name: author?.name || "Eklabya",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "The Eklavya",
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteBase}/images/eklabya-logo-fit-E.jpeg`,
+        },
+      },
+      datePublished: createdAt,
+      dateModified: createdAt,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalUrl,
       },
     },
-    datePublished: createdAt,
-    dateModified: createdAt,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": canonicalUrl,
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteBase || "https://www.theeklavya.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: `${siteBase}/blog`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: title,
+          item: canonicalUrl,
+        },
+      ],
     },
-  };
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <JsonLd data={jsonLd} />
+      <JsonLd data={schemas} />
       <SEO
         title={seoTitle}
         description={excerpt || "Read this article on Eklabya"}

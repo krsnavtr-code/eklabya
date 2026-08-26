@@ -692,49 +692,92 @@ const CourseDetail: React.FC = () => {
 
   const courseImageUrl =
     getImageUrl(courseImage) || `${siteBase}${courseImage}`;
-  const jsonLd = course
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: course.title,
-        description:
-          course.description || course.shortDescription || seoDescription,
-        provider: {
-          "@type": "Organization",
-          name: "The Eklavya",
-          sameAs: siteBase,
+
+  const schemas: Record<string, any>[] = [];
+
+  if (course) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "Course",
+      name: course.title,
+      description:
+        course.description || course.shortDescription || seoDescription,
+      provider: {
+        "@type": "Organization",
+        name: "The Eklavya",
+        sameAs: siteBase,
+      },
+      url: canonicalUrl,
+      image: courseImageUrl,
+      ...(course.price !== undefined && {
+        offers: {
+          "@type": "Offer",
+          price: course.price,
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: canonicalUrl,
         },
-        url: canonicalUrl,
-        image: courseImageUrl,
-        ...(course.price !== undefined && {
-          offers: {
-            "@type": "Offer",
-            price: course.price,
-            priceCurrency: "INR",
-            availability: "https://schema.org/InStock",
-            url: canonicalUrl,
+      }),
+      ...(course.rating && {
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: course.rating,
+          reviewCount: course.reviews?.length || course.enrolledStudents || 0,
+        },
+      }),
+      ...(course.duration && {
+        timeRequired:
+          typeof course.duration === "number"
+            ? `PT${course.duration}H`
+            : course.duration,
+      }),
+      ...(course.level && { educationalLevel: course.level }),
+    });
+
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteBase || "https://www.theeklavya.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Courses",
+          item: `${siteBase}/courses`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: course.title,
+          item: canonicalUrl,
+        },
+      ],
+    });
+
+    if (course.faqs && course.faqs.length > 0) {
+      schemas.push({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: course.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
           },
-        }),
-        ...(course.rating && {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: course.rating,
-            reviewCount: course.reviews?.length || course.enrolledStudents || 0,
-          },
-        }),
-        ...(course.duration && {
-          timeRequired:
-            typeof course.duration === "number"
-              ? `PT${course.duration}H`
-              : course.duration,
-        }),
-        ...(course.level && { educationalLevel: course.level }),
-      }
-    : null;
+        })),
+      });
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-      {jsonLd && <JsonLd data={jsonLd} />}
+      {schemas.length > 0 && <JsonLd data={schemas} />}
       <SEO
         title={seoTitle}
         description={seoDescription}

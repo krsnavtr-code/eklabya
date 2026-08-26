@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import SEO from "../components/SEO";
+import JsonLd from "../components/JsonLd";
 import { getFAQs } from "../api/faqApi";
 
 interface FAQ {
@@ -66,8 +67,47 @@ export default function FAQPage() {
     );
   }
 
+  const siteBase = "https://www.theeklavya.com";
+
+  const schemas: Record<string, any>[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteBase,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "FAQ",
+          item: `${siteBase}/faq`,
+        },
+      ],
+    },
+  ];
+
+  if (faqs.length > 0) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer.replace(/<[^>]*>?/gm, ""),
+        },
+      })),
+    });
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <JsonLd data={schemas} />
       <SEO
         title="Eklabya FAQ – Online Course Help & Support Guide"
         description="Find answers to common questions about Eklabya online courses, enrollment process, fees, certifications, access details, and student support services."

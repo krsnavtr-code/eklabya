@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { FaClock } from "react-icons/fa";
@@ -18,7 +18,7 @@ interface Course {
   isFeatured?: boolean;
 }
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams?.get("q") || "";
 
@@ -171,5 +171,19 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 text-center text-gray-600 dark:text-gray-300">
+          Loading...
+        </div>
+      }
+    >
+      <SearchContent />
+    </Suspense>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import SEO from "../components/SEO";
 
-export default function ThankYouPage() {
+function ThankYouContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const message =
@@ -42,5 +43,19 @@ export default function ThankYouPage() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4 text-gray-600 dark:text-gray-300">
+          Loading...
+        </div>
+      }
+    >
+      <ThankYouContent />
+    </Suspense>
   );
 }

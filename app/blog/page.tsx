@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { FaCalendarAlt, FaClock, FaArrowRight } from "react-icons/fa";
@@ -24,7 +24,7 @@ interface Post {
   categories?: Category[];
 }
 
-export default function BlogListPage() {
+function BlogListContent() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -229,5 +229,19 @@ export default function BlogListPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 text-center text-gray-600 dark:text-gray-300">
+          Loading...
+        </div>
+      }
+    >
+      <BlogListContent />
+    </Suspense>
   );
 }

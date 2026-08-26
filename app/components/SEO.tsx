@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 interface SEOProps {
   title?: string;
@@ -24,15 +25,20 @@ interface SEOProps {
 
 export default function SEO({
   title = "Eklabya - Online Learning Platform",
-  description =
-    "Eklabya offers professional and management courses, including short programs and degree collaborations.",
-  keywords =
-    "online courses, e-learning, professional courses, management courses, online education, eklabya",
-  canonical = "https://eklabya.com",
+  description = "Eklabya offers professional and management courses, including short programs and degree collaborations.",
+  keywords = "online courses, e-learning, professional courses, management courses, online education, eklabya",
+  canonical,
   robots = "index, follow",
   og = {},
   twitter = {},
 }: SEOProps) {
+  const siteUrl =
+    typeof process !== "undefined"
+      ? process.env.NEXT_PUBLIC_SITE_URL
+      : undefined;
+  const baseUrl = (siteUrl || "").replace(/\/$/, "");
+  const pathname = usePathname() ?? "/";
+  const canonicalUrl = canonical || `${baseUrl}${pathname}`;
   useEffect(() => {
     if (typeof document === "undefined") return;
 
@@ -68,13 +74,13 @@ export default function SEO({
     setMeta("description", description);
     setMeta("keywords", keywords);
     setMeta("robots", robots);
-    setLink("canonical", canonical);
+    setLink("canonical", canonicalUrl);
 
     setMeta("og:title", og.title || title, true);
     setMeta("og:description", og.description || description, true);
     setMeta("og:image", og.image, true);
     setMeta("og:type", og.type || "website", true);
-    setMeta("og:url", og.url || canonical, true);
+    setMeta("og:url", og.url || canonicalUrl, true);
 
     setMeta("twitter:card", twitter.card || "summary_large_image");
     setMeta("twitter:title", og.title || title);

@@ -584,6 +584,8 @@ function Banner() {
       <ContactFormModal
         isOpen={showContactModal}
         onClose={() => setShowContactModal(false)}
+        autoOpen
+        autoOpenDelay={60000}
       />
     </div>
   );

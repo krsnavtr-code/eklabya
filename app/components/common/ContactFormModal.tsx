@@ -9,8 +9,10 @@ import api from "../../utils/api";
 import { submitContactForm } from "../../api/contactApi";
 
 interface ContactFormModalProps {
-  isOpen: boolean;
+  isOpen?: boolean;
   onClose: () => void;
+  autoOpen?: boolean;
+  autoOpenDelay?: number;
 }
 
 interface Course {
@@ -20,8 +22,10 @@ interface Course {
 }
 
 export default function ContactFormModal({
-  isOpen,
+  isOpen = false,
   onClose,
+  autoOpen = false,
+  autoOpenDelay = 60000,
 }: ContactFormModalProps) {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -37,6 +41,14 @@ export default function ContactFormModal({
   const [courses, setCourses] = useState<Course[]>([]);
   const [isLoadingCourses, setIsLoadingCourses] = useState(true);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [autoOpened, setAutoOpened] = useState(false);
+
+  const isVisible = isOpen || autoOpened;
+
+  const closeModal = () => {
+    setAutoOpened(false);
+    onClose();
+  };
 
   useEffect(() => {
     const loadCourses = async () => {
@@ -53,10 +65,32 @@ export default function ContactFormModal({
       }
     };
 
-    if (isOpen) {
+    if (isVisible) {
       loadCourses();
     }
-  }, [isOpen]);
+  }, [isVisible]);
+
+  // Auto-open the lead form after the user has been on the page for a while
+  useEffect(() => {
+    if (!autoOpen || isVisible) return;
+    if (
+      typeof window !== "undefined" &&
+      sessionStorage.getItem("contactLeadShown") === "1"
+    )
+      return;
+
+    const timer = setTimeout(() => {
+      setAutoOpened(true);
+    }, autoOpenDelay);
+
+    return () => clearTimeout(timer);
+  }, [autoOpen, autoOpenDelay, isVisible]);
+
+  useEffect(() => {
+    if (isVisible && typeof window !== "undefined") {
+      sessionStorage.setItem("contactLeadShown", "1");
+    }
+  }, [isVisible]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -114,7 +148,7 @@ export default function ContactFormModal({
           courseInterest: "",
           agreedToTerms: false,
         });
-        onClose();
+        closeModal();
         const thanksMessage =
           result.message || "Your message has been sent successfully!";
         router.push("/thank-you?message=" + encodeURIComponent(thanksMessage));
@@ -139,14 +173,14 @@ export default function ContactFormModal({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isVisible) return null;
 
   return (
     <div className="fixed inset-0 z-50">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
           className="fixed inset-0 transition-opacity bg-gray-500/75"
-          onClick={onClose}
+          onClick={closeModal}
           aria-hidden="true"
         ></div>
 
@@ -157,7 +191,7 @@ export default function ContactFormModal({
                 Request A Call Back
               </h3>
               <button
-                onClick={onClose}
+                onClick={closeModal}
                 className="text-gray-400 hover:text-gray-500 focus:outline-none"
               >
                 <FaTimes className="h-6 w-6" />
@@ -190,7 +224,7 @@ export default function ContactFormModal({
                 <div className="mt-3">
                   <button
                     type="button"
-                    onClick={onClose}
+                    onClick={closeModal}
                     className="w-full justify-center rounded-md border border-transparent shadow-sm px-3 py-1.5 bg-blue-600 text-sm font-medium text-white hover:bg-blue-700"
                   >
                     Close

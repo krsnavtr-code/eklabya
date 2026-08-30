@@ -2,7 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaClock } from "react-icons/fa";
+import {
+  FaClock,
+  FaSearch,
+  FaGraduationCap,
+  FaAward,
+  FaStar,
+  FaShieldAlt,
+} from "react-icons/fa";
 import api from "../utils/api";
 
 interface Course {
@@ -10,15 +17,25 @@ interface Course {
   title: string;
   slug?: string;
   description?: string;
+  shortDescription?: string;
   thumbnail?: string;
   price?: number;
   originalPrice?: number;
   duration?: string;
   isFeatured?: boolean;
+  category?: { _id: string; name: string } | string;
+  skills?: string[];
+  tags?: string[];
+  whatYouWillLearn?: string[];
+  benefits?: string[];
+  instructor?: string;
+  level?: string;
+  metaKeywords?: string;
 }
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +52,7 @@ export default function CoursesPage() {
             status: "published",
             sort: "-createdAt",
             fields:
-              "_id,title,slug,description,thumbnail,price,originalPrice,duration,isFeatured",
+              "_id,title,slug,description,shortDescription,thumbnail,price,originalPrice,duration,isFeatured,category,skills,tags,whatYouWillLearn,benefits,instructor,level,metaKeywords",
           },
         });
 
@@ -96,27 +113,176 @@ export default function CoursesPage() {
     );
   }
 
+  const filteredCourses = courses.filter((course) => {
+    if (!searchQuery.trim()) return true;
+
+    // Split search query into individual search tokens
+    const searchTerms = searchQuery
+      .toLowerCase()
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+    // Extract category name
+    const categoryName =
+      typeof course.category === "object" && course.category !== null
+        ? course.category.name || ""
+        : typeof course.category === "string"
+          ? course.category
+          : "";
+
+    const skillsText = Array.isArray(course.skills)
+      ? course.skills.join(" ")
+      : "";
+    const tagsText = Array.isArray(course.tags) ? course.tags.join(" ") : "";
+    const learnText = Array.isArray(course.whatYouWillLearn)
+      ? course.whatYouWillLearn.join(" ")
+      : "";
+    const benefitsText = Array.isArray(course.benefits)
+      ? course.benefits.join(" ")
+      : "";
+
+    const cleanDescription = (course.description || "")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ");
+
+    const searchableCorpus = [
+      course.title || "",
+      course.slug || "",
+      cleanDescription,
+      course.shortDescription || "",
+      categoryName,
+      skillsText,
+      tagsText,
+      learnText,
+      benefitsText,
+      course.instructor || "",
+      course.level || "",
+      course.metaKeywords || "",
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    // Check if EVERY search term is present anywhere in the course's content
+    return searchTerms.every((term) => searchableCorpus.includes(term));
+  });
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            All Courses
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            Browse all our professional courses
-          </p>
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-950 py-6 sm:py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* --- HERO HEADER --- */}
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-900 text-white p-3 sm:p-4 md:p-4 shadow-2xl border border-blue-500/20">
+          <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+          <div className="absolute -top-16 -right-16 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div className="relative z-10 max-w-3xl mx-auto text-center space-y-1.5">
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/30 text-blue-200 text-xs sm:text-sm font-semibold tracking-wide">
+              <FaGraduationCap className="text-yellow-400" />
+              <span>Industry-Aligned Learning Programs</span>
+            </div>
+
+            {/* Main Title */}
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-sky-300 to-emerald-300">
+                Professional Certification Courses
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-xs sm:text-sm md:text-base text-blue-100/90 font-medium leading-relaxed max-w-2xl mx-auto">
+              Upgrade your career with live mentorship, real-world capstone
+              projects, and industry-certified courses in Data Science, Cloud,
+              SAP &amp; Full Stack.
+            </p>
+
+            {/* Value Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-[11px] sm:text-xs text-blue-100 font-semibold">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10">
+                <FaStar className="text-amber-400 text-[10px]" /> 4.9/5 Student
+                Rating
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10">
+                <FaAward className="text-emerald-400 text-[10px]" /> Recognized
+                Certification
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10">
+                <FaShieldAlt className="text-sky-400 text-[10px]" /> 100%
+                Placement Support
+              </span>
+            </div>
+
+            {/* Integrated Course Search Bar */}
+            <div className="pt-4 max-w-xl mx-auto">
+              <div className="relative">
+                <FaSearch className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by course title, skill, category, topic, or technology (e.g. Python, SAP, DevOps, AI)..."
+                  className="w-full pl-11 pr-4 py-3 bg-white/95 dark:bg-gray-900/95 text-slate-900 dark:text-white placeholder-slate-400 rounded-2xl text-xs sm:text-sm border border-white/20 shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-        {courses.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-black dark:text-white text-lg">
-              No courses found.
+        {/* --- COURSE COUNT & STATUS --- */}
+        <div className="flex justify-between items-center px-1">
+          <p className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
+            {searchQuery.trim() ? (
+              <>
+                Found{" "}
+                <span className="text-blue-600 dark:text-blue-400">
+                  {filteredCourses.length}
+                </span>{" "}
+                results for &ldquo;{searchQuery}&rdquo;
+              </>
+            ) : (
+              <>
+                Showing{" "}
+                <span className="text-blue-600 dark:text-blue-400">
+                  {filteredCourses.length}
+                </span>{" "}
+                Available Courses
+              </>
+            )}
+          </p>
+
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Clear Search
+            </button>
+          )}
+        </div>
+
+        {filteredCourses.length === 0 ? (
+          <div className="text-center py-16 bg-white dark:bg-gray-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 space-y-3">
+            <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto text-lg">
+              <FaSearch />
+            </div>
+            <p className="text-base font-bold text-slate-900 dark:text-white">
+              No courses matching your search
             </p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+              We couldn&apos;t find any courses matching &ldquo;{searchQuery}
+              &rdquo;. Try another keyword or clear the search filter.
+            </p>
+            <button
+              onClick={() => setSearchQuery("")}
+              className="mt-2 inline-block px-5 py-2 bg-blue-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 transition-colors"
+            >
+              View All Courses
+            </button>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.map((course) => (
+            {filteredCourses.map((course) => (
               <Link
                 key={course._id}
                 href={`/course/${course.slug || course._id}`}

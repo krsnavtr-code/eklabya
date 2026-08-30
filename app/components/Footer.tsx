@@ -207,8 +207,8 @@ function Footer() {
                 { name: "Contact", to: "/contact" },
                 { name: "Blog", to: "/blog" },
                 { name: "Testimonials", to: "/testimonials" },
-                { name: "Awards", to: "/awards" },
-                { name: "Media Mentions", to: "/media-mentions" },
+                { name: "Awards & Recognition", to: "/awards-recognition" },
+                { name: "News & Events", to: "/news-events" },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link

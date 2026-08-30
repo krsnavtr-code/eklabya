@@ -22,6 +22,7 @@ interface Category {
   _id: string;
   name: string;
   slug?: string;
+  isActive?: boolean;
 }
 
 export default function CoursesByCategoryPage() {
@@ -42,7 +43,7 @@ export default function CoursesByCategoryPage() {
         setError(null);
 
         const categoriesResponse = await api.get("/categories", {
-          params: { limit: 100 },
+          params: { limit: 100, status: "active" },
         });
 
         let categoriesData: Category[] = [];
@@ -60,15 +61,18 @@ export default function CoursesByCategoryPage() {
           categoriesData = categoriesResponse as Category[];
         }
 
-        setAllCategories(categoriesData);
+        const activeCategories = categoriesData.filter(
+          (cat) => cat && cat.isActive !== false,
+        );
+        setAllCategories(activeCategories);
 
         if (categoryName) {
-          let categoryData = categoriesData.find(
+          let categoryData = activeCategories.find(
             (cat) => cat?.slug?.toLowerCase() === categoryName.toLowerCase(),
           );
 
           if (!categoryData) {
-            categoryData = categoriesData.find(
+            categoryData = activeCategories.find(
               (cat) =>
                 cat?.name?.toLowerCase().replace(/\s+/g, "-") ===
                 categoryName.toLowerCase(),
@@ -79,7 +83,7 @@ export default function CoursesByCategoryPage() {
             const decodedCategoryName = decodeURIComponent(
               categoryName.replace(/-/g, " "),
             );
-            categoryData = categoriesData.find(
+            categoryData = activeCategories.find(
               (cat) =>
                 cat?.name?.trim().toLowerCase() ===
                 decodedCategoryName.trim().toLowerCase(),
@@ -175,7 +179,7 @@ export default function CoursesByCategoryPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="py-8 px-4 sm:px-6 lg:px-8">
-        <nav className="mb-6 text-sm max-w-7xl mx-auto" aria-label="Breadcrumb">
+        {/* <nav className="mb-6 text-sm max-w-7xl mx-auto" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2">
             <li>
               <Link
@@ -206,19 +210,19 @@ export default function CoursesByCategoryPage() {
               </>
             )}
           </ol>
-        </nav>
+        </nav> */}
 
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
-          <div className="w-full md:w-1/4 lg:w-1/5">
-            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 border border-gray-200 dark:border-gray-700 h-fit max-h-[calc(100vh-6rem)] overflow-y-auto">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 items-start">
+          <div className="w-full md:w-1/4 lg:w-1/5 md:sticky md:top-32 self-start">
+            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-2 border border-gray-200 dark:border-gray-700 max-h-[calc(100vh-6rem)] overflow-y-auto">
               <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
                 Categories
               </h2>
-              <ul className="space-y-2">
+              <ul className="space-y-0.5">
                 <li>
                   <Link
                     href="/courses"
-                    className={`block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                    className={`block px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 ${
                       !categoryName
                         ? "bg-blue-50 text-blue-600 font-medium"
                         : "text-black dark:text-white"
@@ -228,6 +232,7 @@ export default function CoursesByCategoryPage() {
                   </Link>
                 </li>
                 {allCategories
+                  .filter((cat) => cat && cat.isActive !== false)
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((cat) => (
                     <li key={cat._id}>
@@ -236,7 +241,7 @@ export default function CoursesByCategoryPage() {
                           cat.slug ||
                           cat.name.toLowerCase().replace(/\s+/g, "-")
                         }`}
-                        className={`block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        className={`block px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 ${
                           category?._id === cat._id
                             ? "bg-blue-50 text-blue-600 font-medium"
                             : "text-black dark:text-white"
@@ -251,7 +256,7 @@ export default function CoursesByCategoryPage() {
           </div>
 
           <div className="w-full md:w-3/4 lg:w-4/5">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-2">
               <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
                 {category ? `${category.name} Courses` : "All Courses"}
               </h1>
@@ -279,7 +284,7 @@ export default function CoursesByCategoryPage() {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {courses.map((course) => (
                   <Link
                     key={course._id}

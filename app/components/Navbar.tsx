@@ -204,6 +204,7 @@ function Navbar() {
   const navLinks = [
     { to: "/courses", label: "All Course" },
     { to: "/categories", label: "Categories" },
+    { to: "/free-courses", label: "Free Course"},
     // { to: "/testimonials", label: "Testimonials" },
     // { to: "/scholarship", label: "Scholarship" },
     ...(isAdmin ? [{ to: "/admin", label: "Admin" }] : []),

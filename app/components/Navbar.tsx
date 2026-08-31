@@ -229,7 +229,7 @@ function Navbar() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Left Side: Contact / Info */}
           <div className="hidden md:inline-flex items-center gap-4">
-            <a
+            {/* <a
               href="tel:+919891030303"
               className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
@@ -240,7 +240,7 @@ function Navbar() {
               className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               <FaEnvelope size={10} /> Mail
-            </a>
+            </a> */}
           </div>
 
           {/* Mobile */}
@@ -342,22 +342,22 @@ function Navbar() {
                     <div className="space-y-2 text-gray-700">
                       <div className="flex justify-between border-y py-2">
                         <span className="font-medium">Bank Name</span>
-                        <strong>IndusInd Bank</strong>
+                        <strong>Yes Bank</strong>
                       </div>
 
                       <div className="flex justify-between border-b pb-2">
                         <span className="font-medium">Account Number</span>
-                        <strong>201037792463</strong>
+                        <strong>020861900007608</strong>
                       </div>
 
                       <div className="flex justify-between border-b pb-2">
                         <span className="font-medium">IFSC Code</span>
-                        <strong>INDB0000588</strong>
+                        <strong>YESB0000208</strong>
                       </div>
 
                       <div className="flex justify-between border-b pb-2">
                         <span className="font-medium">Branch</span>
-                        <strong>Noida Sector 62</strong>
+                        <strong>Okhla Phase II , Delhi</strong>
                       </div>
                     </div>
 
@@ -973,28 +973,28 @@ function Navbar() {
                       <span className="text-gray-500 dark:text-gray-400">
                         Bank Name
                       </span>
-                      <span className="font-medium">IndusInd Bank</span>
+                      <span className="font-medium">Yes Bank</span>
                     </div>
 
                     <div className="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
                       <span className="text-gray-500 dark:text-gray-400">
                         Account Number
                       </span>
-                      <span className="font-medium">201037792463</span>
+                      <span className="font-medium">020861900007608</span>
                     </div>
 
                     <div className="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
                       <span className="text-gray-500 dark:text-gray-400">
                         IFSC Code
                       </span>
-                      <span className="font-medium">INDB0000588</span>
+                      <span className="font-medium">YESB0000208</span>
                     </div>
 
                     <div className="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
                       <span className="text-gray-500 dark:text-gray-400">
                         Branch
                       </span>
-                      <span className="font-medium">Noida Sector 62</span>
+                      <span className="font-medium">Okhla Phase II , Delhi</span>
                     </div>
                   </div>
 

@@ -4,7 +4,6 @@ import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { FaTimes, FaDownload, FaBook, FaArrowLeft } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import api from "../../utils/api";
-import { getImageUrl } from "../../utils/imageUtils";
 
 interface Course {
   _id: string;
@@ -89,39 +88,107 @@ export default function BrochureSelectorModal({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const getFileUrl = (path: string | undefined | null) => {
+    if (!path) return "";
+    const trimmed = path.trim();
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+    const baseUrl = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002")
+      .replace(/\/api\/?$/, "")
+      .replace(/\/+$/, "");
+    const clean = trimmed.replace(/^\/+/, "");
+    return `${baseUrl}/${clean}`;
+  };
+
   const handleDownload = async (e: FormEvent) => {
     e.preventDefault();
     if (!selectedCourse) return;
 
-    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim()
+    ) {
       toast.error("Please fill in all required fields");
       return;
     }
 
     setIsDownloading(true);
+    const toastId = toast.loading("Downloading course brochure...");
     try {
-      const fileUrl = getImageUrl(selectedCourse.brochureUrl);
-      if (!fileUrl) {
-        toast.error("Brochure file not available");
-        return;
+      // 1. Submit lead inquiry so admin / counselors receive contact
+      try {
+        await api.post("/contacts", {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          courseId: selectedCourse._id,
+          courseTitle: selectedCourse.title,
+          subject: "Course Brochure Download",
+          message: `User downloaded uploaded course brochure for "${selectedCourse.title}".`,
+        });
+      } catch (contactErr) {
+        console.warn("Contact logging warning:", contactErr);
       }
 
-      const link = document.createElement("a");
-      link.href = fileUrl;
-      link.target = "_blank";
-      link.download =
-        selectedCourse.brochureUrl.split("/").pop() || "brochure.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // 2. Fetch and trigger brochure download
+      let downloadSucceeded = false;
+      try {
+        const response = await api.get(
+          `/courses/${selectedCourse._id}/download-brochure`,
+          {
+            params: {
+              name: formData.name.trim(),
+              email: formData.email.trim(),
+              phone: formData.phone.trim(),
+            },
+            responseType: "blob",
+          },
+        );
 
-      toast.success("Brochure download started");
-      setFormData({ name: "", email: "", phone: "" });
-      setSelectedCourse(null);
-      setTimeout(onClose, 1000);
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const blobUrl = URL.createObjectURL(blob);
+        const filename = `${selectedCourse.title.replace(/[^a-zA-Z0-9]/g, "_")}_Brochure.pdf`;
+
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+        downloadSucceeded = true;
+      } catch (endpointErr) {
+        console.warn(
+          "Endpoint download failed, attempting direct download:",
+          endpointErr,
+        );
+        if (selectedCourse.brochureUrl) {
+          const directFileUrl = getFileUrl(selectedCourse.brochureUrl);
+          const link = document.createElement("a");
+          link.href = directFileUrl;
+          link.download = `${selectedCourse.title.replace(/[^a-zA-Z0-9]/g, "_")}_Brochure.pdf`;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          downloadSucceeded = true;
+        }
+      }
+
+      if (downloadSucceeded) {
+        toast.success("Brochure downloaded successfully", { id: toastId });
+        setFormData({ name: "", email: "", phone: "" });
+        setSelectedCourse(null);
+        setTimeout(onClose, 800);
+      } else {
+        throw new Error("Unable to download brochure file");
+      }
     } catch (error) {
       console.error("Error downloading brochure:", error);
-      toast.error("Failed to download brochure. Please try again.");
+      toast.error("Failed to download brochure. Please try again.", {
+        id: toastId,
+      });
     } finally {
       setIsDownloading(false);
     }
@@ -135,9 +202,9 @@ export default function BrochureSelectorModal({
         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="fixed inset-0 flex items-center justify-center p-3 sm:p-4">
+      <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-3">
         <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800">
-          <div className="p-5 sm:p-6">
+          <div className="p-2 sm:p-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white tracking-tight">
                 {selectedCourse ? "Download Brochure" : "Select a Course"}
@@ -257,7 +324,7 @@ export default function BrochureSelectorModal({
                         <div className="h-24 mb-2 rounded-lg bg-gray-100 dark:bg-gray-700 overflow-hidden">
                           {course.thumbnail ? (
                             <img
-                              src={getImageUrl(course.thumbnail)}
+                              src={getFileUrl(course.thumbnail)}
                               alt={course.title}
                               className="w-full h-full object-cover"
                             />

@@ -16,9 +16,9 @@ import {
   FaClock,
   FaPlay,
   FaShare,
+  FaFileAlt,
   FaCertificate,
   FaGlobe,
-  FaFileAlt,
   FaTag,
   FaMobileAlt,
   FaBookOpen,
@@ -42,7 +42,6 @@ import { formatPrice } from "../../utils/format";
 import { getImageUrl } from "../../utils/imageUtils";
 import { useAuth } from "../../context/AuthContext";
 import PaymentForm from "../../components/PaymentForm";
-import BrochureDownloadModal from "../../components/common/BrochureDownloadModal";
 
 // Define interfaces for course data structures
 interface Category {
@@ -144,7 +143,6 @@ const CourseDetail: React.FC = () => {
   >({});
   const [showCertificate, setShowCertificate] = useState<boolean>(false);
   const [showVideoModal, setShowVideoModal] = useState<boolean>(false);
-  const [showBrochureModal, setShowBrochureModal] = useState<boolean>(false);
 
   // Initialize expanded sections when course data is loaded
   useEffect(() => {
@@ -381,18 +379,6 @@ const CourseDetail: React.FC = () => {
         });
 
         setShowContactForm(false);
-
-        if (course.brochureUrl) {
-          setTimeout(() => {
-            try {
-              downloadBrochure();
-            } catch (error) {
-              console.error("Error in brochure download:", error);
-            }
-          }, 1000);
-        } else {
-          console.log("No brochure URL found for this course");
-        }
       } else {
         throw new Error(response.data.message || "Failed to submit enrollment");
       }
@@ -459,61 +445,6 @@ const CourseDetail: React.FC = () => {
       }
     } finally {
       setIsSubmitting(false);
-    }
-  };
-
-  const downloadBrochure = async () => {
-    try {
-      if (!course?._id) {
-        toast.error("Course information is not available");
-        return;
-      }
-
-      const toastId = toast.loading("Preparing brochure download...");
-
-      try {
-        const response = await api.get(
-          `/courses/${course._id}/download-brochure`,
-          {
-            responseType: "blob",
-          },
-        );
-
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute(
-          "download",
-          `Brochure-${course.title
-            .replace(/[^a-z0-9]/gi, "-")
-            .toLowerCase()}.pdf`,
-        );
-
-        document.body.appendChild(link);
-        link.click();
-
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(link);
-
-        toast.success("Brochure download started", { id: toastId });
-      } catch (error: any) {
-        console.error("Error downloading brochure:", error);
-
-        if (error.response?.status === 404) {
-          toast.error("Brochure not available for this course", {
-            id: toastId,
-          });
-        } else if (error.response?.data?.message) {
-          toast.error(error.response.data.message, { id: toastId });
-        } else {
-          toast.error("Failed to download brochure. Please try again.", {
-            id: toastId,
-          });
-        }
-      }
-    } catch (error) {
-      console.error("Error in downloadBrochure:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
     }
   };
 
@@ -871,16 +802,6 @@ const CourseDetail: React.FC = () => {
                 >
                   <FaShare className="w-5 h-5" />
                 </button>
-                {course.brochureUrl && (
-                  <button
-                    onClick={() => setShowBrochureModal(true)}
-                    className="text-gray-500 hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400 transition-colors"
-                    aria-label="Download brochure"
-                    title="Download course brochure"
-                  >
-                    <FaFileAlt className="w-5 h-5" />
-                  </button>
-                )}
               </div>
 
               <div className="space-y-4">
@@ -989,12 +910,6 @@ const CourseDetail: React.FC = () => {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <button
-                  onClick={() => setShowBrochureModal(true)}
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-2 md:px-6 py-1 md:py-3 rounded-lg font-medium flex items-center transition-colors"
-                >
-                  Download Brochure <FaArrowRight className="ml-2" />
-                </button>
                 <button
                   onClick={handleVideoPreview}
                   className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center"
@@ -1249,44 +1164,64 @@ const CourseDetail: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="border-b border-gray-200 dark:border-gray-700 mb-8 sticky top-16 md:top-20 z-10 bg-white dark:bg-slate-900">
-          <nav className="flex flex-wrap -mb-px whitespace-nowrap space-x-1">
+        <div className="border-b border-gray-200 dark:border-gray-700 mb-8 sticky top-16 md:top-20 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-xs">
+          <nav className="flex flex-wrap -mb-px whitespace-nowrap space-x-1 py-2">
             <button
-              onClick={() => setActiveTab("overview")}
-              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm ${
+              onClick={() => {
+                setActiveTab("overview");
+                document
+                  .getElementById("overview")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm transition-colors ${
                 activeTab === "overview"
                   ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                  : "border-transparent text-black dark:text-white hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                  : "border-transparent text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
               }`}
             >
               Overview
             </button>
             <button
-              onClick={() => setActiveTab("curriculum")}
-              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm ${
+              onClick={() => {
+                setActiveTab("curriculum");
+                document
+                  .getElementById("curriculum")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm transition-colors ${
                 activeTab === "curriculum"
                   ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                  : "border-transparent text-black dark:text-white hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                  : "border-transparent text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
               }`}
             >
               Curriculum
             </button>
             <button
-              onClick={() => setActiveTab("skills")}
-              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm ${
+              onClick={() => {
+                setActiveTab("skills");
+                document
+                  .getElementById("skills")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm transition-colors ${
                 activeTab === "skills"
                   ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                  : "border-transparent text-black dark:text-white hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                  : "border-transparent text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
               }`}
             >
               Skills
             </button>
             <button
-              onClick={() => setActiveTab("faq")}
-              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm ${
+              onClick={() => {
+                setActiveTab("faq");
+                document
+                  .getElementById("faq")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className={`py-2 px-3 md:px-6 text-center border-b-2 font-medium text-sm transition-colors ${
                 activeTab === "faq"
                   ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                  : "border-transparent text-black dark:text-white hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                  : "border-transparent text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
               }`}
             >
               FAQ
@@ -1302,8 +1237,12 @@ const CourseDetail: React.FC = () => {
           </nav>
         </div>
 
-        <div className="mb-12">
-          {activeTab === "overview" && (
+        <div className="space-y-12 mb-12">
+          {/* 1. Overview Section */}
+          <section
+            id="overview"
+            className="scroll-mt-36 border-b border-gray-200 dark:border-gray-800 pb-12"
+          >
             <div className="text-black dark:text-white prose max-w-none dark:prose-invert">
               <h2 className="text-2xl font-bold mb-4">
                 {customHeadings.aboutCourse}
@@ -1330,39 +1269,6 @@ const CourseDetail: React.FC = () => {
               )}
 
               <h3 className="text-xl font-semibold mb-4">
-                {customHeadings.whatYouWillLearn}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                {course.whatYouWillLearn?.map((item, index) => (
-                  <div key={index} className="flex items-start">
-                    <svg
-                      className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>{item}</span>
-                  </div>
-                )) || <p>No learning objectives specified.</p>}
-              </div>
-
-              <h3 className="text-xl font-semibold mb-4">
-                {customHeadings.requirements}
-              </h3>
-              <ul className="list-disc pl-5 space-y-2 mb-8">
-                {course.prerequisites?.map((req, index) => (
-                  <li key={index}>{req}</li>
-                )) || <li>No specific requirements</li>}
-              </ul>
-
-              <h3 className="text-xl font-semibold mb-4">
                 {customHeadings.whoIsThisFor}
               </h3>
               <ul className="list-disc pl-5 space-y-2">
@@ -1371,9 +1277,13 @@ const CourseDetail: React.FC = () => {
                 )) || <li>Anyone interested in learning about this topic</li>}
               </ul>
             </div>
-          )}
+          </section>
 
-          {activeTab === "curriculum" && (
+          {/* 2. Curriculum Section */}
+          <section
+            id="curriculum"
+            className="scroll-mt-36 border-b border-gray-200 dark:border-gray-800 pb-12"
+          >
             <div className="text-black dark:text-white">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold">
@@ -1503,9 +1413,13 @@ const CourseDetail: React.FC = () => {
                 )}
               </div>
             </div>
-          )}
+          </section>
 
-          {activeTab === "skills" && (
+          {/* 3. Skills Section */}
+          <section
+            id="skills"
+            className="scroll-mt-36 border-b border-gray-200 dark:border-gray-800 pb-12"
+          >
             <div className="flex flex-col gap-8">
               <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
                 <h3 className="text-xl font-bold mb-6 text-black dark:text-white">
@@ -1610,9 +1524,10 @@ const CourseDetail: React.FC = () => {
                 )}
               </div>
             </div>
-          )}
+          </section>
 
-          {activeTab === "faq" && (
+          {/* 4. FAQ Section */}
+          <section id="faq" className="scroll-mt-36">
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-black dark:text-white mb-6">
                 {customHeadings.faq}
@@ -1699,7 +1614,7 @@ const CourseDetail: React.FC = () => {
                 </button>
               </div>
             </div>
-          )}
+          </section>
         </div>
       </div>
 
@@ -1987,13 +1902,6 @@ const CourseDetail: React.FC = () => {
           />
         )}
       </AnimatePresence>
-
-      <BrochureDownloadModal
-        isOpen={showBrochureModal}
-        onClose={() => setShowBrochureModal(false)}
-        courseTitle={course?.title}
-        courseId={course?._id}
-      />
 
       <CertificateModal
         isOpen={showCertificate}

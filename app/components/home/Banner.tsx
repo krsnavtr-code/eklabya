@@ -13,6 +13,7 @@ import {
   FaEnvelope,
   FaUser,
   FaCheckCircle,
+  FaDownload,
   FaPaperPlane,
   FaGraduationCap,
 } from "react-icons/fa";
@@ -21,6 +22,7 @@ import { toast } from "react-hot-toast";
 import api from "../../utils/api";
 import { submitContactForm } from "../../api/contactApi";
 import ContactFormModal from "../common/ContactFormModal";
+import BrochureSelectorModal from "../common/BrochureSelectorModal";
 
 const bannerImg =
   "https://www.eklabya.com/api/upload/file/Home-Page-Image-9212.png";
@@ -121,6 +123,7 @@ function Banner() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [isLoadingCourses, setIsLoadingCourses] = useState(true);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [showBrochureModal, setShowBrochureModal] = useState(false);
 
   useEffect(() => {
     const fetchCourseCount = async () => {
@@ -364,6 +367,14 @@ function Banner() {
                 <span>Start Learning</span>
                 <FaArrowRight className="ml-2 text-xs group-hover:translate-x-1 transition-transform duration-200" />
               </button>
+
+              <button
+                onClick={() => setShowBrochureModal(true)}
+                className="group bg-orange-600 hover:bg-orange-700 text-white px-2 md:px-6 py-1.5 md:py-3 rounded-lg font-bold text-xs md:text-sm transition-all duration-200 flex items-center justify-center shadow-md shadow-orange-600/20"
+              >
+                <span>Download Brochure</span>
+                <FaDownload className="ml-2 text-xs group-hover:translate-y-1 transition-transform duration-200" />
+              </button>
             </div>
           </div>
 
@@ -587,6 +598,10 @@ function Banner() {
         // autoOpen
         // autoOpenDelay={60000}
         autoOpen={false}
+      />
+      <BrochureSelectorModal
+        isOpen={showBrochureModal}
+        onClose={() => setShowBrochureModal(false)}
       />
     </div>
   );

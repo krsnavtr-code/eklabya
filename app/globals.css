@@ -53,3 +53,52 @@ body {
 .animate-fade-in-down {
   animation: fade-in-down 0.3s ease-in-out;
 }
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-rtl {
+  animation: marquee-rtl 30s linear infinite;
+}
+
+.marquee-ltr {
+  animation: marquee-ltr 30s linear infinite;
+}
+
+.animate-marquee-rtl {
+  animation: marquee-rtl 30s linear infinite;
+}
+
+.animate-marquee-ltr {
+  animation: marquee-ltr 30s linear infinite;
+}

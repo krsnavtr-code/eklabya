@@ -216,7 +216,7 @@ export default function TestimonialsPage() {
       />
 
       {/* --- HERO HEADER --- */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-950 text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-950 text-white py-6 sm:py-8 px-3 sm:px-4 lg:px-6">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:18px_18px]"></div>
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -227,21 +227,21 @@ export default function TestimonialsPage() {
             <span>4.9 / 5 Rating from 4,500+ Verified Alumni</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
             Alumni &amp; Learner{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-emerald-300 to-teal-200">
               Success Stories
             </span>
           </h1>
 
-          <p className="max-w-3xl mx-auto text-xs sm:text-sm md:text-base text-blue-100/90 font-medium leading-relaxed">
+          <p className="max-w-7xl mx-auto text-xs sm:text-sm md:text-base text-blue-100/90 font-medium leading-relaxed">
             Real stories from real engineers and career-switchers who upskilled,
             mastered enterprise workflows, and unlocked life-changing career
             opportunities with Eklabya.
           </p>
 
           {/* Key Metrics Counters */}
-          <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
               <div className="text-xl sm:text-2xl font-black text-amber-300">
                 4.9 ★
@@ -279,7 +279,7 @@ export default function TestimonialsPage() {
       </section>
 
       {/* --- MAIN CONTENT --- */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20 space-y-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 space-y-8">
         {/* --- FEATURED ALUMNI SPOTLIGHT BANNER --- */}
         {featuredTestimonial && (
           <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl border border-slate-200/80 dark:border-slate-800 relative overflow-hidden">

@@ -36,7 +36,7 @@ interface Award {
 const demoFeaturedAward: Award = {
   _id: "demo-feat-1",
   title:
-    "National Education Excellence Award for Best Technical Upskilling Institute 2026",
+    "National Education Excellence Award for Best Technical Upskilling 2026",
   description:
     "Honored for groundbreaking curriculum innovation, 98% placement track record, and delivering industry-aligned practical mastery in Artificial Intelligence, SAP, Cloud, and Full Stack Engineering.",
   awardCategory: "excellence",
@@ -251,33 +251,33 @@ export default function AwardsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20">
       {/* --- LUXURY HERO HEADER --- */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-amber-700 via-yellow-800 to-slate-950 text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-amber-700 via-yellow-800 to-slate-950 text-white py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:18px_18px]"></div>
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="relative max-w-7xl mx-auto text-center space-y-4">
+        <div className="relative max-w-7xl mx-auto text-center space-y-2">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-400/30 text-amber-200 text-xs sm:text-sm font-semibold tracking-wide shadow-xs">
             <FaCrown className="text-yellow-300 text-xs" />
             <span>Excellence &amp; Industry Honors</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-black tracking-tight text-white leading-tight">
             Hall of{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-400">
               Awards &amp; Recognition
             </span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-xs sm:text-sm md:text-base text-amber-100/90 font-medium leading-relaxed">
+          <p className="max-w-7xl mx-auto text-xs sm:text-sm md:text-base text-amber-100/90 font-medium leading-relaxed">
             Honoring our commitment to educational excellence, curriculum
             innovation, top placement outcomes, and industry skill
             transformation across India.
           </p>
 
           {/* Quick Metrics Badges */}
-          <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
+          <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-2 sm:p-3 border border-white/10 text-center">
               <div className="text-xl sm:text-2xl font-black text-amber-300">
                 15+
               </div>
@@ -285,7 +285,7 @@ export default function AwardsPage() {
                 National Awards
               </div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-2 sm:p-3 border border-white/10 text-center">
               <div className="text-xl sm:text-2xl font-black text-amber-300">
                 Top 10
               </div>
@@ -293,7 +293,7 @@ export default function AwardsPage() {
                 EdTech Academy 2025
               </div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-2 sm:p-3 border border-white/10 text-center">
               <div className="text-xl sm:text-2xl font-black text-amber-300">
                 98%
               </div>
@@ -301,7 +301,7 @@ export default function AwardsPage() {
                 Placement Success
               </div>
             </div>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-2 sm:p-3 border border-white/10 text-center">
               <div className="text-xl sm:text-2xl font-black text-amber-300">
                 40k+
               </div>
@@ -314,10 +314,10 @@ export default function AwardsPage() {
       </section>
 
       {/* --- MAIN CONTENT CONTAINER --- */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20 space-y-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-20 space-y-6">
         {/* --- SPOTLIGHT FEATURED AWARD CARD --- */}
         {featuredAward && (
-          <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl border border-amber-200/80 dark:border-amber-900/40 relative overflow-hidden">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-3 sm:p-4 md:p-6 shadow-2xl border border-amber-200/80 dark:border-amber-900/40 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-amber-500/15 via-yellow-500/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">

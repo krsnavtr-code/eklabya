@@ -333,10 +333,10 @@ export default function NewsAndEventsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20">
       {/* --- HERO HEADER --- */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-950 text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-950 text-white py-6 md:py-8 px-3 sm:px-4 lg:px-6">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         
-        <div className="relative max-w-7xl mx-auto text-center space-y-4">
+        <div className="relative max-w-7xl mx-auto text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/30 text-blue-200 text-xs sm:text-sm font-semibold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
             Eklabya Live Pulse
@@ -346,12 +346,12 @@ export default function NewsAndEventsPage() {
             News &amp; Events
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-blue-100/90 font-medium leading-relaxed">
+          <p className="max-w-7xl mx-auto text-sm sm:text-base md:text-lg text-blue-100/90 font-medium leading-relaxed">
             Stay ahead with live webinars, expert masterclasses, hackathons, and the latest official press announcements from Eklabya.
           </p>
 
           {/* Quick Metrics */}
-          <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
               <div className="text-xl sm:text-2xl font-black text-white">50+</div>
               <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">Live Webinars Held</div>
@@ -373,7 +373,7 @@ export default function NewsAndEventsPage() {
       </section>
 
       {/* --- MAIN CONTENT CONTAINER --- */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20 space-y-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 space-y-12">
         {/* --- SPOTLIGHT FEATURED BANNER --- */}
         {featuredItem && (
           <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden relative">

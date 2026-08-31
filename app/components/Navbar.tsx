@@ -213,7 +213,7 @@ function Navbar() {
       children: [
         { to: "/awards-recognition", label: "Awards & Recognition" },
         { to: "/news-events", label: "News & Events" },
-        { to: "/testimonials", label: "Testimonials" },
+        { to: "/success-stories", label: "Success Stories" },
         // { to: "/media-mentions", label: "Media Mentions" },
       ],
     },

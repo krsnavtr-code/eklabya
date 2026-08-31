@@ -62,7 +62,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col bg-white min-h-screen">
         {/* Hero Banner */}
         <Banner />
 

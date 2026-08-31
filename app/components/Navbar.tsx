@@ -204,14 +204,14 @@ function Navbar() {
   const navLinks = [
     { to: "/courses", label: "All Course" },
     { to: "/categories", label: "Categories" },
-    { to: "/free-courses", label: "Free Course"},
+    { to: "/free-courses", label: "Free Course" },
     // { to: "/testimonials", label: "Testimonials" },
     // { to: "/scholarship", label: "Scholarship" },
     ...(isAdmin ? [{ to: "/admin", label: "Admin" }] : []),
     {
       label: "Achievements",
       children: [
-        { to: "/awards-recognition", label: "Awards & Recognition" },
+        { to: "/awards-recognition", label: "Awards & Recognitions" },
         { to: "/news-events", label: "News & Events" },
         { to: "/success-stories", label: "Success Stories" },
         // { to: "/media-mentions", label: "Media Mentions" },
@@ -245,7 +245,7 @@ function Navbar() {
 
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-4">
-            <a
+            {/* <a
               href="mailto:info@eklabya.com"
               className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
@@ -256,11 +256,23 @@ function Navbar() {
               className="flex items-center gap-1 hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               <FaPhoneAlt size={10} />
-            </a>
+            </a> */}
           </div>
 
           {/* Right Side: Actions (Theme, Pay, Agent, Auth) */}
           <div className="hidden md:inline-flex items-center gap-2">
+            {/* UG & PG Programmes Button For CollegeVihar */}
+            <a
+              href="https://collegevihar.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-extrabold text-orange-600 text-xs uppercase tracking-wide whitespace-nowrap hover:text-blue-900 dark:hover:text-orange-300 hover:scale-105 transition-all duration-200"
+            >
+              UG, PG Programmes
+            </a>
+
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600 mx-1"></div>
+
             {/* Theme Toggle */}
             <button
               onClick={() => {
@@ -295,14 +307,14 @@ function Navbar() {
 
             <div className="h-3 w-px bg-blue-300 dark:bg-orange-600 mx-1"></div>
 
-            {/* SMART Board
-            <Link
+            {/* SMART Board */}
+            {/* <Link
               href="/smart-board"
               className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold hover:bg-blue-700 transition-colors"
             >
               SMART Board
-            </Link>
-            */}
+            </Link> */}
+           
 
             {/* Payment Dropdown (Small Version) */}
             <div className="relative" ref={paymentDropdownRef}>
@@ -426,7 +438,19 @@ function Navbar() {
           </div>
 
           {/* mobile Right Side: Actions (Theme, Pay, Agent, Auth) */}
-          <div className="md:hidden flex items-center gap-2">
+          <div className="md:hidden flex items-center gap-1">
+            {/* UG & PG Programmes Button For CollegeVihar */}
+            <a
+              href="https://collegevihar.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-extrabold text-orange-600 text-[10px] uppercase tracking-wide whitespace-nowrap hover:text-blue-900 dark:hover:text-orange-300 hover:scale-105 transition-all duration-200"
+            >
+              UG, PG Programmes
+            </a>
+
+            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600"></div>
+
             {/* Theme Toggle */}
             <button
               onClick={() => {
@@ -447,17 +471,17 @@ function Navbar() {
               <span>{theme === "dark" ? "" : ""}</span>
             </button>
 
-            <div className="h-3 w-px bg-blue-300 dark:bg-orange-600"></div>
+            {/* <div className="h-3 w-px bg-blue-300 dark:bg-orange-600"></div> */}
 
             {/* Agent Register */}
-            <a
+            {/* <a
               href="https://genlead.in/agent/register"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-900 dark:hover:text-orange-300 transition-colors"
             >
               Agent Register
-            </a>
+            </a> */}
 
             <div className="h-3 w-px bg-blue-300 dark:bg-orange-600"></div>
 
@@ -576,7 +600,7 @@ function Navbar() {
                 className="flex items-center gap-1 text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded transition-colors"
               >
                 <FaSignInAlt size={10} />{" "}
-                <span className="hidden md:inline">Login</span>
+                <span className="">Login</span>
               </Link>
             )}
           </div>
@@ -1029,6 +1053,16 @@ function Navbar() {
               ),
             )}
 
+            <a
+              href="https://genlead.in/agent/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center font-medium rounded-lg bg-gray-200 dark:bg-gray-800 px-2 py-2 hover:bg-gray-50 dark:hover:bg-gray-800"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Agent Register
+            </a>
+
             {isAuthenticated && (
               <>
                 <div className="border-t border-gray-100 dark:border-gray-800 my-2"></div>
@@ -1046,14 +1080,6 @@ function Navbar() {
                 >
                   My Profile
                 </Link>
-                <a
-                  href="https://genlead.in/agent/register"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-3 py-2 bg-gray-200 dark:bg-gray-800 font-medium hover:bg-gray-50 rounded-lg"
-                >
-                  Agent Register
-                </a>
               </>
             )}
           </div>

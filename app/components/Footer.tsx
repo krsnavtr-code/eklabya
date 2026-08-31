@@ -203,11 +203,13 @@ function Footer() {
             <ul className="space-y-2">
               {[
                 { name: "Browse Courses", to: "/courses" },
+                { name: "Categories", to: "/categories" },
+                { name: "Free Course", to: "/free-courses" },
                 { name: "About Us", to: "/about" },
                 { name: "Contact", to: "/contact" },
                 { name: "Blog", to: "/blog" },
-                { name: "Testimonials", to: "/testimonials" },
-                { name: "Awards & Recognition", to: "/awards-recognition" },
+                { name: "Success Stories", to: "/success-stories" },
+                { name: "Awards & Recognitions", to: "/awards-recognition" },
                 { name: "News & Events", to: "/news-events" },
               ].map((link, idx) => (
                 <li key={idx}>

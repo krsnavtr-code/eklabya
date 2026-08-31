@@ -791,7 +791,7 @@ const CourseDetail: React.FC = () => {
           url: canonicalUrl,
         }}
       />
-      <div className="">
+      {/* <div className="">
         <div className="container mx-auto px-1.5 md:px-4">
           <nav className="flex overflow-x-auto py-2" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-2 text-sm">
@@ -821,7 +821,7 @@ const CourseDetail: React.FC = () => {
             </ol>
           </nav>
         </div>
-      </div>
+      </div> */}
 
       <div className="container mx-auto px-1.5 md:px-4 py-2.5 md:py-6">
         <div className="">

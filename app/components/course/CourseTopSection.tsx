@@ -490,6 +490,8 @@ const CourseTopSection: React.FC<CourseTopSectionProps> = ({
               </p>
             </div>
 
+            {/* Brau */}
+
             <div className="space-y-4">
               <MarqueeRow
                 title="Certifications"

@@ -638,7 +638,7 @@ export default function AwardsPage() {
                 </p>
               </div>
 
-              {selectedAward.externalLink && (
+              {/* {selectedAward.externalLink && (
                 <div className="pt-2">
                   <a
                     href={selectedAward.externalLink}
@@ -650,7 +650,7 @@ export default function AwardsPage() {
                     <FaExternalLinkAlt className="text-xs" />
                   </a>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

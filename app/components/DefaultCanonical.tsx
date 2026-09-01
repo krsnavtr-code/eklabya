@@ -21,8 +21,8 @@ export default function DefaultCanonical() {
       link = document.createElement("link");
       link.setAttribute("rel", "canonical");
       document.head.appendChild(link);
+      link.setAttribute("href", href);
     }
-    link.setAttribute("href", href);
   }, [pathname]);
 
   return null;

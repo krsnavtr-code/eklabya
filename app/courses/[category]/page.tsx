@@ -1,217 +1,125 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { FaClock } from "react-icons/fa";
-import api from "../../utils/api";
+import {
+  fetchActiveCategories,
+  fetchCoursesByCategory,
+  getSiteBase,
+  CategoryData,
+} from "../../lib/server-api";
+import { getImageUrl } from "../../utils/imageUtils";
+import { formatPrice } from "../../utils/format";
 
-interface Course {
-  _id: string;
-  title: string;
-  slug?: string;
-  description?: string;
-  thumbnail?: string;
-  price?: number;
-  originalPrice?: number;
-  duration?: string;
-  isFeatured?: boolean;
+const FALLBACK_SITE_URL = "https://www.theeklavya.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}): Promise<Metadata> {
+  const { category } = await params;
+  const categoryName = decodeURIComponent(category);
+  const categories = await fetchActiveCategories();
+  const categoryData = findCategory(categories, categoryName);
+
+  if (!categoryData) return {};
+
+  const siteBase = getSiteBase() || FALLBACK_SITE_URL;
+  const slug = categoryData.slug || categoryName;
+  const canonical = `${siteBase}/courses/${slug}`;
+  const title = `${categoryData.name} Courses | Eklabya`;
+  const description = `Explore ${categoryData.name} courses on Eklabya and upgrade your skills with industry-recognized programs.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
-interface Category {
-  _id: string;
-  name: string;
-  slug?: string;
-  isActive?: boolean;
+function findCategory(
+  categories: CategoryData[],
+  categoryName: string,
+): CategoryData | undefined {
+  const name = categoryName.toLowerCase().trim();
+
+  return (
+    categories.find((cat) => cat.slug?.toLowerCase() === name) ||
+    categories.find(
+      (cat) => cat.name?.toLowerCase().replace(/\s+/g, "-") === name,
+    ) ||
+    categories.find(
+      (cat) =>
+        cat.name?.trim().toLowerCase() ===
+        decodeURIComponent(name.replace(/-/g, " ")).trim().toLowerCase(),
+    )
+  );
 }
 
-export default function CoursesByCategoryPage() {
-  const params = useParams();
-  const categoryName =
-    typeof params?.category === "string" ? params.category : "";
+export default async function CoursesByCategoryPage({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  const { category } = await params;
+  const categoryName = decodeURIComponent(category);
+  const categories = await fetchActiveCategories();
 
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [category, setCategory] = useState<Category | null>(null);
-  const [allCategories, setAllCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const categoryData = findCategory(categories, categoryName);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  if (!categoryData) notFound();
 
-        const categoriesResponse = await api.get("/categories", {
-          params: { limit: 100, status: "active" },
-        });
+  const courses = await fetchCoursesByCategory(categoryData._id);
 
-        let categoriesData: Category[] = [];
-        if (
-          categoriesResponse?.data?.data &&
-          Array.isArray(categoriesResponse.data.data)
-        ) {
-          categoriesData = categoriesResponse.data.data;
-        } else if (
-          categoriesResponse?.data &&
-          Array.isArray(categoriesResponse.data)
-        ) {
-          categoriesData = categoriesResponse.data;
-        } else if (Array.isArray(categoriesResponse)) {
-          categoriesData = categoriesResponse as Category[];
-        }
+  const siteBase = getSiteBase() || FALLBACK_SITE_URL;
+  const slug = categoryData.slug || categoryName;
+  const canonical = `${siteBase}/courses/${slug}`;
 
-        const activeCategories = categoriesData.filter(
-          (cat) => cat && cat.isActive !== false,
-        );
-        setAllCategories(activeCategories);
-
-        if (categoryName) {
-          let categoryData = activeCategories.find(
-            (cat) => cat?.slug?.toLowerCase() === categoryName.toLowerCase(),
-          );
-
-          if (!categoryData) {
-            categoryData = activeCategories.find(
-              (cat) =>
-                cat?.name?.toLowerCase().replace(/\s+/g, "-") ===
-                categoryName.toLowerCase(),
-            );
-          }
-
-          if (!categoryData) {
-            const decodedCategoryName = decodeURIComponent(
-              categoryName.replace(/-/g, " "),
-            );
-            categoryData = activeCategories.find(
-              (cat) =>
-                cat?.name?.trim().toLowerCase() ===
-                decodedCategoryName.trim().toLowerCase(),
-            );
-          }
-
-          if (categoryData) {
-            setCategory(categoryData);
-            const coursesResponse = await api.get("/courses", {
-              params: {
-                category: categoryData._id,
-                limit: 100,
-                isPublished: "true",
-                status: "published",
-              },
-            });
-
-            let coursesData: Course[] = [];
-            if (
-              coursesResponse?.data?.data &&
-              Array.isArray(coursesResponse.data.data)
-            ) {
-              coursesData = coursesResponse.data.data;
-            } else if (
-              coursesResponse?.data &&
-              Array.isArray(coursesResponse.data)
-            ) {
-              coursesData = coursesResponse.data;
-            } else if (Array.isArray(coursesResponse)) {
-              coursesData = coursesResponse as Course[];
-            }
-
-            setCourses(coursesData);
-            return;
-          }
-        }
-
-        const allCoursesResponse = await api.get("/courses", {
-          params: {
-            limit: 100,
-            isPublished: "true",
-            status: "published",
-          },
-        });
-
-        let allCourses: Course[] = [];
-        if (
-          allCoursesResponse?.data?.data &&
-          Array.isArray(allCoursesResponse.data.data)
-        ) {
-          allCourses = allCoursesResponse.data.data;
-        } else if (
-          allCoursesResponse?.data &&
-          Array.isArray(allCoursesResponse.data)
-        ) {
-          allCourses = allCoursesResponse.data;
-        } else if (Array.isArray(allCoursesResponse)) {
-          allCourses = allCoursesResponse as Course[];
-        }
-
-        setCourses(allCourses);
-      } catch (err: any) {
-        console.error("Error fetching data:", err);
-        setError("Failed to load courses. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [categoryName]);
-
-  const getImageUrl = (imagePath?: string) => {
-    if (!imagePath) return undefined;
-    if (imagePath.startsWith("http")) return imagePath;
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002";
-    return `${baseUrl.replace("/api", "")}${imagePath}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteBase,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Courses",
+        item: `${siteBase}/courses`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: categoryData.name,
+        item: canonical,
+      },
+    ],
   };
-
-  const formatPrice = (price?: number) => {
-    if (!price || price <= 0) return "Free";
-    return `₹${price.toLocaleString("en-IN")}`;
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="py-8 px-4 sm:px-6 lg:px-8">
-        {/* <nav className="mb-6 text-sm max-w-7xl mx-auto" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-2">
-            <li>
-              <Link
-                href="/"
-                className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="text-gray-500 dark:text-gray-400">/</li>
-            <li>
-              <Link
-                href="/courses"
-                className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
-              >
-                Courses
-              </Link>
-            </li>
-            {category && (
-              <>
-                <li className="text-gray-500 dark:text-gray-400">/</li>
-                <li
-                  className="text-blue-600 dark:text-blue-400 font-medium"
-                  aria-current="page"
-                >
-                  {category.name}
-                </li>
-              </>
-            )}
-          </ol>
-        </nav> */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
 
+      <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 items-start">
           <div className="w-full md:w-1/4 lg:w-1/5 md:sticky md:top-32 self-start">
             <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-2 border border-gray-200 dark:border-gray-700 max-h-[calc(100vh-6rem)] overflow-y-auto">
@@ -222,35 +130,35 @@ export default function CoursesByCategoryPage() {
                 <li>
                   <Link
                     href="/courses"
-                    className={`block px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                      !categoryName
-                        ? "bg-blue-50 text-blue-600 font-medium"
-                        : "text-black dark:text-white"
-                    }`}
+                    className={`block px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 text-black dark:text-white`}
                   >
                     All Courses
                   </Link>
                 </li>
-                {allCategories
+                {categories
                   .filter((cat) => cat && cat.isActive !== false)
                   .sort((a, b) => a.name.localeCompare(b.name))
-                  .map((cat) => (
-                    <li key={cat._id}>
-                      <Link
-                        href={`/courses/${
-                          cat.slug ||
-                          cat.name.toLowerCase().replace(/\s+/g, "-")
-                        }`}
-                        className={`block px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                          category?._id === cat._id
-                            ? "bg-blue-50 text-blue-600 font-medium"
-                            : "text-black dark:text-white"
-                        }`}
-                      >
-                        {cat.name}
-                      </Link>
-                    </li>
-                  ))}
+                  .map((cat) => {
+                    const catSlug =
+                      cat.slug || cat.name.toLowerCase().replace(/\s+/g, "-");
+                    const isActive =
+                      (categoryData.slug || "").toLowerCase() ===
+                      catSlug.toLowerCase();
+                    return (
+                      <li key={cat._id}>
+                        <Link
+                          href={`/courses/${catSlug}`}
+                          className={`block px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                            isActive
+                              ? "bg-blue-50 text-blue-600 font-medium"
+                              : "text-black dark:text-white"
+                          }`}
+                        >
+                          {cat.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
           </div>
@@ -258,20 +166,14 @@ export default function CoursesByCategoryPage() {
           <div className="w-full md:w-3/4 lg:w-4/5">
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-                {category ? `${category.name} Courses` : "All Courses"}
+                {categoryData.name} Courses
               </h1>
               <p className="text-black dark:text-white">
                 Total Courses: {courses.length}
               </p>
             </div>
 
-            {error ? (
-              <div className="text-center py-12">
-                <p className="text-red-600 dark:text-red-300 text-lg">
-                  {error}
-                </p>
-              </div>
-            ) : courses.length === 0 ? (
+            {courses.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-black dark:text-white text-lg">
                   No courses found in this category.
@@ -320,9 +222,9 @@ export default function CoursesByCategoryPage() {
                         <span className="font-bold text-lg text-black dark:text-white">
                           {formatPrice(course.price)}
                         </span>
-                        <button className="w-1/2 self-end px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors duration-200">
+                        <span className="w-1/2 self-end px-2 py-1 bg-blue-600 text-white text-sm rounded text-center transition-colors duration-200">
                           Check Details
-                        </button>
+                        </span>
                       </div>
                     </div>
                   </Link>

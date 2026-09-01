@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative bg-slate-50 text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
+    <main className="relative text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
       {/* Search Engine Bots ke liye direct HTML mein inject hoga */}
       <script
         type="application/ld+json"

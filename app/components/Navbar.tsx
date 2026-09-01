@@ -202,7 +202,7 @@ function Navbar() {
   };
 
   const navLinks = [
-    { to: "/courses", label: "All Course" },
+    { to: "/courses", label: "Courses" },
     { to: "/categories", label: "Categories" },
     { to: "/free-courses", label: "Free Course" },
     // { to: "/testimonials", label: "Testimonials" },

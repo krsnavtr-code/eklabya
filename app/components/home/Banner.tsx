@@ -257,7 +257,7 @@ function Banner() {
   const features = [
     {
       icon: <FaBookOpen className="text-lg text-blue-600 dark:text-blue-400" />,
-      title: `${courseCount}+ Top Courses`,
+      title: `${courseCount}+ Top Programme`,
       desc: "Across IT, data, business & design",
     },
     {

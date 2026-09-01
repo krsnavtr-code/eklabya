@@ -175,7 +175,7 @@ const CourseMenu = ({
             className="flex items-center gap-0.5 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-sm shadow-blue-600/20"
           >
             <FaBook className="w-3.5 h-3.5" />
-            <span>Top Courses</span>
+            <span>Top Programme</span>
             <FaChevronRight
               className={`w-2.5 h-2.5 transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
             />
@@ -200,7 +200,7 @@ const CourseMenu = ({
           {isMobile && (
             <div className="px-1.5 py-1 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-700">
               <h3 className="font-bold text-slate-800 dark:text-white flex justify-between items-center">
-                Explore Top Courses
+                Explore Top Programme
               </h3>
             </div>
           )}

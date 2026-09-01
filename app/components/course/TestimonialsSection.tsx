@@ -25,15 +25,15 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Rohit Sharma",
+    name: "Vaibhav Thakur",
     platform: "google",
     rating: 5,
-    text: "The course completely transformed my career. The instructors are industry experts and the projects are real-world. Highly recommended for anyone looking to upskill.",
-    date: "2 weeks ago",
+    text: "Excellent training center for SAP Material Management certification courses. The sessions were interactive, and the placement support helped me gain confidence for interviews. The practical assignments made learning easy and effective.",
+    date: "3 months ago",
   },
   {
     id: 2,
-    name: "Priya Patel",
+    name: "Ritika Bhadani",
     platform: "facebook",
     rating: 5,
     text: "Excellent curriculum and amazing support from the team. I landed my first MNC job within two months of completing the program. Thank you Eklabya!",
@@ -44,16 +44,16 @@ const testimonials: Testimonial[] = [
     name: "Amit Verma",
     platform: "x",
     rating: 4,
-    text: "Great value for money. The live industry project gave me hands-on experience that I could talk about in interviews. Worth every penny. Great value for money. The live industry project gave me hands-on experience that I could talk about in interviews. Worth every penny.",
-    date: "3 weeks ago",
+    text: "Myself Ritika I have learned Data Science and Power BI form Eklabya, As students I have experienced well structured training and practical from here. The trainer explained every concept step-by-step clear my all doubts with practical examples and real-time scenario, thats helped me build my knowledge strong and improve my skills in data science",
+    date: "2 months ago",
   },
   {
     id: 4,
-    name: "Neha Gupta",
+    name: "Sheeba Jaidiya",
     platform: "instagram",
     rating: 5,
-    text: "Loved the community and mentorship. The certificate boosted my resume and the hiring partners helped me connect with top companies.",
-    date: "5 days ago",
+    text: "I had a great learning experience with Eklabya while pursuing Data Science. The course was well-structured, practical, and helped me understand important concepts with real-world applications. The guidance and support from the trainers were really helpful throughout the learning journey. Highly recommended for anyone looking to build a career in Data Science!",
+    date: "10 days ago",
   },
 ];
 

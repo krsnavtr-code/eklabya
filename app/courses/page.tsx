@@ -349,8 +349,8 @@ function CoursesContent() {
                   100% Free Learning Opportunities
                 </h3>
                 <p className="text-xs text-emerald-100">
-                  Enjoy unlimited access to free modules, projects, and
-                  verifiable credentials.
+                  Get Free Course with any paid course. Enjoy unlimited access
+                  to free modules, projects, and verifiable credentials.
                 </p>
               </div>
             </div>

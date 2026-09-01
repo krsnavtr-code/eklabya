@@ -203,10 +203,9 @@ function Navbar() {
 
   const navLinks = [
     { to: "/courses", label: "Courses" },
-    { to: "/categories", label: "Categories" },
-    { to: "/free-courses", label: "Free Course" },
+    // { to: "/categories", label: "Categories" },
+    // { to: "/free-courses", label: "Free Course" },
     // { to: "/testimonials", label: "Testimonials" },
-    // { to: "/scholarship", label: "Scholarship" },
     ...(isAdmin ? [{ to: "/admin", label: "Admin" }] : []),
     {
       label: "Achievements",
@@ -214,6 +213,16 @@ function Navbar() {
         { to: "/awards-recognition", label: "Awards & Recognitions" },
         { to: "/news-events", label: "News & Events" },
         { to: "/success-stories", label: "Success Stories" },
+        // { to: "/media-mentions", label: "Media Mentions" },
+      ],
+    },
+    { to: "/scholarship", label: "Scholarship" },
+    {
+      label: "More",
+      children: [
+        { to: "/about", label: "About Us" },
+        { to: "/blog", label: "Blogs" },
+        { to: "/contact", label: "Contact Us" },
         // { to: "/media-mentions", label: "Media Mentions" },
       ],
     },

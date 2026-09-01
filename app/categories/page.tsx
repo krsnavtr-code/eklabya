@@ -13,6 +13,7 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import api from "../utils/api";
+import { getImageUrl } from "../utils/imageUtils";
 
 interface Category {
   _id: string;
@@ -67,13 +68,6 @@ export default function CategoriesPage() {
 
     fetchCategoriesWithCount();
   }, []);
-
-  const getImageUrl = (imagePath?: string) => {
-    if (!imagePath) return null;
-    if (imagePath.startsWith("http")) return imagePath;
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002";
-    return `${baseUrl.replace("/api", "")}${imagePath}`;
-  };
 
   const renderCategoryImage = (category: Category) => {
     const imageUrl = category.image ? getImageUrl(category.image) : null;

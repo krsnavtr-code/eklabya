@@ -11,6 +11,7 @@ import {
   FaShieldAlt,
 } from "react-icons/fa";
 import api from "../utils/api";
+import { getImageUrl } from "../utils/imageUtils";
 
 interface Course {
   _id: string;
@@ -19,6 +20,7 @@ interface Course {
   description?: string;
   shortDescription?: string;
   thumbnail?: string;
+  image?: string;
   price?: number;
   originalPrice?: number;
   duration?: string;
@@ -76,13 +78,6 @@ export default function CoursesPage() {
 
     fetchCourses();
   }, []);
-
-  const getImageUrl = (imagePath?: string) => {
-    if (!imagePath) return undefined;
-    if (imagePath.startsWith("http")) return imagePath;
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002";
-    return `${baseUrl.replace("/api", "")}${imagePath}`;
-  };
 
   const formatPrice = (price?: number) => {
     if (!price || price <= 0) return "Free";
@@ -289,9 +284,9 @@ export default function CoursesPage() {
                 className="group block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500"
               >
                 <div className="w-full h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                  {course.thumbnail ? (
+                  {course.thumbnail || course.image ? (
                     <img
-                      src={getImageUrl(course.thumbnail)}
+                      src={getImageUrl(course.thumbnail || course.image)}
                       alt={course.title}
                       className="w-full h-full object-cover"
                       loading="lazy"

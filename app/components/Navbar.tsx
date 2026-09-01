@@ -314,7 +314,6 @@ function Navbar() {
             >
               SMART Board
             </Link> */}
-           
 
             {/* Payment Dropdown (Small Version) */}
             <div className="relative" ref={paymentDropdownRef}>
@@ -599,8 +598,7 @@ function Navbar() {
                 href="/login"
                 className="flex items-center gap-1 text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded transition-colors"
               >
-                <FaSignInAlt size={10} />{" "}
-                <span className="">Login</span>
+                <FaSignInAlt size={10} /> <span className="">Login</span>
               </Link>
             )}
           </div>
@@ -643,55 +641,57 @@ function Navbar() {
             </div>
 
             {/* 2. Navigation Links (Desktop) */}
-            <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
+            <div className="hidden md:flex items-center space-x-2 lg:space-x-1">
               <div className="relative group">
                 <CourseMenu />
               </div>
-              {navLinks.map((link) => {
-                if (link.children) {
-                  return (
-                    <div key={link.label} className="relative group py-2">
-                      <button className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 flex items-center gap-1">
-                        {link.label}
-                        <FaChevronDown
-                          size={10}
-                          className="transition-transform duration-200 group-hover:rotate-180"
-                        />
-                      </button>
-                      <div className="absolute top-full left-0 pt-1 w-48 z-50 hidden group-hover:block">
-                        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 py-2 flex flex-col">
-                          {link.children.map((child) => (
-                            <Link
-                              key={child.to}
-                              href={child.to}
-                              className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
+              <div className="flex items-center space-x-3.5">
+                {navLinks.map((link) => {
+                  if (link.children) {
+                    return (
+                      <div key={link.label} className="relative group py-2">
+                        <button className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 flex items-center gap-1">
+                          {link.label}
+                          <FaChevronDown
+                            size={10}
+                            className="transition-transform duration-200 group-hover:rotate-180"
+                          />
+                        </button>
+                        <div className="absolute top-full left-0 pt-1 w-48 z-50 hidden group-hover:block">
+                          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 py-2 flex flex-col">
+                            {link.children.map((child) => (
+                              <Link
+                                key={child.to}
+                                href={child.to}
+                                className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    );
+                  }
+                  const isActive = pathname === link.to;
+                  return (
+                    <Link
+                      key={link.to!}
+                      href={link.to!}
+                      className={`text-sm font-semibold transition-all duration-300 relative ${
+                        isActive
+                          ? "text-blue-600 dark:text-blue-400 font-bold"
+                          : "text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400"
+                      }`}
+                    >
+                      {link.label}
+                      {isActive && (
+                        <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform scale-x-100 transition-transform duration-300"></span>
+                      )}
+                    </Link>
                   );
-                }
-                const isActive = pathname === link.to;
-                return (
-                  <Link
-                    key={link.to!}
-                    href={link.to!}
-                    className={`text-sm font-semibold transition-all duration-300 relative ${
-                      isActive
-                        ? "text-blue-600 dark:text-blue-400 font-bold"
-                        : "text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400"
-                    }`}
-                  >
-                    {link.label}
-                    {isActive && (
-                      <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform scale-x-100 transition-transform duration-300"></span>
-                    )}
-                  </Link>
-                );
-              })}
+                })}
+              </div>
             </div>
 
             {/* 3. Search Icon & Mobile Actions */}
@@ -994,7 +994,9 @@ function Navbar() {
                       <span className="text-gray-500 dark:text-gray-400">
                         Branch
                       </span>
-                      <span className="font-medium">Okhla Phase II , Delhi</span>
+                      <span className="font-medium">
+                        Okhla Phase II , Delhi
+                      </span>
                     </div>
                   </div>
 

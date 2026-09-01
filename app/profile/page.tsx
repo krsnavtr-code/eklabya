@@ -25,6 +25,7 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import SEO from "../components/SEO";
+import { getImageUrl } from "../utils/imageUtils";
 
 interface FormData {
   fullname: string;
@@ -180,8 +181,13 @@ export default function Profile() {
     router.push(`/smart-board/courses/${courseId}`);
   };
 
+  useEffect(() => {
+    if (!authUser) {
+      router.push("/login?redirect=/profile");
+    }
+  }, [authUser, router]);
+
   if (!authUser) {
-    router.push("/login?redirect=/profile");
     return null;
   }
 
@@ -298,7 +304,9 @@ export default function Profile() {
                   />
                   <StatCard
                     title="Status"
-                    value={testResult.percentage >= 50 ? "Passed" : "Not Passed"}
+                    value={
+                      testResult.percentage >= 50 ? "Passed" : "Not Passed"
+                    }
                     icon={
                       testResult.percentage >= 50 ? (
                         <FaCheckCircle className="text-xl" />
@@ -317,7 +325,9 @@ export default function Profile() {
                   />
                   <StatCard
                     title="Date Taken"
-                    value={new Date(testResult.submittedAt).toLocaleDateString()}
+                    value={new Date(
+                      testResult.submittedAt,
+                    ).toLocaleDateString()}
                     icon={<FaClock className="text-xl" />}
                     colorClass="text-blue-600"
                     bgClass="bg-blue-50"
@@ -435,7 +445,9 @@ export default function Profile() {
                                 <span className="text-sm">
                                   {Array.isArray(answer.userAnswer)
                                     ? answer.userAnswer.join(", ")
-                                    : String(answer.userAnswer || "Not answered")}
+                                    : String(
+                                        answer.userAnswer || "Not answered",
+                                      )}
                                 </span>
                               </div>
 
@@ -590,9 +602,11 @@ export default function Profile() {
                         className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col h-full"
                       >
                         <div className="relative h-48 bg-gray-100 dark:bg-gray-700 overflow-hidden">
-                          {course.thumbnail ? (
+                          {course.thumbnail || course.image ? (
                             <img
-                              src={course.thumbnail}
+                              src={getImageUrl(
+                                course.thumbnail || course.image,
+                              )}
                               alt={course.title}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                               onError={(e) => {

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FaImage, FaArrowRight, FaLayerGroup } from "react-icons/fa";
 import Link from "next/link";
 import api from "../../utils/api";
+import { getImageUrl } from "../../utils/imageUtils";
 
 interface Category {
   _id: string;
@@ -14,14 +15,6 @@ interface Category {
   description?: string;
   showOnHome?: boolean;
 }
-
-// Helper function to get the full image URL
-const getImageUrl = (imagePath?: string) => {
-  if (!imagePath) return undefined;
-  if (imagePath.startsWith("http")) return imagePath;
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002";
-  return `${baseUrl}${imagePath}`;
-};
 
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);

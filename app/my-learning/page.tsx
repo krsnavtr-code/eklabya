@@ -3,15 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  FaPlay,
-  FaClock,
-  FaCheckCircle,
-  FaBook,
-} from "react-icons/fa";
+import { FaPlay, FaClock, FaCheckCircle, FaBook } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { getUserEnrollments } from "../api/enrollmentApi";
+import { getImageUrl } from "../utils/imageUtils";
 
 interface Module {
   lessons?: any[];
@@ -22,6 +18,7 @@ interface Course {
   title?: string;
   instructor?: string | { name?: string };
   thumbnail?: string;
+  image?: string;
   duration?: string;
   modules?: Module[];
 }
@@ -104,7 +101,7 @@ export default function MyLearning() {
               "Course Title Not Available",
             instructor,
             thumbnail:
-              course.thumbnail ||
+              getImageUrl(course.thumbnail || course.image) ||
               "https://via.placeholder.com/300x150?text=Course+Image",
             progress: enrollment.progress || 0,
             lastAccessed: enrollment.lastAccessed
@@ -124,9 +121,8 @@ export default function MyLearning() {
 
         setStats({
           totalEnrolled: courses.length,
-          inProgress: courses.filter(
-            (c) => c.progress > 0 && c.progress < 100,
-          ).length,
+          inProgress: courses.filter((c) => c.progress > 0 && c.progress < 100)
+            .length,
           completed: courses.filter((c) => c.progress === 100).length,
         });
       } catch (err) {
@@ -352,7 +348,7 @@ export default function MyLearning() {
                           router.push(`/courses/${course.courseId}`);
                         } else {
                           toast(
-                        "Your enrollment is pending approval. We'll notify you once approved.",
+                            "Your enrollment is pending approval. We'll notify you once approved.",
                             {
                               icon: "⏳",
                               style: {

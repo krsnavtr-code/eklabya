@@ -548,7 +548,11 @@ const CourseTopSection: React.FC<CourseTopSectionProps> = ({
             >
               <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/40 transition-colors z-10"></div>
               <img
-                src={getImageUrl(course.thumbnail)}
+                src={getImageUrl(
+                  course.thumbnail ||
+                    (course as any).image ||
+                    (course as any).imageUrl,
+                )}
                 alt={course.title}
                 className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105"
                 onError={(e: any) => {

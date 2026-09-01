@@ -10,12 +10,14 @@ import {
   FaLaptopCode,
 } from "react-icons/fa";
 import api from "../../utils/api";
+import { getImageUrl } from "../../utils/imageUtils";
 
 interface Course {
   _id: string;
   title: string;
   slug?: string;
   thumbnail?: string;
+  image?: string;
   shortDescription?: string;
   rating?: number;
   duration?: string;
@@ -37,8 +39,10 @@ const CourseCard = ({ course }: { course: Course }) => {
   useEffect(() => {
     let isMounted = true;
 
+    const rawImage = course?.thumbnail || course?.image;
+
     const loadImage = async () => {
-      if (!course?.thumbnail) {
+      if (!rawImage) {
         if (isMounted) {
           setImageState({
             url: "/images/course-placeholder.jpg",
@@ -49,17 +53,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         return;
       }
 
-      let url = course.thumbnail;
-
-      if (
-        !url.startsWith("http") &&
-        !url.startsWith("https") &&
-        !url.startsWith("//")
-      ) {
-        const cleanPath = url.replace(/^\/+/, "");
-        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002";
-        url = `${baseUrl}/${cleanPath}`.replace(/([^:]\/)\/+/g, "$1");
-      }
+      const url = getImageUrl(rawImage);
 
       if (isMounted) {
         setImageState({
@@ -153,7 +147,7 @@ const CourseCard = ({ course }: { course: Course }) => {
             <div className="w-full h-full flex items-center justify-center">
               <div className="animate-pulse rounded-full h-10 w-10 border-3 border-t-blue-500 border-gray-300"></div>
             </div>
-          ) : imageState.error || !course.thumbnail ? (
+          ) : imageState.error || (!course.thumbnail && !course.image) ? (
             <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs font-semibold">
               No preview available
             </div>

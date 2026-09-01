@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaSearch, FaStar, FaClock, FaBook } from "react-icons/fa";
 import SEO from "../components/SEO";
 import api from "../utils/api";
+import { getImageUrl } from "../utils/imageUtils";
 
 interface Course {
   _id: string;
@@ -12,6 +13,7 @@ interface Course {
   title: string;
   shortDescription?: string;
   thumbnail?: string;
+  image?: string;
   instructor?: string;
   rating?: number;
   duration?: string;
@@ -166,9 +168,9 @@ export default function FreeCoursesPage() {
                   className="group relative block bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden border border-gray-100 dark:border-gray-700"
                 >
                   <div className="h-48 overflow-hidden relative">
-                    {course.thumbnail ? (
+                    {course.thumbnail || course.image ? (
                       <img
-                        src={course.thumbnail}
+                        src={getImageUrl(course.thumbnail || course.image)}
                         alt={course.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

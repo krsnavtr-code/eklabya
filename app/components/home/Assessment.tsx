@@ -62,7 +62,7 @@ const Assessment = () => {
               <h3 className="text-lg md:text-xl font-black text-slate-900 dark:text-white mb-3">
                 Eligibility Criteria
               </h3>
-              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+              <p className="text-xs md:text-sm text-slate-800 dark:text-slate-400 mb-6 leading-relaxed">
                 Students who are currently pursuing any Undergraduate or
                 Postgraduate studies at any government recognized school,
                 college, or university, with a good internet connection for the
@@ -96,7 +96,7 @@ const Assessment = () => {
               <h3 className="text-lg md:text-xl font-black text-slate-900 dark:text-white mb-3">
                 Evaluation Process
               </h3>
-              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+              <p className="text-xs md:text-sm text-slate-800 dark:text-slate-400 mb-6 leading-relaxed">
                 Our evaluation is fully digital, timebound, and transparent.
                 Every candidate gets an equal shot.
               </p>

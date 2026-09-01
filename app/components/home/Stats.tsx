@@ -156,7 +156,7 @@ const Stats = () => {
                 <h4 className="text-sm font-bold text-gray-900 dark:text-white">
                   Alumni Stories
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-gray-400">
+                <p className="text-xs text-slate-800 dark:text-gray-400">
                   Hear real success stories from our graduates working globally.
                 </p>
               </div>

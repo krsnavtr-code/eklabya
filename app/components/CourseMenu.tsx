@@ -221,7 +221,7 @@ const CourseMenu = ({
                     className={`cursor-pointer flex items-center justify-between rounded-lg transition-all duration-200 ${
                       isMobile
                         ? "px-1.5 py-1 hover:bg-slate-50 dark:hover:bg-slate-700/50"
-                        : `px-1.5 py-0.5 ${activeCategory?._id === category._id ? "bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 text-blue-600 dark:text-blue-400 font-bold" : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 font-medium"}`
+                        : `px-1.5 py-0.5 ${activeCategory?._id === category._id ? "bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 text-blue-600 dark:text-blue-400 font-bold" : "text-slate-800 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 font-medium"}`
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -278,7 +278,7 @@ const CourseMenu = ({
                                 key={course._id}
                                 href={`/course/${course.slug || course._id}`}
                                 onClick={closeMenu}
-                                className="text-sm text-slate-600 hover:text-blue-600 py-0.5 flex items-center gap-2 before:content-[''] before:w-1 before:h-1 before:bg-slate-300 before:rounded-full"
+                                className="text-sm text-slate-800 hover:text-blue-600 py-0.5 flex items-center gap-2 before:content-[''] before:w-1 before:h-1 before:bg-slate-300 before:rounded-full"
                               >
                                 {course.title}
                               </Link>

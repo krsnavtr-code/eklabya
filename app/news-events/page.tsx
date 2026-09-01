@@ -202,7 +202,8 @@ export default function NewsAndEventsPage() {
           params: { limit: 20 },
         });
 
-        const mentions = response?.data?.data?.mentions || response?.data?.mentions || [];
+        const mentions =
+          response?.data?.data?.mentions || response?.data?.mentions || [];
 
         if (Array.isArray(mentions) && mentions.length > 0) {
           const formattedNews: NewsOrEvent[] = mentions.map((m: any) => ({
@@ -215,22 +216,30 @@ export default function NewsAndEventsPage() {
             publisher: m.publisherName || "Press Release",
             publisherLogo: m.publisherLogo,
             externalLink: m.externalLink || m.mediaUpload || "",
-            tag: m.newsType === "press_release" ? "Press Release" : "Media Mention",
+            tag:
+              m.newsType === "press_release"
+                ? "Press Release"
+                : "Media Mention",
             featured: Boolean(m.isFeatured),
           }));
 
           // Merge without duplicate titles
           setItems((prev) => {
-            const existingTitles = new Set(formattedNews.map((n) => n.title.toLowerCase()));
+            const existingTitles = new Set(
+              formattedNews.map((n) => n.title.toLowerCase()),
+            );
             const nonDuplicateDefaults = defaultEvents.filter(
-              (d) => !existingTitles.has(d.title.toLowerCase())
+              (d) => !existingTitles.has(d.title.toLowerCase()),
             );
             return [...formattedNews, ...nonDuplicateDefaults];
           });
         }
       } catch (err) {
         // Fallback gracefully to default curated events
-        console.warn("Could not fetch media mentions, using default events:", err);
+        console.warn(
+          "Could not fetch media mentions, using default events:",
+          err,
+        );
       } finally {
         setLoading(false);
       }
@@ -255,13 +264,17 @@ export default function NewsAndEventsPage() {
       const matchTag = item.tag.toLowerCase().includes(q);
       const matchSpeaker = item.speaker?.name.toLowerCase().includes(q);
       const matchPublisher = item.publisher?.toLowerCase().includes(q);
-      return matchTitle || matchDesc || matchTag || matchSpeaker || matchPublisher;
+      return (
+        matchTitle || matchDesc || matchTag || matchSpeaker || matchPublisher
+      );
     }
 
     return true;
   });
 
-  const featuredItem = items.find((item) => item.featured && item.category === "upcoming") || items[0];
+  const featuredItem =
+    items.find((item) => item.featured && item.category === "upcoming") ||
+    items[0];
 
   const handleOpenRSVP = (event: NewsOrEvent) => {
     setSelectedEvent(event);
@@ -290,7 +303,9 @@ export default function NewsAndEventsPage() {
       const res = await submitContactForm(submissionData);
       if (res.success) {
         setRsvpSuccess(true);
-        toast.success("RSVP Successful! You will receive confirmation details via Email & SMS.");
+        toast.success(
+          "RSVP Successful! You will receive confirmation details via Email & SMS.",
+        );
       } else {
         toast.error(res.message || "Failed to submit RSVP. Please try again.");
       }
@@ -335,7 +350,7 @@ export default function NewsAndEventsPage() {
       {/* --- HERO HEADER --- */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-950 text-white py-6 md:py-8 px-3 sm:px-4 lg:px-6">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        
+
         <div className="relative max-w-7xl mx-auto text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/30 text-blue-200 text-xs sm:text-sm font-semibold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -347,26 +362,43 @@ export default function NewsAndEventsPage() {
           </h1>
 
           <p className="max-w-7xl mx-auto text-sm sm:text-base md:text-lg text-blue-100/90 font-medium leading-relaxed">
-            Stay ahead with live webinars, expert masterclasses, hackathons, and the latest official press announcements from Eklabya.
+            Stay ahead with live webinars, expert masterclasses, hackathons, and
+            the latest official press announcements from Eklabya.
           </p>
 
           {/* Quick Metrics */}
           <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
-              <div className="text-xl sm:text-2xl font-black text-white">50+</div>
-              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">Live Webinars Held</div>
+              <div className="text-xl sm:text-2xl font-black text-white">
+                50+
+              </div>
+              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">
+                Live Webinars Held
+              </div>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
-              <div className="text-xl sm:text-2xl font-black text-white">25k+</div>
-              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">Community Attendees</div>
+              <div className="text-xl sm:text-2xl font-black text-white">
+                25k+
+              </div>
+              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">
+                Community Attendees
+              </div>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
-              <div className="text-xl sm:text-2xl font-black text-white">100+</div>
-              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">Industry Mentors</div>
+              <div className="text-xl sm:text-2xl font-black text-white">
+                100+
+              </div>
+              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">
+                Industry Mentors
+              </div>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/10 text-center">
-              <div className="text-xl sm:text-2xl font-black text-white">98%</div>
-              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">Satisfaction Rating</div>
+              <div className="text-xl sm:text-2xl font-black text-white">
+                98%
+              </div>
+              <div className="text-[11px] sm:text-xs text-blue-200 mt-0.5">
+                Satisfaction Rating
+              </div>
             </div>
           </div>
         </div>
@@ -385,11 +417,14 @@ export default function NewsAndEventsPage() {
                   <span className="bg-rose-500 text-white text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider animate-pulse">
                     Featured Spotlight
                   </span>
-                  <span className={`text-[11px] font-bold uppercase px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(featuredItem.type)}`}>
+                  <span
+                    className={`text-[11px] font-bold uppercase px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(featuredItem.type)}`}
+                  >
                     {featuredItem.type.toUpperCase()}
                   </span>
                   <span className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">
-                    <FaCalendarAlt className="text-blue-500" /> {formatDate(featuredItem.date)}
+                    <FaCalendarAlt className="text-blue-500" />{" "}
+                    {formatDate(featuredItem.date)}
                   </span>
                 </div>
 
@@ -397,7 +432,7 @@ export default function NewsAndEventsPage() {
                   {featuredItem.title}
                 </h2>
 
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed">
                   {featuredItem.description}
                 </p>
 
@@ -411,7 +446,8 @@ export default function NewsAndEventsPage() {
                         {featuredItem.speaker.name}
                       </div>
                       <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                        {featuredItem.speaker.role} • {featuredItem.speaker.company}
+                        {featuredItem.speaker.role} •{" "}
+                        {featuredItem.speaker.company}
                       </div>
                     </div>
                   </div>
@@ -441,7 +477,9 @@ export default function NewsAndEventsPage() {
 
                 <div className="text-center text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1.5">
                   <FaUsers className="text-emerald-500" />
-                  <span>{featuredItem.attendeesCount || 350}+ registered already</span>
+                  <span>
+                    {featuredItem.attendeesCount || 350}+ registered already
+                  </span>
                 </div>
               </div>
             </div>
@@ -495,7 +533,8 @@ export default function NewsAndEventsPage() {
               No matching events or articles found
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
-              Try adjusting your search terms or select another category filter above.
+              Try adjusting your search terms or select another category filter
+              above.
             </p>
             <button
               onClick={() => {
@@ -521,7 +560,9 @@ export default function NewsAndEventsPage() {
                   <div className="p-6 space-y-4">
                     {/* Top Row: Badges */}
                     <div className="flex items-center justify-between gap-2 flex-wrap">
-                      <span className={`text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(item.type)}`}>
+                      <span
+                        className={`text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(item.type)}`}
+                      >
                         {item.type}
                       </span>
                       <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1">
@@ -536,7 +577,7 @@ export default function NewsAndEventsPage() {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-slate-800 dark:text-slate-300 line-clamp-3 leading-relaxed">
                       {item.description}
                     </p>
 
@@ -556,7 +597,9 @@ export default function NewsAndEventsPage() {
                           ) : (
                             <FaMapMarkerAlt className="text-rose-500 shrink-0 text-xs" />
                           )}
-                          <span className="truncate">{item.location || item.mode}</span>
+                          <span className="truncate">
+                            {item.location || item.mode}
+                          </span>
                         </div>
                       )}
 
@@ -572,7 +615,9 @@ export default function NewsAndEventsPage() {
                       {item.publisher && (
                         <div className="flex items-center gap-2 pt-1 text-slate-700 dark:text-slate-300 font-medium">
                           <FaNewspaper className="text-emerald-500 shrink-0" />
-                          <span className="truncate">Published in: {item.publisher}</span>
+                          <span className="truncate">
+                            Published in: {item.publisher}
+                          </span>
                         </div>
                       )}
                     </div>
@@ -605,7 +650,7 @@ export default function NewsAndEventsPage() {
                     ) : isPast ? (
                       <button
                         onClick={() => handleOpenRSVP(item)}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-blue-600 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-300 hover:text-blue-600 transition-colors"
                       >
                         <span>Request Access</span>
                         <FaArrowRight className="text-[10px]" />
@@ -628,13 +673,17 @@ export default function NewsAndEventsPage() {
               Never Miss a Masterclass or Press Announcement
             </h3>
             <p className="text-xs sm:text-sm text-blue-100/90 leading-relaxed">
-              Join over 40,000+ engineers, students, and professionals getting weekly invitations to live tech sessions, career roadmaps, and industry updates.
+              Join over 40,000+ engineers, students, and professionals getting
+              weekly invitations to live tech sessions, career roadmaps, and
+              industry updates.
             </p>
 
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                toast.success("Subscribed successfully! Watch your inbox for upcoming invites.");
+                toast.success(
+                  "Subscribed successfully! Watch your inbox for upcoming invites.",
+                );
               }}
               className="flex flex-col sm:flex-row gap-2.5 pt-3"
             >
@@ -680,8 +729,10 @@ export default function NewsAndEventsPage() {
                 <h3 className="text-xl font-black text-slate-900 dark:text-white">
                   Registration Confirmed!
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 max-w-xs mx-auto leading-relaxed">
-                  You are registered for <strong>{selectedEvent.title}</strong>. A calendar invite with direct meeting link will arrive in your email shortly.
+                <p className="text-xs text-slate-800 dark:text-slate-300 max-w-xs mx-auto leading-relaxed">
+                  You are registered for <strong>{selectedEvent.title}</strong>.
+                  A calendar invite with direct meeting link will arrive in your
+                  email shortly.
                 </p>
                 <button
                   onClick={() => setSelectedEvent(null)}
@@ -694,7 +745,9 @@ export default function NewsAndEventsPage() {
               <div>
                 <div className="space-y-1 mb-5">
                   <div className="flex items-center gap-2">
-                    <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(selectedEvent.type)}`}>
+                    <span
+                      className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(selectedEvent.type)}`}
+                    >
                       {selectedEvent.type}
                     </span>
                     <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
@@ -718,7 +771,9 @@ export default function NewsAndEventsPage() {
                       type="text"
                       required
                       value={rsvpData.name}
-                      onChange={(e) => setRsvpData({ ...rsvpData, name: e.target.value })}
+                      onChange={(e) =>
+                        setRsvpData({ ...rsvpData, name: e.target.value })
+                      }
                       placeholder="e.g. John Doe"
                       className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
@@ -733,7 +788,9 @@ export default function NewsAndEventsPage() {
                         type="email"
                         required
                         value={rsvpData.email}
-                        onChange={(e) => setRsvpData({ ...rsvpData, email: e.target.value })}
+                        onChange={(e) =>
+                          setRsvpData({ ...rsvpData, email: e.target.value })
+                        }
                         placeholder="you@email.com"
                         className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                       />
@@ -741,13 +798,16 @@ export default function NewsAndEventsPage() {
 
                     <div>
                       <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                        Phone / WhatsApp <span className="text-rose-500">*</span>
+                        Phone / WhatsApp{" "}
+                        <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="tel"
                         required
                         value={rsvpData.phone}
-                        onChange={(e) => setRsvpData({ ...rsvpData, phone: e.target.value })}
+                        onChange={(e) =>
+                          setRsvpData({ ...rsvpData, phone: e.target.value })
+                        }
                         placeholder="+91 9876543210"
                         className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                       />
@@ -761,14 +821,20 @@ export default function NewsAndEventsPage() {
                     <input
                       type="text"
                       value={rsvpData.organization}
-                      onChange={(e) => setRsvpData({ ...rsvpData, organization: e.target.value })}
+                      onChange={(e) =>
+                        setRsvpData({
+                          ...rsvpData,
+                          organization: e.target.value,
+                        })
+                      }
                       placeholder="e.g. ABC University / XYZ Corp"
                       className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
                   </div>
 
                   <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                    By submitting, you agree to receive session reminders via WhatsApp/Email.
+                    By submitting, you agree to receive session reminders via
+                    WhatsApp/Email.
                   </p>
 
                   <button
@@ -776,7 +842,9 @@ export default function NewsAndEventsPage() {
                     disabled={isSubmittingRsvp}
                     className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-blue-500/25 disabled:opacity-70 transition-all"
                   >
-                    {isSubmittingRsvp ? "Submitting Registration..." : "Confirm Free Registration"}
+                    {isSubmittingRsvp
+                      ? "Submitting Registration..."
+                      : "Confirm Free Registration"}
                   </button>
                 </form>
               </div>

@@ -16,13 +16,17 @@ import SEO from "../components/SEO";
 
 const perks = [
   {
-    icon: <FaGraduationCap className="text-xl text-blue-600 dark:text-blue-400" />,
+    icon: (
+      <FaGraduationCap className="text-xl text-blue-600 dark:text-blue-400" />
+    ),
     title: "Up to 50% Tuition Relief",
     description:
       "Earn substantial financial backing tailored directly to your assessment score.",
   },
   {
-    icon: <FaAward className="text-xl text-emerald-600 dark:text-emerald-400" />,
+    icon: (
+      <FaAward className="text-xl text-emerald-600 dark:text-emerald-400" />
+    ),
     title: "Industry-Trusted Credentials",
     description:
       "Graduate with verified certifications recognized by leading tech employers.",
@@ -97,7 +101,7 @@ export default function ScholarshipPage() {
               </span>
             </h1>
 
-            <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm md:text-base text-slate-800 dark:text-slate-300 leading-relaxed font-normal max-w-xl mx-auto">
               Money shouldn&apos;t dictate your potential. Take our evaluation
               test to secure up to a 50% tuition reduction on professional
               career tracks.
@@ -128,7 +132,7 @@ export default function ScholarshipPage() {
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
               Why Apply For Our Grant?
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400">
               Designed specifically to bridge talent with premium mentorship
               without financial strain.
             </p>
@@ -150,7 +154,7 @@ export default function ScholarshipPage() {
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">
                   {item.title}
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-800 dark:text-slate-400 leading-relaxed">
                   {item.description}
                 </p>
               </motion.div>
@@ -175,7 +179,7 @@ export default function ScholarshipPage() {
                 <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-3 tracking-tight">
                   Who Is Eligible To Participate?
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+                <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 mt-1">
                   We look for dedication over background. Review our simplified
                   baseline criteria below:
                 </p>
@@ -205,9 +209,21 @@ export default function ScholarshipPage() {
               </h3>
               <div className="space-y-3">
                 {[
-                  { off: "50% OFF", label: "Top 10% test scorers", tier: "Tier 1" },
-                  { off: "30% OFF", label: "Next 20% high performers", tier: "Tier 2" },
-                  { off: "15% OFF", label: "Next 30% participants", tier: "Tier 3" },
+                  {
+                    off: "50% OFF",
+                    label: "Top 10% test scorers",
+                    tier: "Tier 1",
+                  },
+                  {
+                    off: "30% OFF",
+                    label: "Next 20% high performers",
+                    tier: "Tier 2",
+                  },
+                  {
+                    off: "15% OFF",
+                    label: "Next 30% participants",
+                    tier: "Tier 3",
+                  },
                 ].map((tier, i) => (
                   <div
                     key={i}
@@ -238,7 +254,7 @@ export default function ScholarshipPage() {
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
               Process Flow in 4 Simple Steps
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400">
               A hassle-free journey from application to admission.
             </p>
           </div>
@@ -259,7 +275,7 @@ export default function ScholarshipPage() {
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white pt-1">
                   {s.title}
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-800 dark:text-slate-400 leading-relaxed">
                   {s.text}
                 </p>
               </motion.div>
@@ -303,7 +319,10 @@ export default function ScholarshipPage() {
         </div>
       </section>
 
-      <ContactFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ContactFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

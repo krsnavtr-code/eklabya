@@ -2,10 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import {
-  FaGraduationCap,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaGraduationCap, FaArrowRight } from "react-icons/fa";
 
 const Content = () => {
   return (
@@ -19,7 +16,7 @@ const Content = () => {
           <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Eklabya Centre of Excellence – Your Online Learning Partner
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
             Eklabya is an ISO-certified, NSDC and NIELIT-recognized online
             learning platform built to make career-ready education accessible,
             regardless of your city, schedule, or background. We started with a
@@ -36,53 +33,45 @@ const Content = () => {
             Why Choose Eklabya?
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-            <div
-              className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5"
-            >
+            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
               <div className="text-blue-600 text-base">💻</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Online, Your Rules
               </h4>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">
+              <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-snug">
                 Attend live interactive sessions or catch up at your own pace
                 with recordings.
               </p>
             </div>
 
-            <div
-              className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5"
-            >
+            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
               <div className="text-amber-500 text-base">🎯</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Career Support
               </h4>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">
+              <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-snug">
                 Placement team helps with resume building, mock interviews, and
                 real opportunities.
               </p>
             </div>
 
-            <div
-              className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5"
-            >
+            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
               <div className="text-purple-500 text-base">👨‍🏫</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Expert Trainers
               </h4>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">
+              <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-snug">
                 Industry pros with real-world experience, not just slide
                 recruiters.
               </p>
             </div>
 
-            <div
-              className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5"
-            >
+            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
               <div className="text-emerald-500 text-base">📜</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Verified Certifications
               </h4>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">
+              <p className="text-[11px] text-slate-800 dark:text-slate-400 leading-snug">
                 Respected credentials backed by ISO, NSDC, and NIELIT
                 partnerships.
               </p>
@@ -93,9 +82,7 @@ const Content = () => {
         {/* --- 3 Simple Steps & Community Joined (Two Column Compact Layout) --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Steps Box */}
-          <div
-            className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-4"
-          >
+          <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-4">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Start Learning in 3 Simple Steps
             </h3>
@@ -124,14 +111,12 @@ const Content = () => {
           </div>
 
           {/* Community Box */}
-          <div
-            className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-3 flex flex-col justify-between"
-          >
+          <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-3 flex flex-col justify-between">
             <div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
                 Join a Growing Community Across India
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed">
                 Thousands of students and working professionals have upskilled
                 or switched careers. Eklabya is built to be your complete
                 learning partner, offering current course content, real
@@ -145,13 +130,11 @@ const Content = () => {
         </div>
 
         {/* --- Small Compact CTA Box --- */}
-        <div
-          className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-center shadow-md max-w-2xl mx-auto space-y-3"
-        >
+        <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-center shadow-md max-w-2xl mx-auto space-y-3">
           <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
             Ready to Start Your Learning Journey?
           </h3>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 max-w-lg mx-auto">
             Empower your future with Eklabya. No classroom needed—just a device,
             internet, and the passion to grow.
           </p>

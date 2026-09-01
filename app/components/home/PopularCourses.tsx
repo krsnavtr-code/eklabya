@@ -174,7 +174,7 @@ const CourseCard = ({ course }: { course: Course }) => {
             <h3 className="font-bold text-slate-900 dark:text-white text-base leading-snug line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               {course.title}
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-xs mt-1.5 line-clamp-2 leading-relaxed">
+            <p className="text-slate-800 dark:text-slate-400 text-xs mt-1.5 line-clamp-2 leading-relaxed">
               {course.shortDescription
                 ?.replace(/^<p>/i, "")
                 .replace(/<\/p>$/i, "")}
@@ -307,7 +307,7 @@ const PopularCourses = () => {
               <h3 className="font-bold text-slate-900 dark:text-white text-sm">
                 Learn at your own speed
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-800 dark:text-slate-400 leading-relaxed">
                 Most courses take 10-16 weeks, with a mix of self study and live
                 one on one sessions with a teacher, so you can get on with your
                 life, whether that's a job, uni, or looking after the family —
@@ -322,7 +322,7 @@ const PopularCourses = () => {
               <h3 className="font-bold text-slate-900 dark:text-white text-sm">
                 Build, don't just watch
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-800 dark:text-slate-400 leading-relaxed">
                 Every program includes hands-on projects, from Power BI
                 dashboards to full MERN-stack applications, so you leave with a
                 portfolio, not just a certificate.
@@ -336,7 +336,7 @@ const PopularCourses = () => {
               <h3 className="font-bold text-slate-900 dark:text-white text-sm">
                 Start where you are
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-800 dark:text-slate-400 leading-relaxed">
                 Every course listed is designed for beginners, so prior
                 experience isn't a prerequisite, commitment is.
               </p>
@@ -345,7 +345,7 @@ const PopularCourses = () => {
 
           {/* Concluding Paragraph */}
           <div className="pt-2 border-t border-slate-200 dark:border-slate-700/60">
-            <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">
+            <p className="text-xs md:text-sm text-slate-800 dark:text-slate-300 leading-relaxed italic">
               "Whether you're a student preparing for your first job, a working
               professional pivoting industries, or an entrepreneur building
               technical fluency, Eklabya's online certification courses are

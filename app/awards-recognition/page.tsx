@@ -357,7 +357,7 @@ export default function AwardsPage() {
                   {featuredAward.title}
                 </h2>
 
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed">
                   {featuredAward.description}
                 </p>
 
@@ -367,7 +367,7 @@ export default function AwardsPage() {
                     <span>Conferred by: {featuredAward.organizationName}</span>
                   </div>
                   {featuredAward.recipientName && (
-                    <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center gap-2 text-slate-800 dark:text-slate-400">
                       <FaUserTie className="text-slate-400 text-sm" />
                       <span>
                         Recipient:{" "}
@@ -498,7 +498,7 @@ export default function AwardsPage() {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-slate-800 dark:text-slate-300 line-clamp-3 leading-relaxed">
                       {award.description}
                     </p>
 

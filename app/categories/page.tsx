@@ -291,7 +291,7 @@ export default function CategoriesPage() {
                       {category.name}
                     </h3>
                     {category.description && (
-                      <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                      <p className="mt-2 text-xs text-slate-800 dark:text-slate-400 line-clamp-2 leading-relaxed">
                         {category.description}
                       </p>
                     )}

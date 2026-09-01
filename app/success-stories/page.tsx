@@ -455,7 +455,7 @@ export default function TestimonialsPage() {
                   </div>
 
                   {/* Quote Content */}
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed italic">
                     &ldquo;{item.content}&rdquo;
                   </p>
                 </div>

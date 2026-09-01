@@ -65,7 +65,7 @@ const FAQ = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
             Find answers to common questions about Eklabya courses and
             certifications.
           </p>
@@ -107,7 +107,7 @@ const FAQ = () => {
                 {/* Smooth Collapsible Answer Section */}
                 {isOpen && (
                   <div className="px-6 pb-5 pt-1 border-t border-slate-100 dark:border-slate-700/60">
-                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>

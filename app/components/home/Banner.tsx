@@ -410,7 +410,7 @@ function Banner() {
                     <h4 className="text-base font-black text-slate-900 dark:text-white">
                       Request Received!
                     </h4>
-                    <p className="text-xs text-slate-600 dark:text-slate-300 max-w-xs mx-auto">
+                    <p className="text-xs text-slate-800 dark:text-slate-300 max-w-xs mx-auto">
                       Thank you for reaching out. One of our senior counselors
                       will call you shortly.
                     </p>
@@ -532,7 +532,7 @@ function Banner() {
                       />
                       <label
                         htmlFor="bannerAgreedToTerms"
-                        className="text-[11px] text-slate-600 dark:text-slate-400 leading-tight select-none cursor-pointer"
+                        className="text-[11px] text-slate-800 dark:text-slate-400 leading-tight select-none cursor-pointer"
                       >
                         I agree to receive communications via WhatsApp/SMS/Call.{" "}
                         <Link

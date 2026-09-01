@@ -131,7 +131,7 @@ function Footer() {
                     <li key={courseIndex}>
                       <a
                         href={course.url}
-                        className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-1"
+                        className="text-[11px] sm:text-xs text-slate-800 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-1"
                       >
                         {course.name}
                       </a>
@@ -152,7 +152,7 @@ function Footer() {
             <h3 className="text-xs font-black text-slate-900 dark:text-white tracking-wider uppercase">
               About Us
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed">
               Empowering learners with high-quality courses and resources to
               achieve their educational and career goals.
             </p>
@@ -215,7 +215,7 @@ function Footer() {
                 <li key={idx}>
                   <Link
                     href={link.to}
-                    className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -239,7 +239,7 @@ function Footer() {
                 <li key={idx}>
                   <Link
                     href={link.to}
-                    className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -253,7 +253,7 @@ function Footer() {
             <h3 className="text-xs font-black text-slate-900 dark:text-white tracking-wider uppercase">
               Contact Us
             </h3>
-            <ul className="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <ul className="space-y-3 text-xs sm:text-sm text-slate-800 dark:text-slate-400">
               <li className="flex items-start gap-2.5">
                 <FaMapMarkerAlt className="h-4 w-4 text-blue-500 shrink-0 mt-0.5" />
                 <span>
@@ -296,7 +296,7 @@ function Footer() {
           <p className="text-xs text-slate-500 dark:text-slate-400">
             &copy; {currentYear} eKlabya. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 font-medium">
+          <div className="flex items-center gap-2 text-xs text-slate-800 dark:text-slate-300 font-medium">
             <FaBook className="h-4 w-4 text-blue-500" />
             <span>Learn something new today</span>
           </div>

@@ -117,7 +117,7 @@ const ContactSection = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
             We'd Love to Hear From You
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
             Have a question before you enroll? Send us a message and we'll
             respond as soon as possible.
           </p>
@@ -140,7 +140,7 @@ const ContactSection = () => {
                     <h3 className="text-sm font-black text-slate-900 dark:text-white">
                       {item.title}
                     </h3>
-                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <p className="mt-1 text-xs text-slate-800 dark:text-slate-300 leading-relaxed">
                       {item.description}
                     </p>
                     <a
@@ -178,7 +178,7 @@ const ContactSection = () => {
                   <h3 className="text-lg font-black text-slate-900 dark:text-white">
                     Message Sent Successfully!
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-sm mx-auto">
+                  <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 max-w-sm mx-auto">
                     Thank you for contacting us. We'll get back to you soon!
                   </p>
                   <button

@@ -103,7 +103,7 @@ const HowWillYourTrainingWork = () => {
                   {step.title}
                 </h3>
 
-                <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                <p className="text-xs md:text-sm text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
                   {step.desc}
                 </p>
               </div>

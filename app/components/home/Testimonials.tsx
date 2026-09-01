@@ -140,7 +140,7 @@ const Testimonials = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
             What Our Learners Say
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
             Real outcomes from real students, not stock reviews.
           </p>
         </div>

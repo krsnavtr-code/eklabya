@@ -607,276 +607,278 @@ function Navbar() {
 
       {/* ==================================================================
           PART 2: BOTTOM BAR (Main Navigation)
-          White background, bigger height, contains Logo, Links, Search.
+          Floating Glass Navbar Look
       ================================================================== */}
-      <div
-        className="relative bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm"
-        ref={desktopSearchRef}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-10 md:h-12 gap-2">
-            {/* 1. Logo */}
-            <div className="flex-shrink-0 flex items-center gap-1">
-              {/* Mobile Toggle (Left of logo on mobile) */}
-              <button
-                className="md:hidden mr-2 p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              >
-                {isMobileMenuOpen ? (
-                  <FaTimes size={22} />
-                ) : (
-                  <FaBars size={22} />
-                )}
-              </button>
-              <Link
-                href="/"
-                className="text-lg font-bold text-blue-600 dark:text-blue-400"
-              >
-                <img
-                  src={logoImg}
-                  alt="eklabya – Your Online Learning Partner"
-                  className="h-10 rounded"
-                />
-              </Link>
-            </div>
-
-            {/* 2. Navigation Links (Desktop) */}
-            <div className="hidden md:flex items-center space-x-2 lg:space-x-1">
-              <div className="relative group">
-                <CourseMenu />
+      <div className="w-full px-2 sm:px-4 lg:px-6 py-1 pointer-events-auto">
+        <div
+          className="relative max-w-7xl mx-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-lg shadow-slate-200/40 dark:shadow-black/40 transition-all duration-300"
+          ref={desktopSearchRef}
+        >
+          <div className="px-3 sm:px-5 lg:px-6">
+            <div className="flex items-center justify-between h-12 md:h-14 gap-2">
+              {/* 1. Logo */}
+              <div className="flex-shrink-0 flex items-center gap-1">
+                {/* Mobile Toggle (Left of logo on mobile) */}
+                <button
+                  className="md:hidden mr-2 p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-800"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                  {isMobileMenuOpen ? (
+                    <FaTimes size={20} />
+                  ) : (
+                    <FaBars size={20} />
+                  )}
+                </button>
+                <Link
+                  href="/"
+                  className="text-lg font-bold text-blue-600 dark:text-blue-400"
+                >
+                  <img
+                    src={logoImg}
+                    alt="eklabya – Your Online Learning Partner"
+                    className="h-10 rounded"
+                  />
+                </Link>
               </div>
-              <div className="flex items-center space-x-3.5">
-                {navLinks.map((link) => {
-                  if (link.children) {
-                    return (
-                      <div key={link.label} className="relative group py-2">
-                        <button className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 flex items-center gap-1">
-                          {link.label}
-                          <FaChevronDown
-                            size={10}
-                            className="transition-transform duration-200 group-hover:rotate-180"
-                          />
-                        </button>
-                        <div className="absolute top-full left-0 pt-1 w-48 z-50 hidden group-hover:block">
-                          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 py-2 flex flex-col">
-                            {link.children.map((child) => (
-                              <Link
-                                key={child.to}
-                                href={child.to}
-                                className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                              >
-                                {child.label}
-                              </Link>
-                            ))}
+
+              {/* 2. Navigation Links (Desktop) */}
+              <div className="hidden md:flex items-center space-x-2 lg:space-x-1">
+                <div className="relative group">
+                  <CourseMenu />
+                </div>
+                <div className="flex items-center space-x-3.5">
+                  {navLinks.map((link) => {
+                    if (link.children) {
+                      return (
+                        <div key={link.label} className="relative group py-2">
+                          <button className="text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 flex items-center gap-1">
+                            {link.label}
+                            <FaChevronDown
+                              size={10}
+                              className="transition-transform duration-200 group-hover:rotate-180"
+                            />
+                          </button>
+                          <div className="absolute top-full left-0 pt-2 w-52 z-50 hidden group-hover:block">
+                            <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-xl shadow-xl border border-slate-100 dark:border-gray-700 py-2 flex flex-col">
+                              {link.children.map((child) => (
+                                <Link
+                                  key={child.to}
+                                  href={child.to}
+                                  className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      );
+                    }
+                    const isActive = pathname === link.to;
+                    return (
+                      <Link
+                        key={link.to!}
+                        href={link.to!}
+                        className={`text-sm font-semibold transition-all duration-300 relative ${
+                          isActive
+                            ? "text-blue-600 dark:text-blue-400 font-bold"
+                            : "text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400"
+                        }`}
+                      >
+                        {link.label}
+                        {isActive && (
+                          <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform scale-x-100 transition-transform duration-300"></span>
+                        )}
+                      </Link>
                     );
-                  }
-                  const isActive = pathname === link.to;
-                  return (
-                    <Link
-                      key={link.to!}
-                      href={link.to!}
-                      className={`text-sm font-semibold transition-all duration-300 relative ${
-                        isActive
-                          ? "text-blue-600 dark:text-blue-400 font-bold"
-                          : "text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400"
-                      }`}
-                    >
-                      {link.label}
-                      {isActive && (
-                        <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform scale-x-100 transition-transform duration-300"></span>
-                      )}
-                    </Link>
-                  );
-                })}
+                  })}
+                </div>
+              </div>
+
+              {/* 3. Search Icon & Mobile Actions */}
+              <div className="flex items-center gap-3">
+                {/* Desktop Search Toggle */}
+                <button
+                  className="hidden lg:flex items-center justify-center w-9 h-9 rounded-full bg-slate-100/80 dark:bg-gray-800/80 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  onClick={() => setIsDesktopSearchOpen(!isDesktopSearchOpen)}
+                  aria-label="Toggle search"
+                >
+                  {isDesktopSearchOpen ? (
+                    <FaTimes size={18} />
+                  ) : (
+                    <FaSearch size={18} />
+                  )}
+                </button>
+
+                {/* Mobile Search Icon */}
+                <button
+                  className="lg:hidden p-2 text-gray-600 dark:text-gray-300"
+                  onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+                  aria-label="Toggle search"
+                >
+                  {isMobileSearchOpen ? (
+                    <FaTimes size={20} />
+                  ) : (
+                    <FaSearch size={20} />
+                  )}
+                </button>
               </div>
             </div>
-
-            {/* 3. Search Icon & Mobile Actions */}
-            <div className="flex items-center gap-3">
-              {/* Desktop Search Toggle */}
-              <button
-                className="hidden lg:flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                onClick={() => setIsDesktopSearchOpen(!isDesktopSearchOpen)}
-                aria-label="Toggle search"
-              >
-                {isDesktopSearchOpen ? (
-                  <FaTimes size={18} />
-                ) : (
-                  <FaSearch size={18} />
-                )}
-              </button>
-
-              {/* Mobile Search Icon */}
-              <button
-                className="lg:hidden p-2 text-gray-600 dark:text-gray-300"
-                onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
-                aria-label="Toggle search"
-              >
-                {isMobileSearchOpen ? (
-                  <FaTimes size={20} />
-                ) : (
-                  <FaSearch size={20} />
-                )}
-              </button>
-            </div>
           </div>
-        </div>
 
-        {/* Desktop Search Bar (Expandable) */}
-        {isDesktopSearchOpen && (
-          <div className="hidden lg:flex absolute left-0 right-0 top-full justify-center px-4 z-50">
-            <div className="w-full max-w-3xl mt-2 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-              <div className="h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500" />
-              <div className="p-2">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="text-sm font-bold text-gray-700 dark:text-gray-200">
-                    Find what you need
-                  </h3>
-                  <button
-                    onClick={() => setIsDesktopSearchOpen(false)}
-                    className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
-                    aria-label="Close search"
-                  >
-                    <FaTimes size={14} />
-                  </button>
-                </div>
-                <form onSubmit={handleSearchSubmit} className="relative">
-                  <input
-                    type="text"
-                    placeholder="What do you want to learn?"
-                    value={searchQuery}
-                    onChange={onSearchChange}
-                    onFocus={() => setShowResults(true)}
-                    className="w-full pl-12 pr-4 py-1.5 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl text-base transition-all"
-                    autoFocus
-                  />
-                  <FaSearch
-                    className="absolute left-4 top-2.5 text-gray-400"
-                    size={18}
-                  />
-                </form>
+          {/* Desktop Search Bar (Expandable) */}
+          {isDesktopSearchOpen && (
+            <div className="hidden lg:flex absolute left-0 right-0 top-full justify-center px-4 z-50">
+              <div className="w-full max-w-3xl mt-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-slate-200/80 dark:border-gray-800 overflow-hidden">
+                <div className="h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500" />
+                <div className="p-2">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="text-sm font-bold text-gray-700 dark:text-gray-200">
+                      Find what you need
+                    </h3>
+                    <button
+                      onClick={() => setIsDesktopSearchOpen(false)}
+                      className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                      aria-label="Close search"
+                    >
+                      <FaTimes size={14} />
+                    </button>
+                  </div>
+                  <form onSubmit={handleSearchSubmit} className="relative">
+                    <input
+                      type="text"
+                      placeholder="What do you want to learn?"
+                      value={searchQuery}
+                      onChange={onSearchChange}
+                      onFocus={() => setShowResults(true)}
+                      className="w-full pl-12 pr-4 py-1.5 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl text-base transition-all"
+                      autoFocus
+                    />
+                    <FaSearch
+                      className="absolute left-4 top-2.5 text-gray-400"
+                      size={18}
+                    />
+                  </form>
 
-                {showResults && searchQuery && (
-                  <div className="mt-4 max-h-72 overflow-y-auto">
-                    {isSearching ? (
-                      <div className="p-4 text-center text-sm text-gray-500">
-                        Searching...
-                      </div>
-                    ) : searchResults.courses.length > 0 ? (
-                      <div className="space-y-1">
-                        <div className="px-1 pb-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                          Top Results
+                  {showResults && searchQuery && (
+                    <div className="mt-4 max-h-72 overflow-y-auto">
+                      {isSearching ? (
+                        <div className="p-4 text-center text-sm text-gray-500">
+                          Searching...
                         </div>
-                        {searchResults.courses.map((course: any) => (
-                          <button
-                            key={course._id}
-                            onClick={() => navigateToCourse(course)}
-                            className="w-full text-left px-3 py-2.5 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg flex items-center gap-3 group transition-colors"
-                          >
-                            <div className="bg-blue-100 dark:bg-blue-900/40 p-2 rounded-lg text-blue-600 dark:text-blue-400">
-                              <FaSearch size={12} />
-                            </div>
-                            <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600">
-                                {course.title}
-                              </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">
-                                {course.category?.name || "General"}
-                              </p>
-                            </div>
-                          </button>
-                        ))}
-                        <div className="pt-3 border-t border-gray-100 dark:border-gray-700">
+                      ) : searchResults.courses.length > 0 ? (
+                        <div className="space-y-1">
+                          <div className="px-1 pb-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                            Top Results
+                          </div>
+                          {searchResults.courses.map((course: any) => (
+                            <button
+                              key={course._id}
+                              onClick={() => navigateToCourse(course)}
+                              className="w-full text-left px-3 py-2.5 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg flex items-center gap-3 group transition-colors"
+                            >
+                              <div className="bg-blue-100 dark:bg-blue-900/40 p-2 rounded-lg text-blue-600 dark:text-blue-400">
+                                <FaSearch size={12} />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600">
+                                  {course.title}
+                                </p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                  {course.category?.name || "General"}
+                                </p>
+                              </div>
+                            </button>
+                          ))}
+                          <div className="pt-3 border-t border-gray-100 dark:border-gray-700">
+                            <Link
+                              href={`/search?q=${encodeURIComponent(searchQuery)}`}
+                              onClick={() => setIsDesktopSearchOpen(false)}
+                              className="block w-full text-center py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+                            >
+                              View all results
+                            </Link>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="p-6 text-center text-sm text-gray-500">
+                          <p>No courses found for &quot;{searchQuery}&quot;</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Mobile Search Bar (Expandable) */}
+          {isMobileSearchOpen && (
+            <div className="lg:hidden absolute left-0 right-0 top-full z-40 px-4">
+              <div className="w-full bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden mt-2">
+                <div className="h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500" />
+                <div className="p-2">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="text-sm font-bold text-gray-700 dark:text-gray-200">
+                      Find what you need
+                    </h3>
+                    <button
+                      onClick={() => setIsMobileSearchOpen(false)}
+                      className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                      aria-label="Close search"
+                    >
+                      <FaTimes size={14} />
+                    </button>
+                  </div>
+                  <form onSubmit={handleSearchSubmit} className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search courses..."
+                      value={searchQuery}
+                      onChange={onSearchChange}
+                      className="w-full pl-10 pr-4 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+                      autoFocus
+                    />
+                    <FaSearch className="absolute left-3.5 top-2.5 text-gray-400" />
+                  </form>
+
+                  {showResults && searchQuery && (
+                    <div className="mt-3 max-h-64 overflow-y-auto">
+                      {isSearching ? (
+                        <div className="p-3 text-center text-sm text-gray-500">
+                          Searching...
+                        </div>
+                      ) : searchResults.courses.length > 0 ? (
+                        <div className="space-y-1">
+                          {searchResults.courses.map((course: any) => (
+                            <button
+                              key={course._id}
+                              onClick={() => navigateToCourse(course)}
+                              className="w-full text-left px-3 py-2.5 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900"
+                            >
+                              {course.title}
+                            </button>
+                          ))}
                           <Link
                             href={`/search?q=${encodeURIComponent(searchQuery)}`}
-                            onClick={() => setIsDesktopSearchOpen(false)}
-                            className="block w-full text-center py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+                            onClick={() => setIsMobileSearchOpen(false)}
+                            className="block w-full text-center py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors mt-2"
                           >
                             View all results
                           </Link>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="p-6 text-center text-sm text-gray-500">
-                        <p>No courses found for &quot;{searchQuery}&quot;</p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Mobile Search Bar (Expandable) */}
-        {isMobileSearchOpen && (
-          <div className="lg:hidden absolute left-0 right-0 top-full z-40 px-4">
-            <div className="w-full bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden mt-2">
-              <div className="h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500" />
-              <div className="p-2">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="text-sm font-bold text-gray-700 dark:text-gray-200">
-                    Find what you need
-                  </h3>
-                  <button
-                    onClick={() => setIsMobileSearchOpen(false)}
-                    className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
-                    aria-label="Close search"
-                  >
-                    <FaTimes size={14} />
-                  </button>
+                      ) : (
+                        <div className="p-4 text-center text-sm text-gray-500">
+                          <p>No courses found for &quot;{searchQuery}&quot;</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
-                <form onSubmit={handleSearchSubmit} className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search courses..."
-                    value={searchQuery}
-                    onChange={onSearchChange}
-                    className="w-full pl-10 pr-4 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
-                    autoFocus
-                  />
-                  <FaSearch className="absolute left-3.5 top-2.5 text-gray-400" />
-                </form>
-
-                {showResults && searchQuery && (
-                  <div className="mt-3 max-h-64 overflow-y-auto">
-                    {isSearching ? (
-                      <div className="p-3 text-center text-sm text-gray-500">
-                        Searching...
-                      </div>
-                    ) : searchResults.courses.length > 0 ? (
-                      <div className="space-y-1">
-                        {searchResults.courses.map((course: any) => (
-                          <button
-                            key={course._id}
-                            onClick={() => navigateToCourse(course)}
-                            className="w-full text-left px-3 py-2.5 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900"
-                          >
-                            {course.title}
-                          </button>
-                        ))}
-                        <Link
-                          href={`/search?q=${encodeURIComponent(searchQuery)}`}
-                          onClick={() => setIsMobileSearchOpen(false)}
-                          className="block w-full text-center py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors mt-2"
-                        >
-                          View all results
-                        </Link>
-                      </div>
-                    ) : (
-                      <div className="p-4 text-center text-sm text-gray-500">
-                        <p>No courses found for &quot;{searchQuery}&quot;</p>
-                      </div>
-                    )}
-                  </div>
-                )}
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {/* ==================================================================

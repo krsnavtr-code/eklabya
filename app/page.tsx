@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main className="relative text-slate-900 dark:text-slate-100 min-h-screen overflow-x-hidden">
       {/* Search Engine Bots ke liye direct HTML mein inject hoga */}
       <script
         type="application/ld+json"
@@ -63,7 +63,13 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-      <div className="flex flex-col bg-white min-h-screen">
+
+      {/* Ambient background light orbs for iPhone-like glass refraction */}
+      <div className="fixed top-20 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/15 dark:bg-blue-600/10 blur-[130px] pointer-events-none -z-10" />
+      <div className="fixed top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-indigo-500/15 dark:bg-purple-600/10 blur-[140px] pointer-events-none -z-10" />
+      <div className="fixed bottom-40 left-1/4 w-[550px] h-[550px] rounded-full bg-rose-500/10 dark:bg-amber-500/10 blur-[130px] pointer-events-none -z-10" />
+
+      <div className="flex flex-col relative z-10">
         {/* Hero Banner */}
         <Banner />
 

@@ -53,13 +53,13 @@ const CertificateModal = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-3"
+      className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-3"
       onContextMenu={(e) => e.preventDefault()}
     >
-      <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-[500px] w-full max-h-[500px] overflow-auto relative shadow-2xl">
+      <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-2xl border border-white/60 dark:border-slate-700/60 rounded-2xl max-w-[500px] w-full max-h-[500px] overflow-auto relative shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white z-20 transition-all"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100/80 dark:bg-slate-800/80 backdrop-blur-sm flex items-center justify-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white z-20 transition-all"
         >
           <FaTimes className="text-sm" />
         </button>
@@ -285,14 +285,19 @@ function Banner() {
   ];
 
   return (
-    <div className="bg-gradient-to-r from-blue-50/60 via-indigo-50/40 to-slate-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 py-6 md:py-10 transition-colors duration-300 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+    <div className="w-full px-2 sm:px-4 lg:px-6 py-2">
+      <div className="relative max-w-7xl mx-auto bg-white/75 dark:bg-gray-900/75 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-6 sm:p-8 lg:p-10 transition-all duration-300 overflow-hidden">
+        {/* Ambient background light orbs for the glass to refract */}
+        <div className="absolute -top-12 -left-12 w-80 h-80 bg-blue-500/15 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-500/10 dark:bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -bottom-10 left-1/3 w-80 h-80 bg-amber-500/10 dark:bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Left Content */}
           <div className="lg:w-[55%] space-y-4">
             {/* Top Badge */}
             <div className="inline-flex items-center">
-              <span className="text-blue-600 dark:text-blue-400 tracking-wider font-extrabold uppercase text-[11px] md:text-xs bg-blue-100/80 dark:bg-blue-950/80 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800 shadow-2xs">
+              <span className="text-blue-600 dark:text-blue-400 tracking-wider font-extrabold uppercase text-[11px] md:text-xs bg-blue-50/80 dark:bg-blue-950/60 backdrop-blur-md px-3 py-1 rounded-full border border-blue-200/80 dark:border-blue-800/80 shadow-2xs">
                 ✦ Career Acceleration Platform
               </span>
             </div>
@@ -326,7 +331,7 @@ function Banner() {
             </div>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed max-w-xl pt-1">
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 font-medium leading-relaxed max-w-xl pt-1">
               Eklabya is an ISO certified, NSDC & NIELIT recognized online
               learning platform helping students and working professionals build
               in-demand skills in IT, data, business, and design, with live
@@ -341,7 +346,7 @@ function Banner() {
                 <div
                   key={index}
                   onClick={feature.onClick}
-                  className={`flex flex-col p-2.5 bg-white dark:bg-gray-800/90 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 transition-all duration-200 hover:-translate-y-0.5 ${
+                  className={`flex flex-col p-2.5 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl shadow-xs border border-gray-200 dark:border-slate-700/60 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
                     feature.onClick
                       ? "cursor-pointer hover:border-blue-400 dark:hover:border-blue-500 shadow-sm"
                       : ""
@@ -378,28 +383,13 @@ function Banner() {
             </div>
           </div>
 
-          {/* Right Content - Lead Form (Banner Image Commented Out Below) */}
+          {/* Right Content - Lead Form */}
           <div className="lg:w-[45%] w-full flex justify-center mt-6 lg:mt-0">
-            {/* 
-            <div className="relative w-full max-w-[400px]">
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-gray-800 shadow-xl shadow-blue-500/5 hover:scale-[1.02] transition-transform duration-300">
-                <img
-                  src={bannerImg}
-                  alt="Skill Development and Online Training Courses"
-                  className="w-full h-auto object-cover block"
-                />
-              </div>
-
-              <div className="absolute -top-6 -right-6 w-28 h-28 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
-              <div className="absolute -bottom-6 -left-6 w-28 h-28 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
-            </div>
-            */}
-
             {/* Lead Form Card */}
             <div className="relative w-full max-w-[430px]">
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md shadow-2xl shadow-blue-500/10 p-5 sm:p-6 transition-all duration-300">
+              <div className="relative rounded-3xl overflow-hidden border border-gray-200 dark:border-slate-700/70 bg-white/80 dark:bg-gray-800/80 backdrop-blur-2xl shadow-2xl shadow-blue-500/10 p-5 sm:p-6 transition-all duration-300">
                 <div className="mb-4">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-[10px] font-extrabold uppercase tracking-wider mb-2">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50/80 dark:bg-emerald-950/70 backdrop-blur-md border border-emerald-300/80 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-[10px] font-extrabold uppercase tracking-wider mb-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                     Free Career Counselling
                   </div>
@@ -447,7 +437,7 @@ function Banner() {
                           value={formData.name}
                           onChange={handleFormChange}
                           placeholder="Your Name"
-                          className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-gray-900/70 border border-slate-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                          className="w-full pl-9 pr-3 py-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700/80 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:bg-white dark:focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                         />
                       </div>
                     </div>
@@ -466,7 +456,7 @@ function Banner() {
                             value={formData.email}
                             onChange={handleFormChange}
                             placeholder="you@email.com"
-                            className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-gray-900/70 border border-slate-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                            className="w-full pl-9 pr-3 py-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700/80 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:bg-white dark:focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                           />
                         </div>
                       </div>
@@ -484,7 +474,7 @@ function Banner() {
                             value={formData.phone}
                             onChange={handleFormChange}
                             placeholder="+91 9876543210"
-                            className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-gray-900/70 border border-slate-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                            className="w-full pl-9 pr-3 py-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700/80 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:bg-white dark:focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                           />
                         </div>
                       </div>
@@ -501,7 +491,7 @@ function Banner() {
                           value={formData.courseInterest}
                           onChange={handleFormChange}
                           disabled={isLoadingCourses}
-                          className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-gray-900/70 border border-slate-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
+                          className="w-full pl-9 pr-3 py-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700/80 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:bg-white dark:focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
                         >
                           <option value="">Select a course (optional)</option>
                           {courses.map((c) => (
@@ -525,7 +515,7 @@ function Banner() {
                           value={formData.otherCourse}
                           onChange={handleFormChange}
                           placeholder="e.g., Cyber Security, Cloud Computing, etc."
-                          className="w-full px-3.5 py-2 bg-slate-50 dark:bg-gray-900/70 border border-slate-200 dark:border-gray-700 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                          className="w-full px-3.5 py-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700/80 rounded-lg text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:bg-white dark:focus:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                         />
                       </div>
                     )}

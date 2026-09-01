@@ -195,7 +195,7 @@ const CourseMenu = ({
       >
         {/* ================= LEFT PANEL: CATEGORIES ================= */}
         <div
-          className={`${isMobile ? "w-full" : "w-[280px] bg-slate-50/50 dark:bg-slate-900/30 border-r border-slate-300 dark:border-slate-700/50 p-1"} flex flex-col`}
+          className={`${isMobile ? "w-full" : "w-[280px] bg-slate-50/50 dark:bg-slate-900/30 border-r border-slate-300 dark:border-slate-700/50 p-1 max-h-[420px] overflow-y-auto"} flex flex-col`}
         >
           {isMobile && (
             <div className="px-1.5 py-1 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-700">
@@ -303,7 +303,7 @@ const CourseMenu = ({
 
         {/* ================= RIGHT PANEL: COURSES (Desktop Only) ================= */}
         {!isMobile && activeCategory && (
-          <div className="flex-1 px-3 py-1 flex flex-col bg-white dark:bg-slate-800">
+          <div className="flex-1 px-3 py-1 flex flex-col bg-white dark:bg-slate-800 max-h-[420px]">
             <div className="flex justify-between items-end border-b border-slate-100 dark:border-slate-700 pb-2">
               <div>
                 <h3 className="text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -323,68 +323,104 @@ const CourseMenu = ({
               </Link>
             </div>
 
-            {isLoadingCourses[activeCategory._id] ? (
-              <div className="flex-1 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-              </div>
-            ) : categoryCourses[activeCategory._id]?.length > 0 ? (
-              <div className="grid grid-cols-1 gap-0.5">
-                {categoryCourses[activeCategory._id].map((course) => (
-                  <Link
-                    key={course._id}
-                    href={`/course/${course.slug || course._id}`}
-                    onClick={closeMenu}
-                    className="group flex gap-1.5 py-1 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 border border-transparent hover:border-slate-100 dark:hover:border-slate-700 transition-all"
-                  >
-                    <div className="w-18 h-12 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden relative">
-                      {course.image || course.thumbnail ? (
-                        <img
-                          src={getImageUrl(course.image || course.thumbnail)}
-                          alt={course.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          onError={(e) => {
-                            const img = e.currentTarget;
-                            img.onerror = null;
-                            img.style.display = "none";
-                            const fallback =
-                              img.parentElement?.querySelector(
-                                ".fallback-icon",
-                              );
-                            if (fallback) fallback.classList.remove("hidden");
-                          }}
-                        />
-                      ) : null}
-                      <div
-                        className={`fallback-icon w-full h-full flex items-center justify-center text-slate-400 ${
-                          course.image || course.thumbnail ? "hidden" : ""
-                        }`}
+            <div className="flex-1 overflow-y-auto min-h-0">
+              {isLoadingCourses[activeCategory._id] ? (
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                </div>
+              ) : categoryCourses[activeCategory._id]?.length > 0 ? (
+                <>
+                  <div className="grid grid-cols-1 gap-0.5">
+                    {categoryCourses[activeCategory._id].map((course) => (
+                      <Link
+                        key={course._id}
+                        href={`/course/${course.slug || course._id}`}
+                        onClick={closeMenu}
+                        className="group flex gap-1.5 py-1 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 border border-transparent hover:border-slate-100 dark:hover:border-slate-700 transition-all"
                       >
-                        <FaBook />
-                      </div>
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2 transition-colors">
-                        {course.title}
+                        <div className="w-18 h-12 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden relative">
+                          {course.image || course.thumbnail ? (
+                            <img
+                              src={getImageUrl(
+                                course.image || course.thumbnail,
+                              )}
+                              alt={course.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                              onError={(e) => {
+                                const img = e.currentTarget;
+                                img.onerror = null;
+                                img.style.display = "none";
+                                const fallback =
+                                  img.parentElement?.querySelector(
+                                    ".fallback-icon",
+                                  );
+                                if (fallback)
+                                  fallback.classList.remove("hidden");
+                              }}
+                            />
+                          ) : null}
+                          <div
+                            className={`fallback-icon w-full h-full flex items-center justify-center text-slate-400 ${
+                              course.image || course.thumbnail ? "hidden" : ""
+                            }`}
+                          >
+                            <FaBook />
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-center">
+                          <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2 transition-colors">
+                            {course.title}
+                          </h4>
+                          {course.price && (
+                            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">
+                              {course.discountPrice
+                                ? `₹${course.discountPrice}`
+                                : `₹${course.price}`}
+                            </span>
+                          )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 relative overflow-hidden rounded-2xl bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/60 dark:border-slate-700/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 group/promo">
+                    {/* Decorative Glowing Blobs for Glass Effect */}
+                    <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500/20 dark:bg-blue-500/30 rounded-full blur-xl group-hover/promo:scale-150 transition-transform duration-700 pointer-events-none"></div>
+                    <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-indigo-500/20 dark:bg-indigo-500/30 rounded-full blur-xl group-hover/promo:scale-150 transition-transform duration-700 pointer-events-none"></div>
+
+                    {/* Highly Attractive Content */}
+                    <div className="relative z-10 mb-4">
+                      <h4 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-1.5 mb-1.5 tracking-tight">
+                        <span className="text-lg">🎯</span> Find Your Dream Role
                       </h4>
-                      {course.price && (
-                        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">
-                          {course.discountPrice
-                            ? `₹${course.discountPrice}`
-                            : `₹${course.price}`}
-                        </span>
-                      )}
+                      <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pr-2">
+                        Confused about where to start? Explore our expertly
+                        curated categories and pick the exact skills top MNCs
+                        are hiring for.
+                      </p>
                     </div>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <div className="flex-1 flex flex-col items-center justify-center text-slate-400">
-                <FaLayerGroup className="w-10 h-10 mb-3 opacity-20" />
-                <p className="text-sm">
-                  No courses found in this category yet.
-                </p>
-              </div>
-            )}
+
+                    {/* Sleek Glassy Button */}
+                    <Link
+                      href="/categories"
+                      onClick={closeMenu}
+                      className="relative z-10 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/60 dark:bg-slate-700/60 hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-600 text-slate-800 dark:text-white hover:text-white text-sm font-bold backdrop-blur-md border border-white/80 dark:border-slate-600/50 hover:border-transparent hover:shadow-lg hover:shadow-blue-600/30 transition-all duration-300 group"
+                    >
+                      <FaLayerGroup className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors" />
+                      <span>Explore All Categories</span>
+                      <FaArrowRight className="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all" />
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <div className="flex-1 flex flex-col items-center justify-center text-slate-400">
+                  <FaLayerGroup className="w-10 h-10 mb-3 opacity-20" />
+                  <p className="text-sm">
+                    No courses found in this category yet.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

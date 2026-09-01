@@ -266,9 +266,9 @@ function Navbar() {
               href="https://collegevihar.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-extrabold text-orange-600 text-xs uppercase tracking-wide whitespace-nowrap hover:text-blue-900 dark:hover:text-orange-300 hover:scale-105 transition-all duration-200"
+              className="font-extrabold text-orange-600 text-xs tracking-wide whitespace-nowrap hover:text-blue-900 dark:hover:text-orange-300 hover:scale-105 transition-all duration-200"
             >
-              UG, PG Programmes
+              Online University Courses
             </a>
 
             <div className="h-3 w-px bg-blue-300 dark:bg-orange-600 mx-1"></div>
@@ -446,7 +446,7 @@ function Navbar() {
               rel="noopener noreferrer"
               className="font-extrabold text-orange-600 text-[10px] uppercase tracking-wide whitespace-nowrap hover:text-blue-900 dark:hover:text-orange-300 hover:scale-105 transition-all duration-200"
             >
-              UG, PG Programmes
+              Online university courses
             </a>
 
             <div className="h-3 w-px bg-blue-300 dark:bg-orange-600"></div>

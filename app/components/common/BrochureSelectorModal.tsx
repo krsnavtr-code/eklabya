@@ -4,6 +4,7 @@ import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { FaTimes, FaDownload, FaBook, FaArrowLeft } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import api from "../../utils/api";
+import { getImageUrl } from "../../utils/imageUtils";
 
 interface Course {
   _id: string;
@@ -203,11 +204,13 @@ export default function BrochureSelectorModal({
         onClick={onClose}
       />
       <div className="fixed inset-0 flex items-center justify-center p-2 sm:p-3">
-        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800">
           <div className="p-2 sm:p-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white tracking-tight">
-                {selectedCourse ? "Download Brochure" : "Select a Course"}
+                {selectedCourse
+                  ? "Download Brochure"
+                  : "Select a Course you want to Learn"}
               </h3>
               <button
                 onClick={onClose}
@@ -298,9 +301,9 @@ export default function BrochureSelectorModal({
               </div>
             ) : (
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                {/* <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                   Choose an active course to download its brochure.
-                </p>
+                </p> */}
 
                 {loading ? (
                   <div className="flex justify-center items-center h-40">
@@ -324,9 +327,14 @@ export default function BrochureSelectorModal({
                         <div className="h-24 mb-2 rounded-lg bg-gray-100 dark:bg-gray-700 overflow-hidden">
                           {course.thumbnail ? (
                             <img
-                              src={getFileUrl(course.thumbnail)}
+                              src={getImageUrl(course.thumbnail)}
                               alt={course.title}
                               className="w-full h-full object-cover"
+                              onError={(e) => {
+                                const img = e.target as HTMLImageElement;
+                                img.onerror = null;
+                                img.src = "/images/course-placeholder.jpg";
+                              }}
                             />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-gray-400">

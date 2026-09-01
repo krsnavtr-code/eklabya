@@ -278,7 +278,7 @@ function Footer() {
                   info@eklabya.com
                 </a>
               </li>
-              <li className="flex items-center gap-2.5">
+              {/* <li className="flex items-center gap-2.5">
                 <FaEnvelope className="h-3.5 w-3.5 text-purple-500 shrink-0" />
                 <a
                   href="mailto:anand@eklabya.com"
@@ -286,7 +286,7 @@ function Footer() {
                 >
                   anand@eklabya.com
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

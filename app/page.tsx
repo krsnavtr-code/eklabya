@@ -10,6 +10,7 @@ import Stats from "./components/home/Stats";
 import StudentPlacements from "./components/home/StudentPlacements";
 import Content from "./components/home/Content";
 import Testimonials from "./components/home/Testimonials";
+import GoogleReviews from "./components/home/GoogleReviews";
 import Newsletter from "./components/home/Newsletter";
 import FAQ from "./components/home/FAQ";
 import ContactSection from "./components/home/ContactSection";
@@ -88,7 +89,10 @@ export default function Home() {
         <Stats />
 
         {/* Student Placements */}
-        <StudentPlacements />
+        {/* <StudentPlacements /> */}
+
+        {/* Google review */}
+        <GoogleReviews />
 
         {/* Content */}
         <Content />

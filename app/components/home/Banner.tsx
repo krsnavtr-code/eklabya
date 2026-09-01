@@ -133,7 +133,7 @@ function Banner() {
         });
         const count =
           response?.data?.data?.length || response?.data?.length || 0;
-        setCourseCount(count + 100);
+        setCourseCount(count + 0);
       } catch (error) {
         console.error("Error fetching course count:", error);
         setCourseCount(180); // Fallback value
@@ -257,7 +257,7 @@ function Banner() {
   const features = [
     {
       icon: <FaBookOpen className="text-lg text-blue-600 dark:text-blue-400" />,
-      title: `${courseCount}+ Courses`,
+      title: `${courseCount}+ Top Courses`,
       desc: "Across IT, data, business & design",
     },
     {

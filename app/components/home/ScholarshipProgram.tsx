@@ -11,20 +11,20 @@ import {
 
 const ScholarshipProgram = () => {
   return (
-    <section className="py-6 md:py-10 bg-gradient-to-br from-blue-50/60 via-indigo-50/30 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-6 overflow-hidden">
         {/* --- Section Header --- */}
-        <div className="text-center max-w-3xl mx-auto mb-1 space-y-1">
+        <div className="text-center max-w-3xl mx-auto space-y-1">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 dark:text-white tracking-tight">
             Why Learn with Eklabya?
           </h2>
         </div>
 
         {/* --- Main Content Grid --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center mt-2">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
           {/* Left Column: Core Narrative */}
-          <div className="lg:col-span-7 space-y-3">
-            <div className="bg-white dark:bg-gray-800/90 rounded-3xl p-2 md:p-3 shadow-xs border border-slate-200/80 dark:border-slate-800 space-y-4">
+          <div className="lg:col-span-7 space-y-4">
+            <div className="bg-white/50 dark:bg-gray-800/40 backdrop-blur-md rounded-2xl p-4 md:p-5 shadow-xs border border-slate-200/80 dark:border-slate-700/60 space-y-4">
               <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed font-normal">
                 Eklabya isn't just your run of the mill course library, it's
                 built around one single purpose : making learning actually lead
@@ -37,7 +37,7 @@ const ScholarshipProgram = () => {
               </p>
             </div>
 
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-blue-900 dark:to-indigo-950 rounded-3xl p-2 md:p-3 text-white shadow-xl space-y-1">
+            <div className="bg-gradient-to-r from-blue-600/90 to-indigo-700/90 dark:from-blue-900/90 dark:to-indigo-950/90 backdrop-blur-md rounded-2xl p-4 md:p-5 text-white shadow-xl space-y-2">
               <h3 className="text-lg md:text-xl font-black tracking-tight flex items-center gap-2">
                 <FaRocket className="text-amber-400" /> What Sets Us Apart
               </h3>
@@ -58,10 +58,9 @@ const ScholarshipProgram = () => {
 
           {/* Right Column: Highlight Card & Quick Actions */}
           <div className="lg:col-span-5">
-            <div className="bg-white dark:bg-gray-800 rounded-3xl p-2 md:p-3 shadow-xl border border-slate-200/80 dark:border-slate-700 space-y-6 relative overflow-hidden">
-
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-5 md:p-6 shadow-xl border border-slate-200/80 dark:border-slate-700/60 space-y-6 relative overflow-hidden">
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-900">
+                <span className="text-[11px] font-extrabold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/80 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-900">
                   Career First Approach
                 </span>
                 <h3 className="text-xl md:text-2xl font-black text-gray-900 dark:text-white mt-3 tracking-tight">
@@ -88,10 +87,10 @@ const ScholarshipProgram = () => {
                 </div>
               </div>
 
-              <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-700/60">
+              <div className="space-y-3 pt-4 border-t border-slate-200/80 dark:border-slate-700/60">
                 <Link
                   href="/scholarship"
-                  className="w-full text-center border-2 border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-bold py-2 px-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-white/50 dark:bg-gray-800/50"
+                  className="w-full text-center border-2 border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-bold py-2.5 px-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm shadow-xs"
                 >
                   Learn About Scholarship
                 </Link>

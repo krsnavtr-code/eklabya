@@ -130,71 +130,73 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-10 md:py-16 bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 transition-colors duration-300 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-2">
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
-            Testimonials
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 py-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-2">
+            <div className="inline-flex items-center gap-1.5 bg-blue-50/80 dark:bg-blue-950/60 backdrop-blur-md border border-blue-200/80 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
+              Testimonials
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+              What Our Learners Say
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
+              Real outcomes from real students, not stock reviews.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-            What Our Learners Say
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
-            Real outcomes from real students, not stock reviews.
-          </p>
         </div>
-      </div>
 
-      {/* Infinite Scrolling Marquee Wrapper */}
-      <div className="relative w-full overflow-hidden py-4">
-        {/* Left & Right Gradient Fades for Smooth Edge Blending */}
-        <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none" />
+        {/* Infinite Scrolling Marquee Wrapper */}
+        <div className="relative w-full overflow-hidden py-4">
+          {/* Left & Right Gradient Fades for Smooth Edge Blending */}
+          <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white/80 dark:from-gray-900/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white/80 dark:from-gray-900/80 to-transparent z-10 pointer-events-none" />
 
-        <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-          {/* We duplicate the array to create a seamless infinite loop effect */}
-          {[...testimonials, ...testimonials].map((testimonial, idx) => (
-            <div
-              key={`${testimonial.id}-${idx}`}
-              className="group relative w-[320px] sm:w-[380px] mx-3 p-6 rounded-3xl bg-white dark:bg-gray-800/90 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between shrink-0"
-            >
-              <div>
-                {/* Quote Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex gap-1">
-                    {renderStars(testimonial.rating)}
+          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+            {/* We duplicate the array to create a seamless infinite loop effect */}
+            {[...testimonials, ...testimonials].map((testimonial, idx) => (
+              <div
+                key={`${testimonial.id}-${idx}`}
+                className="group relative w-[320px] sm:w-[380px] mx-3 p-6 rounded-3xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between shrink-0"
+              >
+                <div>
+                  {/* Quote Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex gap-1">
+                      {renderStars(testimonial.rating)}
+                    </div>
+                    <FaQuoteLeft className="text-blue-500/20 dark:text-blue-400/20 text-2xl group-hover:scale-110 transition-transform" />
                   </div>
-                  <FaQuoteLeft className="text-blue-500/20 dark:text-blue-400/20 text-2xl group-hover:scale-110 transition-transform" />
-                </div>
 
-                {/* Review Text */}
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic mb-6 line-clamp-4">
-                  "{testimonial.content}"
-                </p>
-              </div>
-
-              {/* User Details Footer */}
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-700/60">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500/20 shrink-0">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={testimonial.avatar}
-                    alt={`${testimonial.name}'s avatar`}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white truncate">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 truncate mt-0.5">
-                    {testimonial.role}
+                  {/* Review Text */}
+                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic mb-6 line-clamp-4">
+                    "{testimonial.content}"
                   </p>
                 </div>
+
+                {/* User Details Footer */}
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-700/60">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500/20 shrink-0">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={testimonial.avatar}
+                      alt={`${testimonial.name}'s avatar`}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white truncate">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 truncate mt-0.5">
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 

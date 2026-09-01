@@ -107,11 +107,11 @@ const ContactSection = () => {
   ];
 
   return (
-    <section className="py-6 md:py-10 bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-8 overflow-hidden">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
+        <div className="text-center max-w-3xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-1.5 bg-blue-50/80 dark:bg-blue-950/60 backdrop-blur-md border border-blue-200/80 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
             <FaHeadset className="text-xs" /> Get In Touch
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -123,17 +123,17 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Contact Information Cards (Col 4) */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="lg:col-span-4 space-y-3">
             {contactInfo.map((item, index) => (
               <motion.div
                 key={index}
-                className="bg-white dark:bg-gray-800/90 p-5 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-800 hover:shadow-md transition-all duration-300"
+                className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-xs border border-slate-200/80 dark:border-slate-700/60 hover:shadow-md hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300"
                 whileHover={{ y: -3 }}
               >
                 <div className="flex items-start space-x-3.5">
-                  <div className="flex-shrink-0 p-3 bg-slate-50 dark:bg-gray-700/60 rounded-xl border border-slate-100 dark:border-gray-700">
+                  <div className="flex-shrink-0 p-3 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 rounded-xl border border-blue-100 dark:border-blue-900/60">
                     {item.icon}
                   </div>
                   <div className="min-w-0">
@@ -169,7 +169,7 @@ const ContactSection = () => {
 
           {/* Contact Form (Col 8) */}
           <div className="lg:col-span-8">
-            <div className="bg-white dark:bg-gray-800/90 p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200/80 dark:border-slate-800">
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-2xl p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-200/80 dark:border-slate-700/60">
               {isSubmitted ? (
                 <div className="text-center py-10 space-y-4">
                   <div className="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800">
@@ -205,7 +205,7 @@ const ContactSection = () => {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-900/60 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                        className="w-full px-4 py-3 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
                         placeholder="John Doe"
                       />
                     </div>
@@ -224,7 +224,7 @@ const ContactSection = () => {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-900/60 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                        className="w-full px-4 py-3 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
                         placeholder="you@example.com"
                       />
                     </div>
@@ -244,7 +244,7 @@ const ContactSection = () => {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-900/60 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                      className="w-full px-4 py-3 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
                       placeholder="How can we help you?"
                     />
                   </div>
@@ -263,7 +263,7 @@ const ContactSection = () => {
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-900/60 border border-slate-200 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white focus:bg-white dark:focus:bg-gray-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all resize-none"
                       placeholder="Type your message here..."
                     />
                   </div>
@@ -275,13 +275,13 @@ const ContactSection = () => {
                       type="checkbox"
                       checked={formData.agreedToTerms}
                       onChange={handleChange}
-                      className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
+                      className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
                       required
                     />
                     <div className="text-xs">
                       <label
                         htmlFor="agreedToTerms"
-                        className="font-medium text-slate-700 dark:text-slate-300"
+                        className="font-medium text-slate-700 dark:text-slate-300 select-none cursor-pointer"
                       >
                         I hereby agree to receive the promotional emails &
                         messages through WhatsApp/RCS/SMS{" "}

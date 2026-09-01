@@ -56,11 +56,11 @@ const steps = [
 
 const HowWillYourTrainingWork = () => {
   return (
-    <section className="py-6 md:py-12 bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-6 overflow-hidden">
         {/* --- Section Header & Intro --- */}
-        <div className="text-center max-w-6xl mx-auto mb-4 space-y-2">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-200 dark:border-blue-800 shadow-2xs">
+        <div className="text-center max-w-6xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300 text-xs font-bold uppercase tracking-wider border border-blue-200/80 dark:border-blue-800 shadow-2xs">
             <FaBookReader className="text-xs" /> Training Workflow
           </div>
 
@@ -68,7 +68,7 @@ const HowWillYourTrainingWork = () => {
             How Your Training Works - With Eklabya
           </h2>
 
-          <div className="text-left space-y-2 shadow-sm">
+          <div className="bg-white/50 dark:bg-gray-800/40 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 rounded-2xl p-4 md:p-6 text-left space-y-2 shadow-sm">
             <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
               From enrollment to certification, every step of the Eklabya
               learning journey is structured, transparent, and built around
@@ -84,18 +84,18 @@ const HowWillYourTrainingWork = () => {
         </div>
 
         {/* --- Steps Grid Layout --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {steps.map((step, index) => (
             <div
               key={index}
-              className="relative bg-white dark:bg-gray-800 rounded-3xl p-1.5 md:p-4 shadow-xs border border-slate-200/80 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between overflow-hidden"
+              className="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-4 md:p-5 shadow-xs border border-slate-200/80 dark:border-slate-700/60 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between overflow-hidden"
             >
-              <span className="absolute top-4 right-6 text-6xl font-black text-slate-100 dark:text-gray-700/30 select-none pointer-events-none transition-colors group-hover:text-blue-50 dark:group-hover:text-gray-700/50">
+              <span className="absolute top-3 right-5 text-6xl font-black text-slate-200/60 dark:text-gray-700/30 select-none pointer-events-none transition-colors group-hover:text-blue-100 dark:group-hover:text-gray-700/50">
                 {step.stepNum}
               </span>
 
-              <div className="relative z-10 space-y-0.5">
-                <div className="w-10 h-10 rounded-2xl bg-blue-50 dark:bg-blue-950/60 flex items-center justify-center border border-blue-100 dark:border-blue-900 shadow-inner group-hover:scale-105 transition-transform">
+              <div className="relative z-10 space-y-1.5">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 flex items-center justify-center border border-blue-100 dark:border-blue-900 shadow-inner group-hover:scale-105 transition-transform">
                   {step.icon}
                 </div>
 
@@ -108,7 +108,7 @@ const HowWillYourTrainingWork = () => {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+              <div className="mt-5 pt-3 border-t border-slate-200/80 dark:border-slate-700/60 flex items-center justify-between">
                 <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 tracking-wider uppercase">
                   Step {step.stepNum} of 06
                 </span>

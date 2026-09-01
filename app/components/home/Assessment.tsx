@@ -15,15 +15,11 @@ const Assessment = () => {
   const router = useRouter();
 
   return (
-    <section className="relative py-6 text-black dark:text-white bg-gradient-to-b from-white to-indigo-50/30 dark:from-gray-900 dark:to-gray-800 overflow-hidden transition-colors duration-300">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-indigo-100 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-purple-100 dark:bg-purple-900/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-6 overflow-hidden">
         {/* --- Section Header & Overview --- */}
-        <div className="text-center max-w-7xl mx-auto mb-4 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-100/80 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider border border-indigo-200 dark:border-indigo-800 shadow-2xs">
+        <div className="text-center max-w-7xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-100/80 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider border border-indigo-200/80 dark:border-indigo-800 shadow-2xs">
             <FaTrophy /> Scholarship Program 2026
           </div>
 
@@ -31,7 +27,7 @@ const Assessment = () => {
             Unlock Your Future with the Eklabya Scholarship Exam
           </h2>
 
-          <div className="bg-slate-50 dark:bg-gray-800/60 border border-slate-200/80 dark:border-slate-800 rounded-xl p-2 md:p-4 text-left space-y-2 shadow-sm">
+          <div className="bg-white/50 dark:bg-gray-800/40 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 rounded-2xl p-4 md:p-6 text-left space-y-3 shadow-sm">
             <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
               The Eklabya Scholarship Exam is a merit-based online initiative
               designed to reward talented, ambitious students with real
@@ -52,9 +48,9 @@ const Assessment = () => {
         </div>
 
         {/* --- Two Column Feature Grid (Eligibility & Evaluation) --- */}
-        <div className="grid md:grid-cols-2 gap-3 md:gap-6 mb-4">
+        <div className="grid md:grid-cols-2 gap-3 md:gap-6">
           {/* Column 1: Eligibility Criteria */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-2 md:p-4 shadow-xs border border-slate-200/80 dark:border-slate-700 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-4 md:p-6 shadow-xs border border-slate-200/80 dark:border-slate-700/60 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 group flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 bg-blue-50 dark:bg-blue-950/60 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl group-hover:scale-105 transition-transform">
                 <FaGlobe />
@@ -88,7 +84,7 @@ const Assessment = () => {
           </div>
 
           {/* Column 2: Evaluation Process */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-2 md:p-4 shadow-xs border border-slate-200/80 dark:border-slate-700 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-4 md:p-6 shadow-xs border border-slate-200/80 dark:border-slate-700/60 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 group flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 bg-purple-50 dark:bg-purple-950/60 rounded-2xl flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl group-hover:scale-105 transition-transform">
                 <FaCertificate />
@@ -137,10 +133,10 @@ const Assessment = () => {
         </div>
 
         {/* --- CTA Banner --- */}
-        <div className="relative rounded-3xl overflow-hidden bg-slate-900 dark:bg-black text-white shadow-2xl border border-slate-800">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-700 opacity-90 dark:opacity-80"></div>
+        <div className="relative rounded-3xl overflow-hidden bg-slate-900 dark:bg-black text-white shadow-2xl border border-slate-700/60">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 to-purple-700/90 backdrop-blur-xl"></div>
 
-          <div className="relative z-10 px-6 py-10 md:py-14 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+          <div className="relative z-10 px-6 py-10 md:py-12 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
             <div className="max-w-2xl space-y-2">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight">
                 Ready to prove your potential?
@@ -162,9 +158,6 @@ const Assessment = () => {
               </button>
             </div>
           </div>
-
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl pointer-events-none"></div>
         </div>
       </div>
     </section>

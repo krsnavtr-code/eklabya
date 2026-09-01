@@ -135,7 +135,11 @@ const WhyLearnWithEklabya = () => {
     }, 150);
   };
 
-  const handleCellClick = (e: React.MouseEvent, rowIndex: number, column: keyof ComparisonData) => {
+  const handleCellClick = (
+    e: React.MouseEvent,
+    rowIndex: number,
+    column: keyof ComparisonData,
+  ) => {
     e.preventDefault();
     toggleValue(rowIndex, column);
   };
@@ -143,81 +147,91 @@ const WhyLearnWithEklabya = () => {
   return (
     <section
       ref={componentRef}
-      className={`py-2 md:py-4 bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 transition-all duration-1000 ${
+      className={`w-full px-2 sm:px-4 lg:px-6 py-4 transition-all duration-1000 ${
         isVisible ? "opacity-100 visible" : "opacity-0"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-2 sm:px-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 overflow-hidden p-3 sm:p-5">
         <div className="w-full">
           {/* Desktop view - Premium Table layout */}
           <div className="hidden md:block w-full">
-            <div className="w-full bg-white dark:bg-gray-800/90 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200/80 dark:border-slate-800 overflow-hidden backdrop-blur-md">
+            <div className="w-full bg-white/60 dark:bg-gray-800/50 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-700/60 overflow-hidden backdrop-blur-md">
               <div className="w-full overflow-x-auto">
                 <table className="w-full table-fixed border-collapse">
                   <thead>
                     <tr className="bg-slate-100/80 dark:bg-gray-900/80 text-slate-900 dark:text-white text-xs uppercase tracking-wider font-extrabold border-b border-slate-200 dark:border-slate-800">
-                      <th className="w-1/2 px-6 py-1.5 text-left">
+                      <th className="w-1/2 px-6 py-2.5 text-left">
                         Key Benefits & Features
                       </th>
-                      <th className="w-1/6 px-4 py-1.5 text-center text-blue-600 dark:text-blue-400 font-black">
+                      <th className="w-1/6 px-4 py-2.5 text-center text-blue-600 dark:text-blue-400 font-black">
                         Eklabya
                       </th>
-                      <th className="w-1/6 px-4 py-1.5 text-center text-slate-500 dark:text-slate-400">
+                      <th className="w-1/6 px-4 py-2.5 text-center text-slate-500 dark:text-slate-400">
                         Other Platforms
                       </th>
-                      <th className="w-1/6 px-4 py-1.5 text-center text-slate-500 dark:text-slate-400">
+                      <th className="w-1/6 px-4 py-2.5 text-center text-slate-500 dark:text-slate-400">
                         YouTube
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
+                  <tbody className="divide-y divide-slate-100/80 dark:divide-slate-800/60">
                     {comparisonData.map((row, idx) => (
                       <tr
                         key={idx}
                         className={`transition-colors duration-150 hover:bg-blue-50/40 dark:hover:bg-blue-950/20 ${
                           idx % 2 === 0
-                            ? "bg-white dark:bg-gray-800/40"
-                            : "bg-slate-50/40 dark:bg-gray-800/80"
+                            ? "bg-white/40 dark:bg-gray-800/30"
+                            : "bg-slate-50/40 dark:bg-gray-800/60"
                         }`}
                       >
-                        <td className="w-1/2 px-6 py-1.5 text-left font-bold text-slate-800 dark:text-slate-200 text-sm">
+                        <td className="w-1/2 px-6 py-2 text-left font-bold text-slate-800 dark:text-slate-200 text-sm">
                           {row.benefit}
                         </td>
                         <td
-                          className="w-1/6 px-4 py-1.5 text-center"
+                          className="w-1/6 px-4 py-2 text-center"
                           data-row={idx}
                           data-column="firstVITE"
                           onClick={(e) => handleCellClick(e, idx, "firstVITE")}
                         >
                           <div
                             className="flip-icon-container cursor-pointer"
-                            style={{ "--delay": idx % 3 } as React.CSSProperties}
+                            style={
+                              { "--delay": idx % 3 } as React.CSSProperties
+                            }
                           >
                             {renderIcon(row.firstVITE)}
                           </div>
                         </td>
                         <td
-                          className="w-1/6 px-4 py-1.5 text-center"
+                          className="w-1/6 px-4 py-2 text-center"
                           data-row={idx}
                           data-column="others"
                           onClick={(e) => handleCellClick(e, idx, "others")}
                         >
                           <div
                             className="flip-icon-container cursor-pointer"
-                            style={{ "--delay": (idx % 3) + 1 } as React.CSSProperties}
+                            style={
+                              {
+                                "--delay": (idx % 3) + 1,
+                              } as React.CSSProperties
+                            }
                           >
                             {renderIcon(row.others)}
                           </div>
                         </td>
                         <td
-                          className="w-1/6 px-4 py-1.5 text-center"
+                          className="w-1/6 px-4 py-2 text-center"
                           data-row={idx}
                           data-column="youtube"
                           onClick={(e) => handleCellClick(e, idx, "youtube")}
                         >
                           <div
                             className="flip-icon-container cursor-pointer"
-                            style={{ "--delay": (idx % 3) + 2 } as React.CSSProperties}
+                            style={
+                              {
+                                "--delay": (idx % 3) + 2,
+                              } as React.CSSProperties
+                            }
                           >
                             {renderIcon(row.youtube)}
                           </div>
@@ -231,20 +245,20 @@ const WhyLearnWithEklabya = () => {
           </div>
 
           {/* Mobile view - Modern Card stack layout */}
-          <div className="md:hidden space-y-0.5">
+          <div className="md:hidden space-y-2">
             {comparisonData.map((row, idx) => (
               <div
                 key={idx}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-2 md:p-3 shadow-xs border border-slate-200/80 dark:border-slate-800 space-y-2 transition-all duration-300"
+                className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-3 shadow-xs border border-slate-200/80 dark:border-slate-700/60 space-y-2 transition-all duration-300"
               >
                 <h3 className="font-bold text-slate-900 dark:text-white text-sm leading-snug">
                   {row.benefit}
                 </h3>
 
-                <div className="grid grid-cols-3 gap-2 border-t border-slate-100 dark:border-slate-700/60">
+                <div className="grid grid-cols-3 gap-2 border-t border-slate-200/60 dark:border-slate-700/60 pt-2">
                   {/* Eklabya */}
                   <div
-                    className="flex flex-col items-center justify-center p-1 rounded-xl bg-blue-50/60 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60"
+                    className="flex flex-col items-center justify-center p-1.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/60"
                     onClick={() => toggleValue(idx, "firstVITE")}
                   >
                     <span className="text-[10px] font-black uppercase text-blue-600 dark:text-blue-400 mb-1.5">
@@ -255,7 +269,7 @@ const WhyLearnWithEklabya = () => {
 
                   {/* Others */}
                   <div
-                    className="flex flex-col items-center justify-center p-1 rounded-xl bg-slate-50 dark:bg-gray-900/50 border border-slate-200/60 dark:border-slate-800"
+                    className="flex flex-col items-center justify-center p-1.5 rounded-xl bg-slate-50/70 dark:bg-gray-900/50 border border-slate-200/60 dark:border-slate-800"
                     onClick={() => toggleValue(idx, "others")}
                   >
                     <span className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 mb-1.5">
@@ -266,7 +280,7 @@ const WhyLearnWithEklabya = () => {
 
                   {/* YouTube */}
                   <div
-                    className="flex flex-col items-center justify-center p-1 rounded-xl bg-slate-50 dark:bg-gray-900/50 border border-slate-200/60 dark:border-slate-800"
+                    className="flex flex-col items-center justify-center p-1.5 rounded-xl bg-slate-50/70 dark:bg-gray-900/50 border border-slate-200/60 dark:border-slate-800"
                     onClick={() => toggleValue(idx, "youtube")}
                   >
                     <span className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 mb-1.5">

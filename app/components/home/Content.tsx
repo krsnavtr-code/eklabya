@@ -6,11 +6,11 @@ import { FaGraduationCap, FaArrowRight } from "react-icons/fa";
 
 const Content = () => {
   return (
-    <section className="py-6 md:py-10 bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-6 overflow-hidden">
         {/* --- Header & Brand Story --- */}
-        <div className="text-center max-w-5xl mx-auto space-y-1">
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 px-3 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
+        <div className="text-center max-w-5xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-1.5 bg-blue-50/80 dark:bg-blue-950/60 backdrop-blur-md border border-blue-200/80 dark:border-blue-800/80 px-3 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
             <FaGraduationCap className="text-xs" /> About Eklabya
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -32,8 +32,8 @@ const Content = () => {
           <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-4 text-center">
             Why Choose Eklabya?
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 shadow-2xs space-y-1.5">
               <div className="text-blue-600 text-base">💻</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Online, Your Rules
@@ -44,7 +44,7 @@ const Content = () => {
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
+            <div className="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 shadow-2xs space-y-1.5">
               <div className="text-amber-500 text-base">🎯</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Career Support
@@ -55,7 +55,7 @@ const Content = () => {
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
+            <div className="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 shadow-2xs space-y-1.5">
               <div className="text-purple-500 text-base">👨‍🏫</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Expert Trainers
@@ -66,7 +66,7 @@ const Content = () => {
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-1.5">
+            <div className="p-4 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 shadow-2xs space-y-1.5">
               <div className="text-emerald-500 text-base">📜</div>
               <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                 Verified Certifications
@@ -80,13 +80,13 @@ const Content = () => {
         </div>
 
         {/* --- 3 Simple Steps & Community Joined (Two Column Compact Layout) --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Steps Box */}
-          <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-4">
+          <div className="p-5 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 shadow-2xs space-y-3">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Start Learning in 3 Simple Steps
             </h3>
-            <ol className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 list-decimal list-inside">
+            <ol className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 list-decimal list-inside">
               <li className="leading-snug">
                 <strong className="text-slate-900 dark:text-white">
                   Browse Programs:
@@ -111,7 +111,7 @@ const Content = () => {
           </div>
 
           {/* Community Box */}
-          <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-3 flex flex-col justify-between">
+          <div className="p-5 rounded-2xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 shadow-2xs space-y-3 flex flex-col justify-between">
             <div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
                 Join a Growing Community Across India
@@ -130,7 +130,7 @@ const Content = () => {
         </div>
 
         {/* --- Small Compact CTA Box --- */}
-        <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-center shadow-md max-w-2xl mx-auto space-y-3">
+        <div className="p-5 rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 text-center shadow-md max-w-2xl mx-auto space-y-3">
           <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
             Ready to Start Your Learning Journey?
           </h3>

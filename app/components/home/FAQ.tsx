@@ -55,11 +55,11 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-6 md:py-10 bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-4xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-6 overflow-hidden">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-4 space-y-2">
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-1.5 bg-blue-50/80 dark:bg-blue-950/60 backdrop-blur-md border border-blue-200/80 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
             <FaQuestionCircle className="text-xs" /> Got Questions?
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -72,7 +72,7 @@ const FAQ = () => {
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -80,13 +80,13 @@ const FAQ = () => {
                 key={index}
                 className={`rounded-2xl transition-all duration-200 border ${
                   isOpen
-                    ? "bg-white dark:bg-gray-800 border-blue-500/40 shadow-md shadow-blue-500/5"
-                    : "bg-white dark:bg-gray-800/80 border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs"
+                    ? "bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-blue-500/40 shadow-md shadow-blue-500/5"
+                    : "bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border-slate-200/80 dark:border-slate-700/60 hover:border-slate-300 dark:hover:border-slate-600 shadow-2xs"
                 } overflow-hidden`}
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer"
+                  className="w-full px-5 py-3.5 text-left flex items-center justify-between gap-4 focus:outline-none cursor-pointer"
                 >
                   <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
                     {faq.question}
@@ -94,7 +94,7 @@ const FAQ = () => {
 
                   {/* Rotating Chevron Icon */}
                   <div
-                    className={`w-7 h-7 rounded-full bg-slate-100 dark:bg-gray-700/60 flex items-center justify-center text-slate-500 dark:text-slate-400 shrink-0 transition-transform duration-300 ${
+                    className={`w-7 h-7 rounded-full bg-slate-100/80 dark:bg-gray-700/60 flex items-center justify-center text-slate-500 dark:text-slate-400 shrink-0 transition-transform duration-300 ${
                       isOpen
                         ? "rotate-180 bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400"
                         : "rotate-0"
@@ -106,7 +106,7 @@ const FAQ = () => {
 
                 {/* Smooth Collapsible Answer Section */}
                 {isOpen && (
-                  <div className="px-6 pb-5 pt-1 border-t border-slate-100 dark:border-slate-700/60">
+                  <div className="px-5 pb-4 pt-1 border-t border-slate-200/60 dark:border-slate-700/60">
                     <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed">
                       {faq.answer}
                     </p>

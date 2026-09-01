@@ -137,7 +137,7 @@ const CourseCard = ({ course }: { course: Course }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800/90 border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 overflow-hidden flex flex-col rounded-2xl group">
+    <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-md shadow-slate-200/30 dark:shadow-black/30 hover:shadow-2xl hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden flex flex-col rounded-3xl group">
       <Link
         href={`/course/${course.slug || course._id}`}
         className="flex flex-col h-full"
@@ -250,11 +250,11 @@ const PopularCourses = () => {
   }, []);
 
   return (
-    <section className="py-6 md:py-6 bg-white dark:bg-gray-900 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
+      <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-6 overflow-hidden">
         {/* Section Header */}
-        <div className="text-center max-w-6xl mx-auto mb-4 space-y-1">
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 px-3 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
+        <div className="text-center max-w-6xl mx-auto space-y-2">
+          <div className="inline-flex items-center gap-1.5 bg-blue-50/80 dark:bg-blue-950/60 backdrop-blur-md border border-blue-200/80 dark:border-blue-800/80 px-3 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
             <FaLaptopCode className="text-xs" />
             Course Overview
           </div>
@@ -264,7 +264,7 @@ const PopularCourses = () => {
         </div>
 
         {/* --- COMPLETE CONTENT INTEGRATED CLEANLY --- */}
-        <div className="bg-slate-50 dark:bg-gray-800/50 border border-slate-200/80 dark:border-slate-800 rounded-lg p-1 md:p-6 mb-4 space-y-8 shadow-sm">
+        <div className="bg-white/50 dark:bg-gray-800/40 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/60 rounded-2xl p-4 md:p-6 space-y-6 shadow-sm">
           {/* Main Intro Paragraph with Domain List Highlights */}
           <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
             Eklabya gives you a range of job-focused online certification
@@ -299,8 +299,8 @@ const PopularCourses = () => {
           </p>
 
           {/* 3 Core Principles Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            <div className="bg-white dark:bg-gray-800 p-2 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-1.5">
               <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 flex items-center justify-center text-blue-600 font-bold text-sm">
                 ⏱️
               </div>
@@ -315,7 +315,7 @@ const PopularCourses = () => {
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-2 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2">
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-1.5">
               <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/60 flex items-center justify-center text-amber-600 font-bold text-sm">
                 🛠️
               </div>
@@ -329,7 +329,7 @@ const PopularCourses = () => {
               </p>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-2 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2">
+            <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/70 shadow-xs space-y-1.5">
               <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 font-bold text-sm">
                 🎯
               </div>

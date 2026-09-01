@@ -69,7 +69,7 @@ export default function Home() {
       <div className="fixed top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-indigo-500/15 dark:bg-purple-600/10 blur-[140px] pointer-events-none -z-10" />
       <div className="fixed bottom-40 left-1/4 w-[550px] h-[550px] rounded-full bg-rose-500/10 dark:bg-amber-500/10 blur-[130px] pointer-events-none -z-10" />
 
-      <div className="flex flex-col relative z-10">
+      <div className="flex flex-col bg-white relative z-10">
         {/* Hero Banner */}
         <Banner />
 

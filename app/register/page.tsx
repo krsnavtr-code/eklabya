@@ -15,9 +15,9 @@ export default function RegisterPage() {
   return (
     <>
       <SEO
-        title="Register | Eklabya - Create Your Account"
-        description="Create your Eklabya account and start your learning journey. Join thousands of students learning in-demand skills."
-        keywords="register, sign up, create account, Eklabya, online learning, new student"
+        title="Register for Industry-Ready Courses | Eklabya"
+        description="Register for industry-ready courses at Eklabya. Gain practical skills, expert guidance and career support. Start your learning journey today."
+        keywords="The Eklabya registration, industry-ready courses, skill development courses, career training, professional courses, job-ready skills, online learning"
         robots="noindex, nofollow"
       />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-500 to-blue-500 p-4">

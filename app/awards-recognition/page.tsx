@@ -252,9 +252,9 @@ export default function AwardsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20">
       <SEO
-        title="Awards & Recognition | Eklabya"
-        description="Discover the awards, certifications, and recognitions earned by Eklabya for excellence in education."
-        keywords="awards, recognition, certifications, eklabya, excellence"
+        title="Awards & Recognition | Eklabya Learning Achievements"
+        description="Discover Eklabya awards and recognition, celebrating excellence, achievements and our commitment to quality education and learner success."
+        keywords="Eklabya awards, Eklabya recognition, education awards, learning achievements, excellence in education, student success, Eklabya achievements"
       />
       {/* --- LUXURY HERO HEADER --- */}
       <section className="relative overflow-hidden bg-gradient-to-br from-amber-700 via-yellow-800 to-slate-950 text-white py-6 sm:py-8 px-4 sm:px-6 lg:px-8">

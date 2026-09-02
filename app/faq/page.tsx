@@ -109,13 +109,13 @@ export default function FAQPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <JsonLd data={schemas} />
       <SEO
-        title="Eklabya FAQ – Online Course Help & Support Guide"
-        description="Find answers to common questions about Eklabya online courses, enrollment process, fees, certifications, access details, and student support services."
-        keywords="FAQ, frequently asked questions, course help, payment questions, enrollment help, Eklabya support, learning platform"
+        title="Eklabya FAQs | Courses, Fees & Career Support"
+        description="Find answers to common questions about Eklabya courses, fees, certifications, training, placement support, eligibility and admissions. Get help today."
+        keywords="Eklabya FAQs, Eklabya courses, course fees, certification, placement support, admissions, eligibility, career training, skill development, online courses"
         og={{
-          title: "Eklabya FAQ – Online Course Help & Support Guide",
+          title: "Eklabya FAQs | Courses, Fees & Career Support",
           description:
-            "Get answers to common questions about our courses, payments, and learning platform. Everything you need to know about Eklabya in one place.",
+            "Find answers to common questions about Eklabya courses, fees, certifications, training, placement support, eligibility and admissions. Get help today.",
           type: "website",
         }}
       />

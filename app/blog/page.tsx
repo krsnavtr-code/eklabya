@@ -109,14 +109,13 @@ function BlogListContent() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950">
       <SEO
-        title="Eklabya Centre of Excellence Blog | Career Insights"
-        description="Explore expert articles, career guidance, technology updates, and industry insights on the official blog of Eklabya Centre of Excellence."
-        keywords="education blog, career advice, learning resources, industry insights, Eklabya articles, professional development"
+        title="Eklabya Blog | Learn Skills, Build Your Career Today"
+        description="Explore career tips, skill insights, industry trends and expert learning resources to build in-demand skills and grow your career with Eklabya."
+        keywords="Eklabya blog, career tips, skill development, online learning, professional courses, career growth, industry trends, job skills, career guidance, education blog"
         og={{
-          title:
-            "Eklabya Centre of Excellence Blog - Education & Career Insights",
+          title: "Eklabya Blog | Learn Skills, Build Your Career Today",
           description:
-            "Discover expert articles, study tips, and industry insights from Eklabya. Stay ahead in your learning journey with our educational blog.",
+            "Explore career tips, skill insights, industry trends and expert learning resources to build in-demand skills and grow your career with Eklabya.",
           type: "website",
         }}
       />

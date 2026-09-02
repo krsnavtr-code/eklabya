@@ -203,14 +203,14 @@ export default function TestimonialsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20">
       <SEO
-        title="Testimonials | Eklabya - What Our Learners Say"
-        description="Read authentic, full-length testimonials from our satisfied learners. Discover how Eklabya has helped students and professionals achieve their learning goals."
-        keywords="testimonials, reviews, learner feedback, Eklabya reviews, student testimonials, course reviews"
+        title="Eklabya Success Stories | Real Career Transformations"
+        description="Explore inspiring success stories from Eklabya learners who gained skills, built confidence and achieved career growth through practical learning."
+        keywords="Eklavya success stories, student success stories, career success, learner achievements, career transformation, skill development, job ready skills, career growth, Eklavya learners"
         robots="index, follow"
         og={{
-          title: "Testimonials - What Our Learners Say About Eklabya",
+          title: "Eklabya Success Stories | Real Career Transformations",
           description:
-            "Hear from our community of learners who have transformed their careers with Eklabya's courses.",
+            "Explore inspiring success stories from Eklabya learners who gained skills, built confidence and achieved career growth through practical learning.",
           type: "website",
         }}
       />

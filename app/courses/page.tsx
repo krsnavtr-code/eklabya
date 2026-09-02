@@ -218,9 +218,9 @@ function CoursesContent() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 py-6 sm:py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <SEO
-        title="Professional Certification Courses | Eklabya"
-        description="Explore industry-aligned certification courses in Data Science, Cloud, SAP, Full Stack, AI, and more."
-        keywords="certification courses, online courses, data science, cloud, sap, full stack, ai, eklabya"
+        title="Eklabya Courses | Learn Skills for Career Growth"
+        description="Explore Eklabya courses in Data Science, AI, Digital Marketing and more. Gain practical skills and prepare for better career opportunities today."
+        keywords="Eklabya courses, online courses, career courses, professional courses, Data Science course, AI course, Digital Marketing course, skill development, career growth, job ready courses"
       />
       <div className="max-w-7xl mx-auto space-y-6">
         {/* --- HERO HEADER --- */}

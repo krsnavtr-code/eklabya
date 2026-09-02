@@ -6,13 +6,13 @@ export default function PaymentTAndC() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <SEO
-        title="Payment Terms & Conditions | Eklabya Centre of Excellence"
-        description="Read the official payment terms and conditions of Eklabya Centre of Excellence including fees, refund policy, billing process, and secure transaction guidelines."
-        keywords="payment terms, payment conditions, refund policy, online payment terms, Eklabya payment, course payment terms"
+        title="Payment Terms and Conditions | Eklabya"
+        description="Read The Eklabya payment terms and conditions for courses, fees, refunds, payment methods, and related policies before completing your payment."
+        keywords="The Eklabya payment terms, payment terms and conditions, course payment policy, course fees, refund policy, payment methods, Eklabya courses, online course payment"
         og={{
-          title: "Payment Terms & Conditions | Eklabya Centre of Excellence",
+          title: "Payment Terms and Conditions | Eklabya",
           description:
-            "Read the official payment terms and conditions of Eklabya Centre of Excellence including fees, refund policy, billing process, and secure transaction guidelines.",
+            "Read The Eklabya payment terms and conditions for courses, fees, refunds, payment methods, and related policies before completing your payment.",
           type: "article",
         }}
       />

@@ -129,9 +129,9 @@ export default function CategoriesPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 py-6 sm:py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <SEO
-        title="Explore Course Categories | Eklabya"
-        description="Browse all course categories at Eklabya — Data Science, SAP, Full Stack, AI, Digital Marketing, Cloud, and more."
-        keywords="course categories, online courses, eklabya, data science, sap, full stack, ai, cloud, digital marketing"
+        title="Explore Course Categories | Online Learning | Eklabya"
+        description="Explore Eklabya course categories and find online courses to build in-demand skills, advance your career, and achieve your learning goals."
+        keywords="Eklabya courses, online courses, course categories, skill development courses, professional courses, career courses, online learning, career skills"
       />
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* --- DISTINCT CATEGORIES HERO HEADER --- */}

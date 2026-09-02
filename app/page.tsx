@@ -16,10 +16,26 @@ import FAQ from "./components/home/FAQ";
 import ContactSection from "./components/home/ContactSection";
 
 export const metadata: Metadata = {
-  title: "Eklabya - Online Learning Platform",
-  description: "Eklabya - Online Learning Platform",
+  title: "Eklabya | Job-Ready Online Certification Courses in India",
+  description:
+    "Learn job-ready skills with Eklabya's online certification courses in Data Science, AI, SAP, Web Development and Digital Marketing with expert mentorship.",
+  keywords:
+    "online certification courses, professional certification courses, job oriented courses, online courses in India, skill development courses, career oriented courses, technical courses online, Data Science course, Artificial Intelligence course, Machine Learning course, SAP courses, SAP ABAP course, SAP FICO course, Digital Marketing course, Web Development course, Power BI course, Python course, IT certification courses, online professional courses, Eklabya courses",
   alternates: {
     canonical: "https://www.theeklavya.com",
+  },
+  openGraph: {
+    title: "Eklabya | Job-Ready Online Certification Courses in India",
+    description:
+      "Learn job-ready skills with Eklabya's online certification courses in Data Science, AI, SAP, Web Development and Digital Marketing with expert mentorship.",
+    url: "https://www.theeklavya.com",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Eklabya | Job-Ready Online Certification Courses in India",
+    description:
+      "Learn job-ready skills with Eklabya's online certification courses in Data Science, AI, SAP, Web Development and Digital Marketing with expert mentorship.",
   },
 };
 

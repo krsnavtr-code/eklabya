@@ -7,13 +7,13 @@ const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <SEO
-        title="Terms of Service | Eklabya Centre of Excellence"
-        description="Read the official Terms of Service of Eklabya Centre of Excellence to understand user responsibilities, policies, conditions, and service guidelines."
-        keywords="terms of service, terms and conditions, user agreement, Eklabya terms, online learning terms"
+        title="Eklabya Terms of Service | User Agreement & Rules"
+        description="Read Eklabya Terms of Service to understand user responsibilities, website rules, intellectual property rights, services and legal terms."
+        keywords="Eklabya terms of service, Eklabya user agreement, terms and conditions, website terms, user responsibilities, legal terms, online learning terms, education platform rules, intellectual property rights"
         og={{
-          title: "Terms of Service | Eklabya",
+          title: "Eklabya Terms of Service | User Agreement & Rules",
           description:
-            "Last updated August 13, 2026. By using Eklabya, you agree to these terms and conditions.",
+            "Read Eklabya Terms of Service to understand user responsibilities, website rules, intellectual property rights, services and legal terms.",
           type: "article",
         }}
       />

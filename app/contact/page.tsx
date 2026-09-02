@@ -125,13 +125,13 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <SEO
-        title="Contact Us | Eklabya Centre of Excellence"
-        description="Get in touch with Eklabya Centre of Excellence for course inquiries, admissions, corporate training, and support."
-        keywords="contact Eklabya, course inquiry, admissions, support, Eklabya contact"
+        title="Contact Eklabya | Courses & Admissions Support"
+        description="Contact Eklabya for admissions, courses and corporate training. Get expert guidance and find the right learning path to achieve your career goals today."
+        keywords="Eklabya contact, contact Eklabya, Eklabya courses, admissions support, online courses, corporate training, career guidance, Noida"
         og={{
-          title: "Contact Us | Eklabya Centre of Excellence",
+          title: "Contact Eklabya | Courses & Admissions Support",
           description:
-            "Reach out to Eklabya for admissions, course queries, and career guidance.",
+            "Contact Eklabya for admissions, courses and corporate training. Get expert guidance and find the right learning path to achieve your career goals today.",
           type: "website",
         }}
       />

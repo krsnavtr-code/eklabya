@@ -8,13 +8,13 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <SEO
-        title="About Eklabya | Leading Online Learning Platform | Eklabya Centre of Excellence"
-        description="Learn about Eklabya, a trusted online learning platform offering skill-based courses, expert mentorship, and career-focused training for students and professionals."
-        keywords="about Eklabya, e-learning platform, online education, learn online, Eklabya mission, education technology, online courses, professional development"
+        title="About Eklabya | Online Learning and Career Growth"
+        description="Discover Eklabya, an online learning platform offering career-focused courses, certifications and flexible skill training for modern professionals."
+        keywords="Eklabya, about Eklabya, online learning platform, career development, online courses, skill development, professional certifications, career growth, flexible learning, online education, career-focused courses, job-ready skills, professional training, e-learning platform, skill training"
         og={{
-          title: "About Eklabya - Empowering Learners Worldwide",
+          title: "About Eklabya | Online Learning and Career Growth",
           description:
-            "Discover how Eklabya is transforming education through accessible, high-quality online learning experiences for students everywhere.",
+            "Discover Eklabya, an online learning platform offering career-focused courses, certifications and flexible skill training for modern professionals.",
           type: "website",
         }}
       />
@@ -128,8 +128,8 @@ export default function About() {
             </h2>
             <div className="w-20 h-1 bg-blue-600 mx-auto mb-8"></div>
             <p className="text-lg text-black dark:text-white max-w-4xl mx-auto">
-              Each learner&apos;s journey is unique, and our platform is designed to
-              support that:
+              Each learner&apos;s journey is unique, and our platform is
+              designed to support that:
             </p>
             <ul className="list-disc list-none list-inside text-lg text-black dark:text-white max-w-4xl mx-auto">
               <li>Interactive Learning Modules</li>
@@ -146,9 +146,9 @@ export default function About() {
             <p className="text-lg text-black dark:text-white max-w-4xl mx-auto">
               With a growing base of satisfied learners across India and beyond,
               we have built a platform that is trusted by students, working
-              professionals, and even corporate clients. Whether you&apos;re looking
-              to upskill, change careers, or prepare for the future, we&apos;re here
-              to guide you every step of the way.
+              professionals, and even corporate clients. Whether you&apos;re
+              looking to upskill, change careers, or prepare for the future,
+              we&apos;re here to guide you every step of the way.
             </p>
           </div>
           <div className="text-center mb-16">

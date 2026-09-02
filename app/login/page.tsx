@@ -142,9 +142,9 @@ function LoginContent() {
   return (
     <>
       <SEO
-        title="Login | Eklabya - Access Your Account"
-        description="Login to your Eklabya account to access your courses, track progress, and continue your learning journey."
-        keywords="login, sign in, Eklabya account, online learning, course access"
+        title="Eklabya Login | Access Your Learning Dashboard"
+        description="Log in to your Eklabya account to access courses, learning resources and your personalized dashboard to continue your learning journey."
+        keywords="Eklabya login, Eklabya student login, student dashboard, online learning login, access courses, Eklabya courses, learning dashboard, online courses"
         robots="noindex, nofollow"
       />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-500 to-blue-500 p-4">

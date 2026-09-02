@@ -349,9 +349,9 @@ export default function NewsAndEventsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20">
       <SEO
-        title="News & Events | Eklabya"
-        description="Stay updated with the latest news, webinars, workshops, and events from Eklabya."
-        keywords="news, events, webinars, workshops, eklabya, announcements"
+        title="Latest News & Events | The Eklabya"
+        description="Explore the latest news, events, workshops, achievements and updates from The Eklabya. Stay connected with our learning and career community."
+        keywords="Eklabya news, Eklabya events, latest updates, workshops, training events, educational events, skill development, career opportunities, announcements, activities"
       />
       {/* --- HERO HEADER --- */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-950 text-white py-6 md:py-8 px-3 sm:px-4 lg:px-6">

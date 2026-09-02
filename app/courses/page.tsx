@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 import api from "../utils/api";
 import { getImageUrl } from "../utils/imageUtils";
+import SEO from "../components/SEO";
 
 interface Course {
   _id: string;
@@ -216,6 +217,11 @@ function CoursesContent() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 py-6 sm:py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <SEO
+        title="Professional Certification Courses | Eklabya"
+        description="Explore industry-aligned certification courses in Data Science, Cloud, SAP, Full Stack, AI, and more."
+        keywords="certification courses, online courses, data science, cloud, sap, full stack, ai, eklabya"
+      />
       <div className="max-w-7xl mx-auto space-y-6">
         {/* --- HERO HEADER --- */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-900 text-white p-4 sm:p-6 md:p-8 shadow-2xl border border-blue-500/20">

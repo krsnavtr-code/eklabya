@@ -2,320 +2,365 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import {
-  FaGraduationCap,
-  FaAward,
-  FaUsers,
-  FaCheckCircle,
   FaArrowRight,
-  FaRocket,
+  FaPercentage,
+  FaClock,
+  FaBookOpen,
+  FaCheckCircle,
+  FaBrain,
+  FaInfoCircle,
+  FaExclamationTriangle,
+  FaBan,
+  FaDesktop,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
 import ContactFormModal from "../components/common/ContactFormModal";
 import SEO from "../components/SEO";
 
-const perks = [
+const testHighlights = [
   {
-    icon: (
-      <FaGraduationCap className="text-xl text-blue-600 dark:text-blue-400" />
-    ),
-    title: "Up to 50% Tuition Relief",
-    description:
-      "Earn substantial financial backing tailored directly to your assessment score.",
+    icon: <FaBookOpen className="text-blue-500" />,
+    title: "Syllabus",
+    desc: "General Knowledge & Course Basics",
   },
   {
-    icon: (
-      <FaAward className="text-xl text-emerald-600 dark:text-emerald-400" />
-    ),
-    title: "Industry-Trusted Credentials",
-    description:
-      "Graduate with verified certifications recognized by leading tech employers.",
+    icon: <FaClock className="text-blue-500" />,
+    title: "Duration",
+    desc: "45 Minutes",
   },
   {
-    icon: <FaUsers className="text-xl text-purple-600 dark:text-purple-400" />,
-    title: "Direct Placement Support",
-    description:
-      "Receive priority resume reviews, mock interviews, and hiring partner introductions.",
+    icon: <FaBrain className="text-blue-500" />,
+    title: "Format",
+    desc: "Multiple Choice Questions (MCQs)",
+  },
+  {
+    icon: <FaPercentage className="text-blue-500" />,
+    title: "Max Benefit",
+    desc: "Up to 70% Tuition Fee Waiver",
   },
 ];
 
-const criteria = [
-  "Open to all undergraduate or postgraduate students across streams (Tech & Non-Tech).",
-  "Ideal for final-year scholars and early professionals (0-2 years experience).",
-  "High drive and commitment to master modern digital and technical skills.",
-  "Basic system accessibility with a stable web connection.",
+const feeSlabs = [
+  {
+    tier: "Tier 1",
+    off: "70%",
+    label: "Top 10% Scorers",
+    color: "text-blue-700 bg-blue-50 border-blue-200",
+  },
+  {
+    tier: "Tier 2",
+    off: "50%",
+    label: "Next 20% Performers",
+    color: "text-slate-700 bg-slate-50 border-slate-200",
+  },
+  {
+    tier: "Tier 3",
+    off: "25%",
+    label: "Next 30% Participants",
+    color: "text-slate-700 bg-slate-50 border-slate-200",
+  },
 ];
 
-const roadmap = [
+const guidelines = [
   {
-    no: "01",
-    title: "Quick Sign-Up",
-    text: "Submit your basic profile details in less than two minutes.",
+    icon: <FaBan className="text-red-500" />,
+    title: "No Negative Marking",
+    text: "Feel free to attempt all questions. There is no penalty for wrong answers.",
   },
   {
-    no: "02",
-    title: "Take Skill Assessment",
-    text: "Complete our quick, transparent online evaluation test.",
+    icon: <FaDesktop className="text-blue-500" />,
+    title: "Single Attempt",
+    text: "You can only take the scholarship test once. Make sure you are fully prepared.",
   },
   {
-    no: "03",
-    title: "Unlock Waiver",
-    text: "Get your exact scholarship percentage calculated instantly.",
+    icon: <FaClock className="text-amber-500" />,
+    title: "Time Bound",
+    text: "The test will auto-submit when the time is up. Keep an eye on the timer.",
   },
   {
-    no: "04",
-    title: "Begin Learning",
-    text: "Claim your grant, pick your program, and launch your path.",
+    icon: <FaExclamationTriangle className="text-orange-500" />,
+    title: "Anti-Cheating",
+    text: "Tab switching or minimizing the browser will auto-submit your test immediately.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Is there any registration fee for the scholarship test?",
+    a: "No, the scholarship test is absolutely free of cost for all students.",
+  },
+  {
+    q: "When will I get the results of the test?",
+    a: "The results are generated instantly. You will see your score and the unlocked discount percentage immediately after submission.",
+  },
+  {
+    q: "Is this scholarship valid for all courses?",
+    a: "Yes, the scholarship discount can be applied to any of our premium certification courses.",
+  },
+  {
+    q: "What happens if my internet disconnects during the test?",
+    a: "If you disconnect briefly, you may be able to resume from where you left off. However, we highly recommend ensuring a stable connection as time will continue running.",
+  },
+  {
+    q: "Can I retake the test if I score low?",
+    a: "No, to maintain fairness, we only allow one attempt per student. Please ensure you are ready before starting.",
   },
 ];
 
 export default function ScholarshipPage() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0); // First FAQ open by default
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50/50 to-white dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans">
       <SEO
-        title="Scholarship 2026 | Eklabya - Merit-Based Fee Waivers"
-        description="Apply for Eklabya's merit scholarship and get up to 50% tuition relief. Take a quick skill assessment and unlock your fee waiver today."
-        keywords="scholarship, merit scholarship, fee waiver, tuition relief, Eklabya scholarship"
-        robots="index, follow"
+        title="Scholarship Test | Up to 70% Fee Waiver"
+        description="Take our scholarship test comprising GK and course-related questions to get up to 70% off on your tuition fees."
       />
 
-      <section className="relative overflow-hidden pt-12 pb-16 md:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto space-y-4"
-          >
-            <div className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider shadow-2xs">
-              <FaRocket className="text-xs" />
-              Scholarship Initiative 2026
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-              Fuel Your Ambition With Our{" "}
-              <span className="text-blue-600 dark:text-blue-400">
-                Merit Scholarship
-              </span>
-            </h1>
-
-            <p className="text-xs sm:text-sm md:text-base text-slate-800 dark:text-slate-300 leading-relaxed font-normal max-w-xl mx-auto">
-              Money shouldn&apos;t dictate your potential. Take our evaluation
-              test to secure up to a 50% tuition reduction on professional
-              career tracks.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-2.5 justify-center pt-2">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="bg-blue-600 text-white px-7 py-3 rounded-xl font-bold text-xs sm:text-sm hover:bg-blue-700 transition-all shadow-md shadow-blue-600/20 active:scale-98 flex items-center justify-center gap-2"
-              >
-                <span>Apply for Scholarship</span>
-                <FaArrowRight className="text-xs" />
-              </button>
-              <button
-                onClick={() => router.push("/scholarship-test")}
-                className="bg-white dark:bg-gray-800 text-slate-900 dark:text-white px-7 py-3 rounded-xl font-bold text-xs sm:text-sm border border-slate-200 dark:border-slate-700 hover:border-blue-500 transition-all active:scale-98"
-              >
-                Take Scholarship Test
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-12 md:py-16 bg-slate-50/50 dark:bg-gray-800/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Why Apply For Our Grant?
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400">
-              Designed specifically to bridge talent with premium mentorship
-              without financial strain.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {perks.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="bg-white dark:bg-gray-800/90 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs hover:shadow-md transition-all space-y-3"
-              >
-                <div className="w-11 h-11 bg-slate-50 dark:bg-gray-700/60 rounded-xl flex items-center justify-center border border-slate-100 dark:border-gray-700">
-                  {item.icon}
-                </div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-slate-800 dark:text-slate-400 leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            <motion.div
-              initial={{ opacity: 0, x: -15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-7 bg-white dark:bg-gray-800/90 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between space-y-6"
-            >
-              <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-100 dark:border-emerald-900">
-                  Eligibility
-                </span>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-3 tracking-tight">
-                  Who Is Eligible To Participate?
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400 mt-1">
-                  We look for dedication over background. Review our simplified
-                  baseline criteria below:
-                </p>
+      {/* ================= COMPACT HERO SECTION ================= */}
+      <section className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 pt-10 pb-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="space-y-5">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-wider">
+                <FaPercentage /> Mega Scholarship Test
               </div>
 
-              <ul className="space-y-3">
-                {criteria.map((text, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300"
-                  >
-                    <FaCheckCircle className="text-emerald-500 mt-0.5 shrink-0 text-sm" />
-                    <span className="leading-snug">{text}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                Qualify the Test & Get Up To{" "}
+                <span className="text-blue-600 dark:text-blue-500">
+                  70% OFF
+                </span>
+              </h1>
 
-            <motion.div
-              initial={{ opacity: 0, x: 15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-5 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col justify-between space-y-4"
-            >
-              <h3 className="text-lg sm:text-xl font-black tracking-tight">
-                Fee Waiver Slabs
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-lg">
+                Your knowledge can fund your education. Take our simple online
+                evaluation test consisting of General Knowledge and basic
+                course-related topics to instantly unlock your fee waiver.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button
+                  onClick={() => router.push("/scholarship-test")}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3.5 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-sm"
+                >
+                  Start Test Now <FaArrowRight />
+                </button>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 px-6 py-3.5 rounded-lg font-bold text-sm transition-colors text-center"
+                >
+                  Have Questions?
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 border-b border-slate-200 dark:border-slate-700 pb-3 flex items-center gap-2">
+                <FaInfoCircle className="text-blue-500" /> Test Information
               </h3>
-              <div className="space-y-3">
-                {[
-                  {
-                    off: "50% OFF",
-                    label: "Top 10% test scorers",
-                    tier: "Tier 1",
-                  },
-                  {
-                    off: "30% OFF",
-                    label: "Next 20% high performers",
-                    tier: "Tier 2",
-                  },
-                  {
-                    off: "15% OFF",
-                    label: "Next 30% participants",
-                    tier: "Tier 3",
-                  },
-                ].map((tier, i) => (
-                  <div
-                    key={i}
-                    className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 flex items-center justify-between"
-                  >
-                    <div>
-                      <div className="text-2xl sm:text-3xl font-black">
-                        {tier.off}
-                      </div>
-                      <div className="text-[11px] text-blue-100">
-                        {tier.label}
-                      </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {testHighlights.map((item, idx) => (
+                  <div key={idx} className="flex gap-3 items-start">
+                    <div className="bg-white dark:bg-slate-700 p-2 rounded-md shadow-sm border border-slate-100 dark:border-slate-600 mt-0.5">
+                      {item.icon}
                     </div>
-                    <span className="text-xs bg-white/20 px-2.5 py-1 rounded-lg font-bold">
-                      {tier.tier}
-                    </span>
+                    <div>
+                      <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">
+                        {item.title}
+                      </p>
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white mt-0.5">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-slate-50/50 dark:bg-gray-800/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Process Flow in 4 Simple Steps
+      {/* ================= COMPACT DETAILS SECTION ================= */}
+      <section className="py-12 border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
+                  What to Study? (Syllabus)
+                </h2>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-5">
+                  The test is designed to evaluate your basic aptitude and
+                  foundational knowledge. You don't need advanced technical
+                  skills to pass.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                    <h3 className="font-bold text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
+                      <FaBrain className="text-amber-500" /> General Knowledge
+                    </h3>
+                    <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1.5 list-disc list-inside">
+                      <li>Basic Aptitude & Logic</li>
+                      <li>Current Affairs (Tech)</li>
+                      <li>General Awareness</li>
+                    </ul>
+                  </div>
+                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                    <h3 className="font-bold text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
+                      <FaBookOpen className="text-blue-500" /> Course Related
+                    </h3>
+                    <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1.5 list-disc list-inside">
+                      <li>Basic Computer Fundamentals</li>
+                      <li>Internet & Digital Basics</li>
+                      <li>Logical Reasoning</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
+                  Simple 3-Step Process
+                </h3>
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 sm:justify-between items-start sm:items-center text-sm font-medium">
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold">
+                      1
+                    </span>{" "}
+                    Fill basic details
+                  </div>
+                  <FaArrowRight className="hidden sm:block text-slate-300" />
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 rounded bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                      2
+                    </span>{" "}
+                    Give the Online Test
+                  </div>
+                  <FaArrowRight className="hidden sm:block text-slate-300" />
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                      3
+                    </span>{" "}
+                    Get Instant Discount
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm h-fit">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1">
+                Fee Waiver Slabs
+              </h2>
+              <p className="text-xs text-slate-500 mb-5">
+                Discounts are strictly based on your test score rankings.
+              </p>
+
+              <div className="space-y-3">
+                {feeSlabs.map((slab, i) => (
+                  <div
+                    key={i}
+                    className={`p-4 rounded-lg border ${slab.color} flex justify-between items-center`}
+                  >
+                    <div>
+                      <div className="text-xs font-bold uppercase tracking-wider mb-0.5 opacity-70">
+                        {slab.tier}
+                      </div>
+                      <div className="text-sm font-semibold">{slab.label}</div>
+                    </div>
+                    <div className="text-2xl font-black">{slab.off}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= IMPORTANT GUIDELINES (NEW SECTION) ================= */}
+      <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+              Important Guidelines
             </h2>
-            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-400">
-              A hassle-free journey from application to admission.
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+              Please read these rules carefully before starting the test.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {roadmap.map((s, idx) => (
-              <motion.div
+            {guidelines.map((rule, idx) => (
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="bg-white dark:bg-gray-800/90 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs relative overflow-hidden space-y-2"
+                className="p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex flex-col gap-3"
               >
-                <span className="text-3xl font-black text-blue-500/20 dark:text-blue-400/20 absolute top-3 right-4 select-none">
-                  {s.no}
-                </span>
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white pt-1">
-                  {s.title}
-                </h3>
-                <p className="text-xs text-slate-800 dark:text-slate-400 leading-relaxed">
-                  {s.text}
-                </p>
-              </motion.div>
+                <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-700 shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-600">
+                  {rule.icon}
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-1">
+                    {rule.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {rule.text}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 rounded-2xl p-6 sm:p-10 text-center text-white shadow-xl relative overflow-hidden space-y-4"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight">
-              Ready to Accelerate Your Professional Journey?
+      {/* ================= FAQs SECTION (NEW SECTION) ================= */}
+      <section className="py-12">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+              Frequently Asked Questions
             </h2>
-            <p className="text-xs sm:text-sm text-blue-100 max-w-lg mx-auto leading-relaxed">
-              Secure your test slot today and unlock quality education with
-              optimized fee concessions.
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
+              Everything you need to know about the scholarship test.
             </p>
-            <div className="flex flex-col sm:flex-row gap-2.5 justify-center pt-1">
-              <button
-                onClick={() => router.push("/scholarship-test")}
-                className="bg-white text-blue-600 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm hover:bg-blue-50 transition-all shadow-md active:scale-98"
+          </div>
+
+          <div className="space-y-3">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm"
               >
-                Apply for Scholarship
-              </button>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-xl font-bold text-xs sm:text-sm hover:bg-white/20 transition-all active:scale-98"
-              >
-                Connect With Us
-              </button>
-            </div>
-          </motion.div>
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full text-left px-6 py-4 flex items-center justify-between gap-4 focus:outline-none hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">
+                    {faq.q}
+                  </span>
+                  {openFaq === index ? (
+                    <FaChevronUp className="text-slate-400 shrink-0" />
+                  ) : (
+                    <FaChevronDown className="text-slate-400 shrink-0" />
+                  )}
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 pb-4 pt-1">
+                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {faq.a}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

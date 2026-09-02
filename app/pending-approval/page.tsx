@@ -1,10 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import SEO from "../components/SEO";
 
 export default function PendingApprovalPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+      <SEO
+        title="Pending Approval | Eklabya"
+        description="Your Eklabya account is pending administrator approval. You will receive an email once approved."
+        keywords="pending approval, account approval, eklabya"
+      />
       <div className="max-w-md w-full space-y-8 text-center">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">

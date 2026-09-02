@@ -1,8 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaCalendarAlt, FaExternalLinkAlt, FaSearch, FaFileAlt } from "react-icons/fa";
-import { getMediaMentions, getFeaturedMediaMention } from "../api/mediaMentionApi";
+import {
+  FaCalendarAlt,
+  FaExternalLinkAlt,
+  FaSearch,
+  FaFileAlt,
+} from "react-icons/fa";
+import {
+  getMediaMentions,
+  getFeaturedMediaMention,
+} from "../api/mediaMentionApi";
+import SEO from "../components/SEO";
 
 interface Mention {
   _id: string;
@@ -58,7 +67,9 @@ export default function MediaMentionsPage() {
         const response = await getMediaMentions(queryParams);
         let allMentions = response.data?.mentions || [];
         if (featured) {
-          allMentions = allMentions.filter((m: Mention) => m._id !== featured._id);
+          allMentions = allMentions.filter(
+            (m: Mention) => m._id !== featured._id,
+          );
         }
         setMentions(allMentions);
       } catch (error) {
@@ -99,6 +110,11 @@ export default function MediaMentionsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <SEO
+        title="Media Mentions | Eklabya"
+        description="Explore media coverage, press releases, and news mentions about Eklabya."
+        keywords="media mentions, press, news, eklabya, coverage"
+      />
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
@@ -205,9 +221,7 @@ export default function MediaMentionsPage() {
             </select>
             <select
               value={filters.sort}
-              onChange={(e) =>
-                setFilters({ ...filters, sort: e.target.value })
-              }
+              onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
               className="w-full md:w-48 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white bg-gray-50 text-black"
             >
               <option value="-publishedDate">Newest First</option>
@@ -283,7 +297,9 @@ export default function MediaMentionsPage() {
                       </span>
                       <span className="text-blue-600 hover:text-blue-700 text-sm font-medium inline-flex items-center">
                         <FaExternalLinkAlt className="mr-1" />
-                        {mention.newsType === "print" ? "View Clipping" : "Read More"}
+                        {mention.newsType === "print"
+                          ? "View Clipping"
+                          : "Read More"}
                       </span>
                     </div>
                   </div>
@@ -299,8 +315,9 @@ export default function MediaMentionsPage() {
             <div>
               <h3 className="text-2xl font-bold mb-4">Media Kit</h3>
               <p className="text-gray-300 mb-6">
-                Download our official media kit including company logo, founder&apos;s
-                bio, brand guidelines, and high-resolution images for press use.
+                Download our official media kit including company logo,
+                founder&apos;s bio, brand guidelines, and high-resolution images
+                for press use.
               </p>
               <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg inline-flex items-center gap-2 transition">
                 <FaFileAlt /> Download Media Kit
@@ -314,7 +331,8 @@ export default function MediaMentionsPage() {
               </p>
               <div className="space-y-2">
                 <p className="text-gray-300">
-                  <span className="font-semibold">Email:</span> press@eklabya.com
+                  <span className="font-semibold">Email:</span>{" "}
+                  press@eklabya.com
                 </p>
                 <p className="text-gray-300">
                   <span className="font-semibold">Phone:</span> +91 98910 30303

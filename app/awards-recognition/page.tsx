@@ -18,6 +18,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { getAwards, getFeaturedAward } from "../api/awardApi";
+import SEO from "../components/SEO";
 
 interface Award {
   _id: string;
@@ -250,6 +251,11 @@ export default function AwardsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20">
+      <SEO
+        title="Awards & Recognition | Eklabya"
+        description="Discover the awards, certifications, and recognitions earned by Eklabya for excellence in education."
+        keywords="awards, recognition, certifications, eklabya, excellence"
+      />
       {/* --- LUXURY HERO HEADER --- */}
       <section className="relative overflow-hidden bg-gradient-to-br from-amber-700 via-yellow-800 to-slate-950 text-white py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:18px_18px]"></div>

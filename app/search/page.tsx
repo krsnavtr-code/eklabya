@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FaClock } from "react-icons/fa";
 import api from "../utils/api";
 import { getImageUrl } from "../utils/imageUtils";
+import SEO from "../components/SEO";
 
 interface Course {
   _id: string;
@@ -68,6 +69,15 @@ function SearchContent() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+      <SEO
+        title={
+          query
+            ? `${query} - Search Courses | Eklabya`
+            : "Search Courses | Eklabya"
+        }
+        description="Find the right course for your career. Search by title, skill, category, or technology."
+        keywords="search courses, find courses, online learning, eklabya"
+      />
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">

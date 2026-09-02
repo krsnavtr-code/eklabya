@@ -22,6 +22,7 @@ import {
 import { toast } from "react-hot-toast";
 import api from "../utils/api";
 import { submitContactForm } from "../api/contactApi";
+import SEO from "../components/SEO";
 
 interface NewsOrEvent {
   id: string;
@@ -347,6 +348,11 @@ export default function NewsAndEventsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20">
+      <SEO
+        title="News & Events | Eklabya"
+        description="Stay updated with the latest news, webinars, workshops, and events from Eklabya."
+        keywords="news, events, webinars, workshops, eklabya, announcements"
+      />
       {/* --- HERO HEADER --- */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-950 text-white py-6 md:py-8 px-3 sm:px-4 lg:px-6">
         <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>

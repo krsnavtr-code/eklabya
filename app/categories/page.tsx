@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import api from "../utils/api";
 import { getImageUrl } from "../utils/imageUtils";
+import SEO from "../components/SEO";
 
 interface Category {
   _id: string;
@@ -127,6 +128,11 @@ export default function CategoriesPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-950 py-6 sm:py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <SEO
+        title="Explore Course Categories | Eklabya"
+        description="Browse all course categories at Eklabya — Data Science, SAP, Full Stack, AI, Digital Marketing, Cloud, and more."
+        keywords="course categories, online courses, eklabya, data science, sap, full stack, ai, cloud, digital marketing"
+      />
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* --- DISTINCT CATEGORIES HERO HEADER --- */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white p-6 sm:p-8 md:p-10 shadow-2xl border border-indigo-500/20">

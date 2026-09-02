@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
+import SEO from "../components/SEO";
 
 export default function SuspendedAccountPage() {
   const router = useRouter();
@@ -14,6 +15,11 @@ export default function SuspendedAccountPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+      <SEO
+        title="Account Suspended | Eklabya"
+        description="Your Eklabya account has been suspended. Please contact support for assistance."
+        keywords="account suspended, support, eklabya"
+      />
       <div className="max-w-lg w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center">
         <div className="text-6xl mb-4">🚫</div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">

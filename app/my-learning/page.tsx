@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-hot-toast";
 import { getUserEnrollments } from "../api/enrollmentApi";
 import { getImageUrl } from "../utils/imageUtils";
+import SEO from "../components/SEO";
 
 interface Module {
   lessons?: any[];
@@ -240,6 +241,11 @@ export default function MyLearning() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pb-16 px-4">
+      <SEO
+        title="My Learning Dashboard | Eklabya"
+        description="Track your enrolled courses, progress, and continue learning with Eklabya."
+        keywords="my learning, dashboard, enrolled courses, online learning, eklabya"
+      />
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">

@@ -133,7 +133,7 @@ const Assessment = () => {
         </div>
 
         {/* --- CTA Banner --- */}
-        <div className="relative rounded-3xl overflow-hidden bg-slate-900 dark:bg-black text-white shadow-2xl border border-slate-700/60">
+        <div className="relative rounded-3xl overflow-hidden text-white shadow-2xl border border-slate-700/60">
           <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/90 to-purple-700/90 backdrop-blur-xl"></div>
 
           <div className="relative z-10 px-6 py-10 md:py-12 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
@@ -150,7 +150,7 @@ const Assessment = () => {
 
             <div className="flex-shrink-0">
               <button
-                onClick={() => router.push("/scholarship-test")}
+                onClick={() => router.push("/scholarship")}
                 className="group bg-white text-indigo-600 px-8 py-3.5 rounded-xl font-bold text-sm md:text-base shadow-lg hover:shadow-xl hover:bg-indigo-50 transition-all duration-300 flex items-center gap-2 active:scale-98"
               >
                 <span>Take Assessment</span>

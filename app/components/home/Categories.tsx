@@ -246,9 +246,9 @@ const Categories = () => {
         <div className="mt-6 text-center">
           <Link
             href="/categories"
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-slate-900 hover:bg-blue-600 dark:bg-white dark:text-slate-900 dark:hover:bg-blue-600 dark:hover:text-white text-white font-bold rounded-xl transition-all duration-300 shadow-md shadow-slate-900/10 active:scale-98"
+            className="inline-flex items-center gap-2 px-8 py-2.5 bg-slate-900 hover:bg-blue-600 dark:bg-white dark:text-slate-900 dark:hover:bg-blue-600 dark:hover:text-white text-white font-bold rounded-xl transition-all duration-300 shadow-md shadow-slate-900/10 active:scale-98"
           >
-            <span>View All Categories</span>
+            <span>Browse Categories</span>
             <FaArrowRight className="text-xs" />
           </Link>
         </div>

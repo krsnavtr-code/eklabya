@@ -69,14 +69,14 @@ const CertificateModal = ({
           </h3>
           <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
             <div
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 z-10 pointer-events-none"
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 z-10 "
               style={{
                 backgroundImage:
                   "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 20px)",
                 mixBlendMode: "multiply",
               }}
             />
-            <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+            <div className="absolute inset-0 flex items-center justify-center z-10 ">
               <div className="text-xl font-black text-gray-400/40 transform -rotate-45 select-none tracking-widest">
                 SAMPLE CERTIFICATE
               </div>
@@ -288,9 +288,9 @@ function Banner() {
     <div className="w-full px-2 sm:px-4 lg:px-6 py-2">
       <div className="relative max-w-7xl mx-auto bg-white/75 dark:bg-gray-900/75 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-6 sm:p-8 lg:p-10 transition-all duration-300 overflow-hidden">
         {/* Ambient background light orbs for the glass to refract */}
-        <div className="absolute -top-12 -left-12 w-80 h-80 bg-blue-500/15 dark:bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-500/10 dark:bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -bottom-10 left-1/3 w-80 h-80 bg-amber-500/10 dark:bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        {/* <div className="absolute -top-12 -left-12 w-80 h-80 bg-blue-500/15 dark:bg-blue-600/10 rounded-full blur-3xl "></div>
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-500/10 dark:bg-purple-600/10 rounded-full blur-3xl "></div>
+        <div className="absolute -bottom-10 left-1/3 w-80 h-80 bg-amber-500/10 dark:bg-amber-600/10 rounded-full blur-3xl "></div> */}
 
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Left Content */}
@@ -369,7 +369,7 @@ function Banner() {
                 onClick={() => setShowContactModal(true)}
                 className="group bg-blue-600 hover:bg-blue-700 text-white px-2 md:px-6 py-1.5 md:py-3 rounded-lg font-bold text-xs md:text-sm transition-all duration-200 flex items-center justify-center shadow-md shadow-blue-600/20"
               >
-                <span>Start Learning</span>
+                <span>Start Learning Today</span>
                 <FaArrowRight className="ml-2 text-xs group-hover:translate-x-1 transition-transform duration-200" />
               </button>
 
@@ -396,10 +396,6 @@ function Banner() {
                   <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
                     Book a Free Course Consultation
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                    Speak to our mentors &amp; get a personalized learning
-                    roadmap.
-                  </p>
                 </div>
 
                 {isSubmitted ? (
@@ -429,7 +425,7 @@ function Banner() {
                         Full Name <span className="text-rose-500">*</span>
                       </label>
                       <div className="relative">
-                        <FaUser className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3 pointer-events-none" />
+                        <FaUser className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300 absolute left-3 top-1/2 -translate-y-1/2 z-10 pointer-events-none" />
                         <input
                           type="text"
                           name="name"
@@ -448,7 +444,7 @@ function Banner() {
                           Email Address <span className="text-rose-500">*</span>
                         </label>
                         <div className="relative">
-                          <FaEnvelope className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3 pointer-events-none" />
+                          <FaEnvelope className="w-3.5 h-3.5 text-slate-500 dark:text-slate-300 absolute left-3 top-1/2 -translate-y-1/2 z-10 pointer-events-none " />
                           <input
                             type="email"
                             name="email"
@@ -466,7 +462,7 @@ function Banner() {
                           Phone Number <span className="text-rose-500">*</span>
                         </label>
                         <div className="relative">
-                          <FaPhone className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3 pointer-events-none" />
+                          <FaPhone className="w-3.5 h-3.5 text-slate-500 dark:text-slate-300 absolute left-3 top-1/2 -translate-y-1/2 z-10 pointer-events-none " />
                           <input
                             type="tel"
                             name="phone"
@@ -485,7 +481,7 @@ function Banner() {
                         Course You&apos;re Interested In (Optional)
                       </label>
                       <div className="relative">
-                        <FaGraduationCap className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3 pointer-events-none" />
+                        <FaGraduationCap className="w-3.5 h-3.5 text-slate-500 dark:text-slate-300 absolute left-3 top-1/2 -translate-y-1/2 z-10 pointer-events-none " />
                         <select
                           name="courseInterest"
                           value={formData.courseInterest}
@@ -571,8 +567,8 @@ function Banner() {
               </div>
 
               {/* Background Glows */}
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/15 rounded-full blur-2xl pointer-events-none"></div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
+              {/* <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/15 rounded-full blur-2xl "></div> */}
+              {/* <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-emerald-500/15 rounded-full blur-2xl "></div> */}
             </div>
           </div>
         </div>

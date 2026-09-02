@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import AppShell from "./components/AppShell";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
 import DefaultCanonical from "./components/DefaultCanonical";
@@ -40,12 +39,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full bg-slate-50 dark:bg-slate-800 flex flex-col" suppressHydrationWarning>
+      <body
+        className="min-h-full bg-slate-50 dark:bg-slate-800 flex flex-col"
+        suppressHydrationWarning
+      >
         <DefaultCanonical />
         <AuthProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <AppShell>
+            <main className="flex-1">{children}</main>
+          </AppShell>
           <Toaster position="top-right" />
         </AuthProvider>
       </body>

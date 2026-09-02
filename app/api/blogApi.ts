@@ -18,6 +18,20 @@ export const getBlogPostBySlug = async (slug: string) => {
   return response.data;
 };
 
+export const searchBlogPosts = async (
+  q: string,
+  params: Record<string, any> = {},
+) => {
+  const response = await api.get("/blog/search", {
+    params: {
+      q,
+      status: "published",
+      ...params,
+    },
+  });
+  return response.data;
+};
+
 export const getPostsByCategory = async (
   category: string,
   params: Record<string, any> = {},

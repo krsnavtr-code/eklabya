@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Private/Admin Areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /login/
+Disallow: /register/
+
+# Internal Search Pages
+Disallow: /search/
+Disallow: /*?s=
+
+# Tracking Parameters
+Disallow: /*?utm_
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+
+# Sitemap
+Sitemap: https://www.eklabya.com/sitemap.xml

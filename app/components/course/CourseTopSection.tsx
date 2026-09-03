@@ -187,7 +187,7 @@ const MarqueeRow = ({
           {trackItems.map((item, index) => (
             <div
               key={`${item.name}-${index}`}
-              className="flex items-center justify-center h-16 px-6 min-w-[140px] bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer group/logo"
+              className="flex items-center justify-center h-16 px-6 min-w-[140px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/50 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer group/logo"
             >
               {item.logoUrl ? (
                 <img
@@ -659,7 +659,7 @@ const CourseTopSection: React.FC<CourseTopSectionProps> = ({
               {course.certificateIncluded && (
                 <div
                   onClick={onShowCertificate}
-                  className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700 cursor-pointer group"
+                  className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 cursor-pointer group"
                 >
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-xl group-hover:scale-105 group-hover:bg-green-100 dark:group-hover:bg-green-900/40 transition-all">
@@ -681,7 +681,7 @@ const CourseTopSection: React.FC<CourseTopSectionProps> = ({
               {/* Enquiry Form */}
               <div
                 ref={formRef}
-                className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700"
+                className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700"
               >
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-4">
                   Have a Question?

@@ -171,7 +171,7 @@ export default function ScholarshipPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {testHighlights.map((item, idx) => (
                   <div key={idx} className="flex gap-3 items-start">
-                    <div className="bg-white dark:bg-slate-700 p-2 rounded-md shadow-sm border border-slate-100 dark:border-slate-600 mt-0.5">
+                    <div className="bg-white dark:bg-slate-700 p-2 rounded-md shadow-sm border border-slate-200 dark:border-slate-600 mt-0.5">
                       {item.icon}
                     </div>
                     <div>
@@ -205,7 +205,7 @@ export default function ScholarshipPage() {
                   skills to pass.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                     <h3 className="font-bold text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
                       <FaBrain className="text-amber-500" /> General Knowledge
                     </h3>
@@ -215,7 +215,7 @@ export default function ScholarshipPage() {
                       <li>General Awareness</li>
                     </ul>
                   </div>
-                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700">
+                  <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                     <h3 className="font-bold text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
                       <FaBookOpen className="text-blue-500" /> Course Related
                     </h3>
@@ -304,7 +304,7 @@ export default function ScholarshipPage() {
                 key={idx}
                 className="p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex flex-col gap-3"
               >
-                <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-700 shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-600">
+                <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-700 shadow-sm flex items-center justify-center border border-slate-200 dark:border-slate-600">
                   {rule.icon}
                 </div>
                 <div>

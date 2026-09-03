@@ -303,7 +303,7 @@ export default function CategoriesPage() {
                     )}
                   </div>
 
-                  {/* <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
+                  {/* <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs">
                     <span className="font-semibold text-indigo-600 dark:text-indigo-400">
                       {category.courseCount || 0} Available Courses
                     </span>

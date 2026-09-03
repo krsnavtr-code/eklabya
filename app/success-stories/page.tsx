@@ -461,7 +461,7 @@ export default function TestimonialsPage() {
                 </div>
 
                 {/* Author Metadata */}
-                <div className="flex items-center gap-3.5 pt-5 mt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center gap-3.5 pt-5 mt-4 border-t border-slate-200 dark:border-slate-800">
                   {item.image ? (
                     <img
                       src={item.image}

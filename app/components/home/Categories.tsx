@@ -117,7 +117,7 @@ const Categories = () => {
     }, [category?.image]);
 
     return (
-      <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-blue-50 dark:bg-gray-800 border border-slate-100 dark:border-slate-700/80 flex items-center justify-center shadow-inner shrink-0 group-hover:scale-105 transition-transform duration-300">
+      <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-blue-50 dark:bg-gray-800 border border-slate-200 dark:border-slate-700/80 flex items-center justify-center shadow-inner shrink-0 group-hover:scale-105 transition-transform duration-300">
         {!imageError && imageUrl ? (
           <img
             src={imageUrl}
@@ -148,7 +148,7 @@ const Categories = () => {
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xs border border-slate-100 dark:border-slate-800 animate-pulse space-y-4"
+                className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xs border border-slate-200 dark:border-slate-800 animate-pulse space-y-4"
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-14 h-14 bg-slate-200 dark:bg-gray-700 rounded-2xl"></div>

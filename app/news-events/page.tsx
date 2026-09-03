@@ -588,7 +588,7 @@ export default function NewsAndEventsPage() {
                     </p>
 
                     {/* Metadata Section */}
-                    <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+                    <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
                       {item.time && (
                         <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                           <FaClock className="text-slate-400 shrink-0 text-xs" />
@@ -630,7 +630,7 @@ export default function NewsAndEventsPage() {
                   </div>
 
                   {/* Bottom Action Footer */}
-                  <div className="px-6 py-4 bg-slate-50/80 dark:bg-gray-800/50 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                  <div className="px-6 py-4 bg-slate-50/80 dark:bg-gray-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                     <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
                       #{item.tag}
                     </span>

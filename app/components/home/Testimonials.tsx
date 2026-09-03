@@ -176,7 +176,7 @@ const Testimonials = () => {
                 </div>
 
                 {/* User Details Footer */}
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-700/60">
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-700/60">
                   <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500/20 shrink-0">
                     <img
                       className="w-full h-full object-cover"

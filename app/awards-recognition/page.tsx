@@ -367,7 +367,7 @@ export default function AwardsPage() {
                   {featuredAward.description}
                 </p>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pt-2 text-xs border-t border-slate-100 dark:border-slate-800">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pt-2 text-xs border-t border-slate-200 dark:border-slate-800">
                   <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-bold">
                     <FaBuilding className="text-amber-500 text-sm" />
                     <span>Conferred by: {featuredAward.organizationName}</span>
@@ -509,7 +509,7 @@ export default function AwardsPage() {
                     </p>
 
                     {/* Organization metadata */}
-                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs space-y-1">
+                    <div className="pt-2 border-t border-slate-200 dark:border-slate-800 text-xs space-y-1">
                       <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-semibold truncate">
                         <FaBuilding className="text-amber-500 shrink-0 text-xs" />
                         <span className="truncate">
@@ -528,7 +528,7 @@ export default function AwardsPage() {
                   </div>
 
                   {/* Footer CTA */}
-                  <div className="px-6 py-3.5 bg-slate-50/80 dark:bg-gray-800/50 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                  <div className="px-6 py-3.5 bg-slate-50/80 dark:bg-gray-800/50 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
                     <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
                       Citation Record
                     </span>

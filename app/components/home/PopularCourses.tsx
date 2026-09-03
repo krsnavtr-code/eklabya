@@ -181,7 +181,7 @@ const CourseCard = ({ course }: { course: Course }) => {
             </p>
           </div>
 
-          <div className="pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+          <div className="pt-3 border-t border-slate-200 dark:border-slate-700/60 flex items-center justify-between">
             <div className="flex items-center text-xs font-semibold text-slate-500 dark:text-slate-400">
               <FaRegClock className="mr-1.5 text-blue-500" />
               {course.duration || "10-16"} Weeks

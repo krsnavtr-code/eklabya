@@ -128,7 +128,7 @@ const GoogleReviews = () => {
                     &ldquo;{review.text}&rdquo;
                   </p>
 
-                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-700/50 mt-auto">
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-700/50 mt-auto">
                     <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shadow-md shrink-0">
                       {review.name
                         .split(" ")

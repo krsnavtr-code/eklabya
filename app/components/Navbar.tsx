@@ -668,7 +668,7 @@ function Navbar() {
                             />
                           </button>
                           <div className="absolute top-full left-0 pt-2 w-52 z-50 hidden group-hover:block">
-                            <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-xl shadow-xl border border-slate-100 dark:border-gray-700 py-2 flex flex-col">
+                            <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-xl shadow-xl border border-slate-200 dark:border-gray-700 py-2 flex flex-col">
                               {link.children.map((child) => (
                                 <Link
                                   key={child.to}

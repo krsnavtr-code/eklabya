@@ -271,7 +271,7 @@ function BlogListContent() {
                         </div>
                       )}
 
-                      <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700/60">
+                      <div className="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700/60">
                         <Link
                           href={`/blog/${post.slug}`}
                           className="inline-flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"

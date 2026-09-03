@@ -472,7 +472,7 @@ function CoursesContent() {
                     </div>
                   </div>
 
-                  <div className="p-4 pt-0 border-t border-slate-100 dark:border-slate-700/60 mt-auto flex items-center justify-between">
+                  <div className="p-4 pt-0 border-t border-slate-200 dark:border-slate-700/60 mt-auto flex items-center justify-between">
                     <div>
                       <span className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
                         {formatPrice(course.price)}

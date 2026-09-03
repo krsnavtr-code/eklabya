@@ -141,7 +141,7 @@ const TestimonialsSection: React.FC = () => {
             ].map((review, index) => {
               const config = platformConfig[review.platform];
               const PlatformIcon = config.icon;
-              
+
               // ==========================================
               // DYNAMIC WIDTH LOGIC BASED ON TEXT LENGTH
               // ==========================================
@@ -157,7 +157,7 @@ const TestimonialsSection: React.FC = () => {
               return (
                 <div
                   key={`${review.id}-${index}`}
-                  className={`${dynamicWidthClass} shrink-0 relative group rounded-2xl bg-white dark:bg-slate-800/95 border border-slate-100 dark:border-slate-700/50 shadow-lg shadow-slate-200/40 dark:shadow-black/20 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-300/40 dark:hover:shadow-blue-900/20 border-t-4 ${config.border}`}
+                  className={`${dynamicWidthClass} shrink-0 relative group rounded-2xl bg-white dark:bg-slate-800/95 border border-slate-200 dark:border-slate-700/50 shadow-lg shadow-slate-200/40 dark:shadow-black/20 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-300/40 dark:hover:shadow-blue-900/20 border-t-4 ${config.border}`}
                 >
                   <div
                     className={`absolute -top-3 left-6 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${config.bg} ${config.color} shadow-sm`}
@@ -178,7 +178,7 @@ const TestimonialsSection: React.FC = () => {
                     &ldquo;{review.text}&rdquo;
                   </p>
 
-                  <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-700/50 mt-auto">
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-700/50 mt-auto">
                     <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shadow-md shrink-0">
                       {review.name
                         .split(" ")

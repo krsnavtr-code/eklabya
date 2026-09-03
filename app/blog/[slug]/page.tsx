@@ -78,6 +78,8 @@ export default async function BlogDetailPage({
     getImageUrl(post.imageUrl || post.featuredImage) ||
     `${siteBase}/images/eklabya-logo-fit-E.jpeg`;
 
+  const featuredImageUrl = getImageUrl(post.featuredImage || post.imageUrl);
+
   const schemas = [
     {
       "@context": "https://schema.org",
@@ -119,8 +121,7 @@ export default async function BlogDetailPage({
       {/* 
         ======================================================================
         Custom CSS for Quill Editor Rendering
-        Ye block ensure karega ki admin panel se aane wala alignment, 
-        text size, aur YouTube videos frontend par perfectly render ho!
+        Updated to handle base64 images (copy/pasted) and text colors.
         ======================================================================
       */}
       <style
@@ -133,6 +134,16 @@ export default async function BlogDetailPage({
         .blog-content .ql-size-large { font-size: 1.5rem; font-weight: 600; line-height: 1.2; }
         .blog-content .ql-size-huge { font-size: 2.25rem; font-weight: 700; line-height: 1.1; }
         
+        /* ✨ Fix for Copy/Pasted Images ✨ */
+        .blog-content img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 12px;
+          margin: 2rem auto;
+          display: block;
+          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
         /* Responsive iframe for YouTube/Vimeo Videos */
         .blog-content iframe.ql-video { 
           width: 100%; 
@@ -142,7 +153,12 @@ export default async function BlogDetailPage({
           box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); 
         }
 
-        /* Prevent Tailwind Prose from overriding inline background colors */
+        /* ✨ Fix for Text Colors & Background Colors ✨ */
+        /* Forces Tailwind Typography to respect inline colors */
+        .blog-content span[style*="color"] {
+          color: inherit !important; 
+        }
+        
         .blog-content [style*="background-color"] {
           padding: 0.1rem 0.25rem;
           border-radius: 0.25rem;
@@ -190,7 +206,7 @@ export default async function BlogDetailPage({
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* ================= LEFT CONTENT AREA ================= */}
         <section className="lg:col-span-8 space-y-8">
-          <article className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800/60 overflow-hidden">
+          <article className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800/60 overflow-hidden">
             {/* Header / Meta Info */}
             <div className="p-6 md:p-10 pb-6">
               {post.categories && post.categories.length > 0 && (
@@ -217,7 +233,7 @@ export default async function BlogDetailPage({
                 </p>
               )}
 
-              <div className="flex flex-wrap items-center gap-y-4 gap-x-6 text-sm font-medium text-slate-500 dark:text-slate-400 py-4 border-y border-slate-100 dark:border-slate-800">
+              <div className="flex flex-wrap items-center gap-y-4 gap-x-6 text-sm font-medium text-slate-500 dark:text-slate-400 py-4 border-y border-slate-200 dark:border-slate-800">
                 <div className="flex items-center gap-2">
                   <FaUserCircle className="w-5 h-5 text-slate-400" />
                   <span className="text-slate-800 dark:text-slate-200 font-bold">
@@ -240,11 +256,15 @@ export default async function BlogDetailPage({
             </div>
 
             {/* Featured Image */}
-            {post.featuredImage && (
+            {(post.featuredImage || post.imageUrl) && (
               <div className="px-6 md:px-10 pb-8">
-                <div className="w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden relative shadow-inner">
+                <div className="w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden relative shadow-inner bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
                   <img
-                    src={getImageUrl(post.featuredImage)}
+                    src={
+                      (post.featuredImage || post.imageUrl).startsWith("http")
+                        ? post.featuredImage || post.imageUrl
+                        : getImageUrl(post.featuredImage || post.imageUrl)
+                    }
                     alt={post.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
@@ -274,7 +294,7 @@ export default async function BlogDetailPage({
 
             {/* Footer Tags */}
             {post.tags && post.tags.length > 0 && (
-              <div className="px-6 md:px-10 py-6 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800">
+              <div className="px-6 md:px-10 py-6 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-sm font-bold text-slate-900 dark:text-white mr-2 flex items-center gap-2">
                     <FaTags className="text-blue-500" /> Tags:
@@ -311,7 +331,7 @@ export default async function BlogDetailPage({
         <aside className="lg:col-span-4">
           <div className="sticky top-24 space-y-6">
             {/* Author Widget */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800/60 p-6 sm:p-8">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800/60 p-6 sm:p-8">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xl font-bold shadow-md">
                   {(post.author?.name || "Eklabya").charAt(0).toUpperCase()}
@@ -353,7 +373,7 @@ export default async function BlogDetailPage({
 
             {/* Categories Widget */}
             {post.categories && post.categories.length > 0 && (
-              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800/60 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800/60 p-6">
                 <h3 className="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                   <FaFolderOpen className="text-blue-500" /> Topics in this post
                 </h3>

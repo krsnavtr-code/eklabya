@@ -198,7 +198,7 @@ const CourseMenu = ({
           className={`${isMobile ? "w-full" : "w-[280px] bg-slate-50/50 dark:bg-slate-900/30 border-r border-slate-300 dark:border-slate-700/50 p-1 max-h-[420px] overflow-y-auto"} flex flex-col`}
         >
           {isMobile && (
-            <div className="px-1.5 py-1 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-700">
+            <div className="px-1.5 py-1 bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700">
               <h3 className="font-bold text-slate-800 dark:text-white flex justify-between items-center">
                 Explore Top Programme
               </h3>
@@ -221,7 +221,7 @@ const CourseMenu = ({
                     className={`cursor-pointer flex items-center justify-between rounded-lg transition-all duration-200 ${
                       isMobile
                         ? "px-1.5 py-1 hover:bg-slate-50 dark:hover:bg-slate-700/50"
-                        : `px-1.5 py-0.5 ${activeCategory?._id === category._id ? "bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 text-blue-600 dark:text-blue-400 font-bold" : "text-slate-800 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 font-medium"}`
+                        : `px-1.5 py-0.5 ${activeCategory?._id === category._id ? "bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 text-blue-600 dark:text-blue-400 font-bold" : "text-slate-800 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 font-medium"}`
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -264,7 +264,7 @@ const CourseMenu = ({
 
                   {/* Mobile Courses Dropdown */}
                   {isMobile && activeCategory?._id === category._id && (
-                    <div className="bg-slate-50 dark:bg-slate-900/30 px-1 py-0.5 border-t border-slate-100 dark:border-slate-700">
+                    <div className="bg-slate-50 dark:bg-slate-900/30 px-1 py-0.5 border-t border-slate-200 dark:border-slate-700">
                       {isLoadingCourses[category._id] ? (
                         <div className="text-xs text-slate-500 py-2">
                           Loading courses...
@@ -304,7 +304,7 @@ const CourseMenu = ({
         {/* ================= RIGHT PANEL: COURSES (Desktop Only) ================= */}
         {!isMobile && activeCategory && (
           <div className="flex-1 px-3 py-1 flex flex-col bg-white dark:bg-slate-800 max-h-[420px]">
-            <div className="flex justify-between items-end border-b border-slate-100 dark:border-slate-700 pb-2">
+            <div className="flex justify-between items-end border-b border-slate-200 dark:border-slate-700 pb-2">
               <div>
                 <h3 className="text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
                   {activeCategory.name}
@@ -336,7 +336,7 @@ const CourseMenu = ({
                         key={course._id}
                         href={`/course/${course.slug || course._id}`}
                         onClick={closeMenu}
-                        className="group flex gap-1.5 py-1 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 border border-transparent hover:border-slate-100 dark:hover:border-slate-700 transition-all"
+                        className="group flex gap-1.5 py-1 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all"
                       >
                         <div className="w-18 h-12 rounded-lg bg-slate-100 dark:bg-slate-700 flex-shrink-0 overflow-hidden relative">
                           {course.image || course.thumbnail ? (

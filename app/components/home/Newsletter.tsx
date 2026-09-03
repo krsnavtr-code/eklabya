@@ -21,9 +21,6 @@ const Newsletter = () => {
           viewport={{ once: true }}
           className="relative bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl p-6 sm:p-8 md:p-12 text-center overflow-hidden border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40"
         >
-          <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
-          <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
           <div className="relative z-10 max-w-2xl mx-auto space-y-4">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
               Your Dream Career Is Just One Step Away

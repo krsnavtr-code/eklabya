@@ -90,7 +90,7 @@ const HowWillYourTrainingWork = () => {
               key={index}
               className="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-4 md:p-5 shadow-xs border border-slate-200/80 dark:border-slate-700/60 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between overflow-hidden"
             >
-              <span className="absolute top-3 right-5 text-6xl font-black text-slate-200/60 dark:text-gray-700/30 select-none pointer-events-none transition-colors group-hover:text-blue-100 dark:group-hover:text-gray-700/50">
+              <span className="absolute top-3 right-5 text-6xl font-black text-slate-400/60 dark:text-gray-700/30 select-none pointer-events-none transition-colors group-hover:text-blue-100 dark:group-hover:text-gray-700/50">
                 {step.stepNum}
               </span>
 

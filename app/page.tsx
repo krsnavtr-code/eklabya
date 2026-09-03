@@ -57,15 +57,29 @@ export default function Home() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "The Eklavya",
+    "@id": "https://www.eklabya.com/#organization",
+    name: "Eklabya",
+    alternateName: "Eklabya Online Learning Platform",
     url: "https://www.eklabya.com",
-    logo: "https://www.eklabya.com/images/eklabya-logo-fit-E.jpeg",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.eklabya.com/logo.png",
+    },
+    description:
+      "Eklabya is an online learning platform offering industry-focused courses, certifications, and career-oriented training programs across Data Science, Digital Marketing, SAP, IT, Business, and emerging technologies.",
     sameAs: [
-      "https://x.com/eklabyaofficial",
-      "https://www.linkedin.com/company/eklabya-centre-of-excellence/",
-      "https://www.facebook.com/profile.php?id=61589473389916",
       "https://www.instagram.com/eklabya_official",
+      "https://www.facebook.com/eklabyaofficial",
+      "https://in.pinterest.com/eklabya_official/",
+      "https://x.com/eklabyaofficial",
+      "https://www.linkedin.com/in/anand-shekhar-71515a408/",
+      "https://www.youtube.com/@eklabya_official",
     ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      url: "https://www.eklabya.com/contact",
+    },
   };
 
   return (
@@ -79,11 +93,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
-
-      {/* Ambient background light orbs for iPhone-like glass refraction */}
-      <div className="fixed top-20 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/15 dark:bg-blue-600/10 blur-[130px] pointer-events-none -z-10" />
-      <div className="fixed top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-indigo-500/15 dark:bg-purple-600/10 blur-[140px] pointer-events-none -z-10" />
-      <div className="fixed bottom-40 left-1/4 w-[550px] h-[550px] rounded-full bg-rose-500/10 dark:bg-amber-500/10 blur-[130px] pointer-events-none -z-10" />
 
       <div className="flex flex-col relative z-10">
         {/* Hero Banner */}

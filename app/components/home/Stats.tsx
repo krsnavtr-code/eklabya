@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FaBook,
   FaUsers,
   FaGraduationCap,
   FaBriefcase,
   FaCommentAlt,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -43,17 +45,134 @@ const stats = [
 ];
 
 const techCompanies = [
-  "TCS",
-  "Infosys",
-  "Wipro",
-  "HCL",
-  "Capgemini",
-  "IBM",
-  "Microsoft",
-  "Amazon",
+  {
+    name: "TCS",
+    logo: "/images/Company%20logos/Tata_Consultancy_Services_old_logo.svg",
+  },
+  { name: "Infosys", logo: "/images/Company%20logos/Infosys_logo.svg" },
+  {
+    name: "Wipro",
+    logo: "/images/Company%20logos/Wipro_Primary_Logo_Color_RGB.svg",
+  },
+  { name: "HCL", logo: "/images/Company%20logos/hcltech-1.svg" },
+  {
+    name: "Mahindra & Mahindra",
+    logo: "/images/Company%20logos/mahindra-mahindra-logo.svg",
+  },
+  { name: "Microsoft", logo: "/images/Company%20logos/Microsoft_logo.svg" },
+  { name: "Amazon", logo: "/images/Company%20logos/amazon-icon.svg" },
+  { name: "Google", logo: "/images/Company%20logos/Google_2015_logo.svg" },
+  {
+    name: "Google Cloud",
+    logo: "/images/Company%20logos/google_cloud-icon.svg",
+  },
+  { name: "Meta", logo: "/images/Company%20logos/Meta_Platforms_logo.svg" },
+  { name: "Netflix", logo: "/images/Company%20logos/Netflix_icon.svg" },
+  { name: "Flipkart", logo: "/images/Company%20logos/flipkart-icon.svg" },
+  { name: "Zomato", logo: "/images/Company%20logos/Zomato_Logo.svg" },
 ];
 
 const Stats = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(
+      Math.ceil(el.scrollLeft + el.clientWidth) < el.scrollWidth,
+    );
+  };
+
+  useEffect(() => {
+    checkScroll();
+    const handleResize = () => checkScroll();
+    window.addEventListener("resize", handleResize, { passive: true });
+    const interval = setInterval(checkScroll, 300);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const scroll = (direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const amount = el.clientWidth * 0.8;
+    el.scrollBy({
+      left: direction === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
+  };
+
+  // --- REVISED AUTO-SCROLL LOGIC ---
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let rafId: number;
+    let direction = 1; // 1 = moving right (revealing left), -1 = moving left
+    let exactScroll = el.scrollLeft; // Keeps track of fractional pixels
+    let lastTime = performance.now();
+    const speed = 40; // Pixels per second (adjust to make it faster/slower)
+    let isHovered = false;
+
+    // Pause animation when user hovers over the logos
+    const handleMouseEnter = () => (isHovered = true);
+    const handleMouseLeave = () => {
+      isHovered = false;
+      lastTime = performance.now(); // Reset time to prevent sudden jump
+    };
+
+    el.addEventListener("mouseenter", handleMouseEnter);
+    el.addEventListener("mouseleave", handleMouseLeave);
+    el.addEventListener("touchstart", handleMouseEnter, { passive: true });
+    el.addEventListener("touchend", handleMouseLeave, { passive: true });
+
+    const step = (time: number) => {
+      const delta = (time - lastTime) / 1000;
+      lastTime = time;
+
+      const maxScroll = el.scrollWidth - el.clientWidth;
+
+      // Only scroll if there is overflow and user is not hovering
+      if (maxScroll > 0 && !isHovered) {
+        exactScroll += speed * delta * direction;
+
+        // Ping-Pong Logic (Reverse direction when hitting edges)
+        if (exactScroll >= maxScroll) {
+          exactScroll = maxScroll;
+          direction = -1; // Go left
+        } else if (exactScroll <= 0) {
+          exactScroll = 0;
+          direction = 1; // Go right
+        }
+
+        el.scrollLeft = exactScroll;
+
+        // Allow manual overriding: If user clicked buttons or scrolled manually,
+        // sync our exactScroll variable with the actual scrollLeft.
+        if (Math.abs(el.scrollLeft - exactScroll) > 1.5) {
+          exactScroll = el.scrollLeft;
+        }
+      }
+
+      rafId = requestAnimationFrame(step);
+    };
+
+    rafId = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      el.removeEventListener("mouseenter", handleMouseEnter);
+      el.removeEventListener("mouseleave", handleMouseLeave);
+      el.removeEventListener("touchstart", handleMouseEnter);
+      el.removeEventListener("touchend", handleMouseLeave);
+    };
+  }, []);
+
   return (
     <section className="w-full px-2 sm:px-4 lg:px-6 py-4">
       <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-8 overflow-hidden">
@@ -135,15 +254,51 @@ const Stats = () => {
               <p className="text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
                 Trusted by Global Tech Leaders
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
-                {techCompanies.map((company, index) => (
-                  <div
-                    key={index}
-                    className="px-3.5 py-1.5 rounded-xl bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700 text-xs md:text-sm font-extrabold text-slate-700 dark:text-slate-300 tracking-wider shadow-2xs hover:border-blue-500 transition-colors"
-                  >
-                    {company}
-                  </div>
-                ))}
+              <div className="relative w-full">
+                <button
+                  type="button"
+                  onClick={() => scroll("left")}
+                  disabled={!canScrollLeft}
+                  aria-label="Previous"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 dark:bg-slate-800/90 shadow backdrop-blur flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-0 transition-opacity"
+                >
+                  <FaChevronLeft className="w-4 h-4" />
+                </button>
+
+                {/* Scroll Container */}
+                <div
+                  ref={scrollRef}
+                  className="flex items-center gap-3 md:gap-4 overflow-x-hidden scroll-smooth px-10 py-2"
+                >
+                  {techCompanies.map((company, index) => (
+                    <div
+                      key={index}
+                      className="flex-shrink-0 px-5 py-2 rounded-xl bg-white/70 dark:bg-gray-900/60 backdrop-blur-sm border border-slate-200/80 dark:border-gray-700 flex items-center justify-center shadow-2xs hover:border-blue-500 transition-colors h-14"
+                    >
+                      {company.logo ? (
+                        <img
+                          src={company.logo}
+                          alt={company.name}
+                          className="h-8 w-auto max-w-[130px] object-contain dark:invert"
+                        />
+                      ) : (
+                        <span className="text-sm md:text-base font-extrabold text-slate-700 dark:text-slate-300 tracking-wider">
+                          {company.name}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => scroll("right")}
+                  disabled={!canScrollRight}
+                  aria-label="Next"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/90 dark:bg-slate-800/90 shadow backdrop-blur flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-0 transition-opacity"
+                >
+                  <FaChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
 

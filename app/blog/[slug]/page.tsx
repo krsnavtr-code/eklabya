@@ -78,7 +78,12 @@ export default async function BlogDetailPage({
     getImageUrl(post.imageUrl || post.featuredImage) ||
     `${siteBase}/images/eklabya-logo-fit-E.jpeg`;
 
-  const featuredImageUrl = getImageUrl(post.featuredImage || post.imageUrl);
+  const rawFeaturedImage = post.featuredImage || post.imageUrl;
+  const featuredImageUrl = rawFeaturedImage
+    ? rawFeaturedImage.startsWith("http")
+      ? rawFeaturedImage
+      : getImageUrl(rawFeaturedImage) || ""
+    : "";
 
   const schemas = [
     {
@@ -256,15 +261,11 @@ export default async function BlogDetailPage({
             </div>
 
             {/* Featured Image */}
-            {(post.featuredImage || post.imageUrl) && (
+            {featuredImageUrl && (
               <div className="px-6 md:px-10 pb-8">
                 <div className="w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden relative shadow-inner bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
                   <img
-                    src={
-                      (post.featuredImage || post.imageUrl).startsWith("http")
-                        ? post.featuredImage || post.imageUrl
-                        : getImageUrl(post.featuredImage || post.imageUrl)
-                    }
+                    src={featuredImageUrl}
                     alt={post.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />

@@ -107,7 +107,7 @@ function BlogListContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-gray-950">
+    <div className="min-h-screen">
       <SEO
         title="Eklabya Blog | Learn Skills, Build Your Career Today"
         description="Explore career tips, skill insights, industry trends and expert learning resources to build in-demand skills and grow your career with Eklabya."
@@ -121,21 +121,17 @@ function BlogListContent() {
       />
 
       {/* ===== HERO HEADER WITH SEARCH ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-800 to-slate-900 text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8">
-        {/* <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
-        <div className="absolute -top-16 -right-16 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" /> */}
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-blue-100 text-xs sm:text-sm font-semibold tracking-wide">
+      <section className="relative overflow-hidden pt-4 sm:pt-10 px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full backdrop-blur-md border border-white/20 text-gray-800 dark:text-gray-100 text-xs sm:text-sm font-semibold tracking-wide">
             <FaBook className="text-yellow-300" />
             <span>Eklabya Insights</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl text-gray-800 dark:text-gray-100 font-black tracking-tight leading-tight">
             Career Insights &amp; Learning Resources
           </h1>
-          <p className="text-sm sm:text-base text-blue-100/90 font-medium max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-800 dark:text-gray-100 font-medium max-w-5xl mx-auto leading-relaxed">
             Expert articles, tutorials, and industry updates to help you stay
             ahead in your career and learning journey.
           </p>
@@ -217,21 +213,21 @@ function BlogListContent() {
                 {posts.map((post) => (
                   <article
                     key={post._id}
-                    className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200/80 dark:border-slate-700/60 hover:border-blue-500 dark:hover:border-blue-500 hover:-translate-y-1 flex flex-col h-full"
+                    className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-300 dark:border-slate-600 hover:border-blue-500 dark:hover:border-blue-500 hover:-translate-y-1 flex flex-col h-full"
                   >
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="block h-48 bg-slate-100 dark:bg-gray-700 overflow-hidden relative"
+                      className="block h-auto bg-slate-100 dark:bg-gray-700 overflow-hidden relative"
                     >
                       {post.featuredImage ? (
                         <img
                           src={getImageUrl(post.featuredImage)}
                           alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                           loading="lazy"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400">
+                        <div className="w-full h-auto flex items-center justify-center text-slate-400">
                           <FaBook className="text-4xl opacity-50" />
                         </div>
                       )}

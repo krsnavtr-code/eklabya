@@ -16,9 +16,10 @@ export function getSiteBase() {
 function extractList<T>(data: any): T[] | null {
   if (!data) return null;
   const list =
+    data.data?.posts ??
+    data.posts ??
     data.data ??
     data.courses ??
-    data.posts ??
     data.categories ??
     data.items ??
     data;
@@ -201,13 +202,29 @@ export async function fetchBlogPostBySlug(
 export async function fetchRelatedPosts(
   categoryId: string,
   excludePostId: string,
+  limit: number = 3,
 ): Promise<BlogPost[]> {
   const base = getApiBase();
   const json = await fetchJson(
-    `${base}/blog/categories/${categoryId}?status=published&exclude=${excludePostId}&limit=3`,
+    `${base}/blog/categories/${categoryId}?status=published&exclude=${excludePostId}&limit=${limit}`,
   );
   const list = extractList<BlogPost>(json);
   return list || [];
+}
+
+export async function fetchNextBlogs(
+  currentSlug: string,
+  limit: number = 4,
+): Promise<BlogPost[]> {
+  const base = getApiBase();
+  const json = await fetchJson(
+    `${base}/blog/posts?status=published&limit=1000&fields=title,slug,featuredImage,createdAt,readingTime,_id`,
+  );
+  const list = extractList<BlogPost>(json);
+  if (!list) return [];
+  const currentIndex = list.findIndex((p) => p.slug === currentSlug);
+  if (currentIndex === -1) return [];
+  return list.slice(currentIndex + 1, currentIndex + 1 + limit);
 }
 
 export interface CategoryData {

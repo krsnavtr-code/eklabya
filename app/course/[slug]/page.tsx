@@ -26,9 +26,7 @@ export async function generateMetadata({
   const courseImage = course.imageUrl || "/images/eklabya-logo-fit-E.jpeg";
   const courseImageUrl = getCourseImageUrl(courseImage, siteBase);
 
-  const title = course.metaTitle
-    ? `${course.metaTitle} | Eklabya`
-    : `${course.title} | Eklabya`;
+  const title = course.metaTitle || course.title;
   const description =
     course.metaDescription ||
     course.shortDescription ||

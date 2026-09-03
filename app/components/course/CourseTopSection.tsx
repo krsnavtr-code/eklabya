@@ -540,42 +540,38 @@ const CourseTopSection: React.FC<CourseTopSectionProps> = ({
 
         {/* ================= RIGHT COLUMN (FLOATING CARD) ================= */}
         <div className="lg:col-span-5 xl:col-span-4 lg:sticky lg:top-6 w-full">
-          <div className="bg-white dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/50 dark:shadow-black/40 border border-slate-100 dark:border-slate-700/50 overflow-hidden flex flex-col">
+          <div className="bg-white dark:bg-slate-800/95 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-200/50 dark:shadow-black/40 border border-slate-200 dark:border-slate-700/50 overflow-hidden flex flex-col">
             {/* Thumbnail Header */}
             <div
               className="relative group cursor-pointer"
-              onClick={onVideoPreview}
+              // onClick={onVideoPreview}
             >
-              <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/40 transition-colors z-10"></div>
+              <div className="absolute inset-0 group-hover:bg-slate-900/20 transition-colors z-10"></div>
               <img
-                src={getImageUrl(
-                  course.thumbnail ||
-                    (course as any).image ||
-                    (course as any).imageUrl,
-                )}
+                src={getImageUrl(course.thumbnail)}
                 alt={course.title}
-                className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                 onError={(e: any) => {
                   e.target.onerror = null;
                   e.target.src = "/images/course-placeholder.jpg";
                 }}
               />
               {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center z-20">
+              {/* <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="w-14 h-14 bg-white/90 dark:bg-slate-800/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
                   <FaPlay className="text-blue-600 dark:text-blue-400 w-5 h-5 ml-1" />
                 </div>
-              </div>
+              </div> */}
 
               {/* Discount Tag */}
-              {discountPercentage > 0 && (
+              {/* {discountPercentage > 0 && (
                 <div className="absolute top-4 left-4 z-20 bg-red-500 text-white text-xs font-extrabold px-3 py-1.5 rounded-lg shadow-md tracking-wider uppercase">
                   {discountPercentage}% OFF
                 </div>
-              )}
+              )} */}
             </div>
 
-            <div className="p-6 md:p-8 flex flex-col">
+            <div className="p-2 md:p-3 flex flex-col">
               {/* Price Section */}
               <div className="flex items-end gap-3 mb-6">
                 <span className="text-3xl font-extrabold text-slate-900 dark:text-white">

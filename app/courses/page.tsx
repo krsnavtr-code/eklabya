@@ -128,7 +128,7 @@ function CoursesContent() {
   );
 
   const formatPrice = (price?: number) => {
-    if (!price || price <= 0) return "Free";
+    if (!price || price <= 0) return "Free Course";
     return `₹${price.toLocaleString("en-IN")}`;
   };
 
@@ -477,12 +477,12 @@ function CoursesContent() {
                       <span className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
                         {formatPrice(course.price)}
                       </span>
-                      {course.originalPrice &&
+                      {/* {course.originalPrice &&
                         course.originalPrice > (course.price || 0) && (
                           <span className="ml-2 text-xs text-slate-400 line-through">
                             {formatPrice(course.originalPrice)}
                           </span>
-                        )}
+                        )} */}
                     </div>
                     <button className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors duration-200 shadow-sm">
                       Check Details

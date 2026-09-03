@@ -19,7 +19,7 @@ export const getImageUrl = (path: string | undefined | null): string => {
     trimmed.startsWith("https://") ||
     trimmed.startsWith("//")
   ) {
-    if (trimmed.includes("eklabya.com") || trimmed.includes("theeklavya.com"))
+    if (trimmed.includes("eklabya.com") || trimmed.includes("eklabya.com"))
       return trimmed;
     if (
       typeof window !== "undefined" &&

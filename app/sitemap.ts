@@ -6,7 +6,7 @@ import {
   fetchAllPublishedBlogSlugs,
 } from "./lib/server-api";
 
-const FALLBACK_SITE_URL = "https://www.theeklavya.com";
+const FALLBACK_SITE_URL = "https://www.eklabya.com";
 
 const staticPaths = [
   { path: "/", priority: 1.0 },

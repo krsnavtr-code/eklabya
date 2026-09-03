@@ -22,13 +22,13 @@ export const metadata: Metadata = {
   keywords:
     "online certification courses, professional certification courses, job oriented courses, online courses in India, skill development courses, career oriented courses, technical courses online, Data Science course, Artificial Intelligence course, Machine Learning course, SAP courses, SAP ABAP course, SAP FICO course, Digital Marketing course, Web Development course, Power BI course, Python course, IT certification courses, online professional courses, Eklabya courses",
   alternates: {
-    canonical: "https://www.theeklavya.com",
+    canonical: "https://www.eklabya.com",
   },
   openGraph: {
     title: "Eklabya | Job-Ready Online Certification Courses in India",
     description:
       "Learn job-ready skills with Eklabya's online certification courses in Data Science, AI, SAP, Web Development and Digital Marketing with expert mentorship.",
-    url: "https://www.theeklavya.com",
+    url: "https://www.eklabya.com",
     type: "website",
   },
   twitter: {
@@ -45,10 +45,10 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "The Eklavya",
-    url: "https://www.theeklavya.com",
+    url: "https://www.eklabya.com",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://www.theeklavya.com/courses?search={search_term_string}",
+      target: "https://www.eklabya.com/courses?search={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
@@ -58,8 +58,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "The Eklavya",
-    url: "https://www.theeklavya.com",
-    logo: "https://www.theeklavya.com/images/eklabya-logo-fit-E.jpeg",
+    url: "https://www.eklabya.com",
+    logo: "https://www.eklabya.com/images/eklabya-logo-fit-E.jpeg",
     sameAs: [
       "https://x.com/eklabyaofficial",
       "https://www.linkedin.com/company/eklabya-centre-of-excellence/",

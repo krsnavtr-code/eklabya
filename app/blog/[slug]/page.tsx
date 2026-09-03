@@ -14,7 +14,7 @@ import { getImageUrl } from "../../utils/imageUtils";
 import ShareButton from "../../components/ShareButton";
 import RelatedPosts from "../_components/RelatedPosts";
 
-const FALLBACK_SITE_URL = "https://www.theeklavya.com";
+const FALLBACK_SITE_URL = "https://www.eklabya.com";
 
 const formatDate = (dateString?: string) => {
   if (!dateString) return "";

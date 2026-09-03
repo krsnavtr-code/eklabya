@@ -4,7 +4,7 @@ import { fetchCourseBySlug, getSiteBase } from "../../lib/server-api";
 import { getImageUrl } from "../../utils/imageUtils";
 import CourseDetailClient from "../_components/CourseDetailClient";
 
-const FALLBACK_SITE_URL = "https://www.theeklavya.com";
+const FALLBACK_SITE_URL = "https://www.eklabya.com";
 
 function getCourseImageUrl(courseImage: string | undefined, siteBase: string) {
   return getImageUrl(courseImage) || `${siteBase}${courseImage}`;

@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { STANDALONE_PATHS } from "../lib/standaloneRoutes";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ const HIDDEN_LAYOUT_PATHS = [
   "/register",
   "/forgot-password",
   "/forgot",
+  ...STANDALONE_PATHS,
 ];
 
 export default function AppShell({ children }: AppShellProps) {

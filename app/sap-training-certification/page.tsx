@@ -472,7 +472,6 @@ export default function SapTrainingCertification() {
 
           {/* Trust Strip (ratings, CTAs & accreditations) */}
           <div className="relative z-10 max-w-7xl mx-auto mt-4 lg:mt-6 pt-3 border-t border-white/10">
-
             {/* Accreditation badges */}
             <div className="flex flex-wrap items-stretch justify-center gap-3 mt-2">
               {[
@@ -552,6 +551,13 @@ export default function SapTrainingCertification() {
           .animate-marquee-logos {
             animation: marquee-logos 40s linear infinite;
           }
+          /* Highlight a course card when its footer/anchor link is clicked */
+          .sap-course-card:target {
+            border-color: rgb(239 68 68) !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.35),
+              0 20px 40px -12px rgba(239, 68, 68, 0.35) !important;
+            transform: translateY(-4px);
+          }
         `}</style>
 
         {/* SAP Courses Grid */}
@@ -573,7 +579,8 @@ export default function SapTrainingCertification() {
               {sapCourses.map((course) => (
                 <div
                   key={course.href}
-                  className="group relative bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-7 flex flex-col hover:border-blue-500/50 hover:shadow-blue-500/10 transition-all"
+                  id={course.href.replace("/course/", "course-")}
+                  className="sap-course-card group relative bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-7 flex flex-col hover:border-blue-500/50 hover:shadow-blue-500/10 transition-all scroll-mt-24"
                 >
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl">
@@ -881,7 +888,7 @@ export default function SapTrainingCertification() {
                   {sapCourses.map((course, idx) => (
                     <li key={idx}>
                       <a
-                        href="#sap-courses"
+                        href={`#${course.href.replace("/course/", "course-")}`}
                         className="text-xs sm:text-sm text-slate-400 hover:text-blue-400 transition-colors"
                       >
                         {course.name}

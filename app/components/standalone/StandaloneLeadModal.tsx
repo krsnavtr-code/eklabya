@@ -13,6 +13,7 @@ interface StandaloneLeadModalProps {
   courseKeyword?: string;
   defaultCourseKeyword?: string;
   showMessage?: boolean;
+  redirectTo?: string;
 }
 
 // Button + popup modal wrapper around StandaloneLeadForm for standalone
@@ -25,6 +26,7 @@ export default function StandaloneLeadModal({
   courseKeyword,
   defaultCourseKeyword,
   showMessage = false,
+  redirectTo,
 }: StandaloneLeadModalProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -75,6 +77,7 @@ export default function StandaloneLeadModal({
                   defaultCourseKeyword={defaultCourseKeyword}
                   showMessage={showMessage}
                   noCard
+                  redirectTo={redirectTo}
                 />
               </div>
             </div>

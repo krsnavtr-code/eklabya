@@ -456,6 +456,7 @@ export default function SapTrainingCertification() {
                     courseKeyword="SAP"
                     showMessage={false}
                     noCard
+                    redirectTo="/sap-training-certification/thank-you"
                   />
 
                   <div className="mt-3 text-center">
@@ -473,6 +474,7 @@ export default function SapTrainingCertification() {
             {/* CTA buttons */}
             {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mt-6">
               <StandaloneLeadModal
+                redirectTo="/sap-training-certification/thank-you"
                 triggerLabel="PLACEMENT REPORT"
                 triggerClassName="w-full bg-blue-600 text-white px-5 py-3 rounded-lg font-extrabold text-xs sm:text-sm tracking-wide hover:bg-blue-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] cursor-pointer"
                 heading="Get the Latest Placement Report"
@@ -480,6 +482,7 @@ export default function SapTrainingCertification() {
                 courseKeyword="SAP"
               />
               <StandaloneLeadModal
+                redirectTo="/sap-training-certification/thank-you"
                 triggerLabel="GET BROCHURE"
                 triggerClassName="w-full bg-white/5 border border-white/20 text-white px-5 py-3 rounded-lg font-extrabold text-xs sm:text-sm tracking-wide hover:bg-white/10 transition-all cursor-pointer"
                 heading="Download Course Brochure"
@@ -487,6 +490,7 @@ export default function SapTrainingCertification() {
                 courseKeyword="SAP"
               />
               <StandaloneLeadModal
+                redirectTo="/sap-training-certification/thank-you"
                 triggerLabel="INTERVIEW QUESTIONS"
                 triggerClassName="w-full bg-white/5 border border-white/20 text-white px-5 py-3 rounded-lg font-extrabold text-xs sm:text-sm tracking-wide hover:bg-white/10 transition-all cursor-pointer"
                 heading="Get SAP Interview Questions"
@@ -612,6 +616,7 @@ export default function SapTrainingCertification() {
                     {course.description}
                   </p>
                   <StandaloneLeadModal
+                    redirectTo="/sap-training-certification/thank-you"
                     triggerLabel={
                       <>
                         Enquire About This Course
@@ -636,6 +641,7 @@ export default function SapTrainingCertification() {
                   module that matches your background and goals.
                 </p>
                 <StandaloneLeadModal
+                  redirectTo="/sap-training-certification/thank-you"
                   triggerLabel={
                     <>
                       Get Free Counselling <FaArrowRight className="text-xs" />

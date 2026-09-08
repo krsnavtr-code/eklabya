@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, ChangeEvent, FormEvent, ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
 import api from "../../utils/api";
@@ -24,6 +25,9 @@ interface StandaloneLeadFormProps {
   // Render without the card background/border/shadow (when wrapped in a
   // custom container, e.g. inside the hero banner).
   noCard?: boolean;
+  // Redirect to a standalone thank-you page after successful submit.
+  // If not set, an inline success message is shown instead.
+  redirectTo?: string;
 }
 
 // Self-contained lead capture form for standalone landing pages.
@@ -36,7 +40,9 @@ export default function StandaloneLeadForm({
   defaultCourseKeyword,
   showMessage = true,
   noCard = false,
+  redirectTo,
 }: StandaloneLeadFormProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -121,6 +127,10 @@ export default function StandaloneLeadForm({
       if (result.success) {
         if (result.data?.trackingId) {
           localStorage.setItem("user_tracker_id", result.data.trackingId);
+        }
+        if (redirectTo) {
+          router.push(redirectTo);
+          return;
         }
         setIsSuccess(true);
         toast.success("Submitted successfully! We will call you back soon.");

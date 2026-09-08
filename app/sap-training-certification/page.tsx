@@ -22,11 +22,22 @@ import {
   FaBoxes,
   FaFileInvoiceDollar,
 } from "react-icons/fa";
-import WhyLearnWithEklabya from "../components/home/WhyLearnWithEklabya";
 import HowWillYourTrainingWork from "../components/home/HowWillYourTrainingWork";
 import GoogleReviews from "../components/home/GoogleReviews";
 import Testimonials from "../components/home/Testimonials";
-import FAQ from "../components/home/FAQ";
+import {
+  FaChevronDown,
+  FaQuestionCircle,
+  FaWhatsapp,
+  FaTwitter,
+  FaLinkedin,
+  FaFacebook,
+  FaInstagram,
+  FaPinterest,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaEnvelope,
+} from "react-icons/fa";
 import StandaloneLeadForm from "../components/standalone/StandaloneLeadForm";
 import StandaloneNavbar from "../components/standalone/StandaloneNavbar";
 import StandaloneLeadModal from "../components/standalone/StandaloneLeadModal";
@@ -176,6 +187,44 @@ const careerRoles = [
   "SAP End User / Power User",
   "ERP Business Analyst",
   "SAP Implementation Associate",
+];
+
+const sapFaqs = [
+  {
+    question: "Which SAP module should I choose — ABAP, FICO, MM, SD or PP?",
+    answer:
+      "It depends on your background. If you have a programming or IT background, SAP ABAP (technical) is the best fit. If you come from commerce, finance or MBA, SAP FICO is ideal. For supply chain, logistics or mechanical backgrounds, SAP MM, SD or PP work best. Our counsellors can help you pick the right module on a free call.",
+  },
+  {
+    question: "Do I need prior SAP or coding experience to join?",
+    answer:
+      "No. Our SAP programmes start from ERP and SAP fundamentals, so beginners can join comfortably. Only the ABAP track benefits from basic programming logic, but even that is taught from scratch.",
+  },
+  {
+    question: "Will I get hands-on practice on a live SAP server?",
+    answer:
+      "Yes. Every learner gets SAP server access for the duration of the course so you can practice configuration, transactions and real-time business scenarios — not just watch recorded videos.",
+  },
+  {
+    question: "Is the training live or recorded?",
+    answer:
+      "It's a mix of both. You attend live instructor-led classes with trainers who have real SAP implementation experience, and every session is recorded so you can revise anytime at your own pace.",
+  },
+  {
+    question: "Do you provide SAP certification and placement support?",
+    answer:
+      "Yes. On completion you receive an ISO-certified, verifiable course completion certificate. Our placement team also helps with resume building, mock interviews and referrals to hiring partners for SAP consultant and analyst roles.",
+  },
+  {
+    question: "What is the course duration and fee?",
+    answer:
+      "Duration is typically 8–12 weeks depending on the module, with weekday and weekend batch options. Fees vary by module — fill the enquiry form or book a free demo class and our counsellor will share exact fees, syllabus and upcoming batch timings.",
+  },
+  {
+    question: "Can working professionals join? Are there weekend batches?",
+    answer:
+      "Absolutely. We run evening and weekend batches designed for working professionals, and all live sessions are recorded in case you miss a class.",
+  },
 ];
 
 const techCompanies = [
@@ -723,7 +772,188 @@ export default function SapTrainingCertification() {
         </div>
 
         {/* SAP Faq's */}
-        
+        <section
+          id="faq"
+          className="w-full px-2 sm:px-4 lg:px-6 py-4 scroll-mt-20"
+        >
+          <div className="relative max-w-7xl mx-auto bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-200/40 dark:shadow-black/40 p-5 sm:p-7 md:p-8 space-y-6 overflow-hidden">
+            {/* Section Header */}
+            <div className="text-center max-w-5xl mx-auto space-y-2">
+              <div className="inline-flex items-center gap-1.5 bg-blue-50/80 dark:bg-blue-950/60 backdrop-blur-md border border-blue-200/80 dark:border-blue-800/80 px-3.5 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-extrabold uppercase tracking-wider">
+                <FaQuestionCircle className="text-xs" /> Got Questions?
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                SAP Training FAQs
+              </h2>
+              <p className="text-sm sm:text-base text-slate-800 dark:text-slate-400 leading-relaxed font-normal">
+                Common questions about our SAP courses, certification and
+                placements.
+              </p>
+            </div>
+
+            {/* Accordion List */}
+            <div className="space-y-2">
+              {sapFaqs.map((faq, index) => (
+                <details
+                  key={index}
+                  className="group rounded-2xl border border-slate-200/80 dark:border-slate-700/60 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md shadow-2xs overflow-hidden open:bg-white/90 dark:open:bg-gray-800/90 open:border-blue-500/40 open:shadow-md open:shadow-blue-500/5 transition-all duration-200"
+                >
+                  <summary className="px-5 py-3.5 flex items-center justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                      {faq.question}
+                    </span>
+                    <div className="w-7 h-7 rounded-full bg-slate-100/80 dark:bg-gray-700/60 flex items-center justify-center text-slate-500 dark:text-slate-400 shrink-0 transition-transform duration-300 group-open:rotate-180 group-open:bg-blue-50 dark:group-open:bg-blue-950 group-open:text-blue-600 dark:group-open:text-blue-400">
+                      <FaChevronDown className="text-xs" />
+                    </div>
+                  </summary>
+                  <div className="px-5 pb-4 pt-1 border-t border-slate-200/60 dark:border-slate-700/60">
+                    <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-300 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Standalone Footer (in-page anchors & external links only) */}
+        <footer className="w-full mt-8 bg-slate-900 text-slate-300 border-t border-slate-800">
+          <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* About */}
+              <div className="space-y-4">
+                <h3 className="text-xs font-black text-white tracking-wider uppercase">
+                  SAP Training &amp; Certification
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  Job-oriented SAP training with live classes, hands-on server
+                  access, real-time projects, certification and dedicated
+                  placement support.
+                </p>
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {[
+                    { icon: FaWhatsapp, href: WHATSAPP_URL },
+                    { icon: FaTwitter, href: "https://x.com/eklabyaofficial" },
+                    {
+                      icon: FaLinkedin,
+                      href: "https://www.linkedin.com/company/eklabya-centre-of-excellence/",
+                    },
+                    {
+                      icon: FaFacebook,
+                      href: "https://www.facebook.com/profile.php?id=61589473389916",
+                    },
+                    {
+                      icon: FaInstagram,
+                      href: "https://www.instagram.com/eklabya_official",
+                    },
+                    {
+                      icon: FaPinterest,
+                      href: "https://in.pinterest.com/eklabyaofficial",
+                    },
+                  ].map((social, idx) => (
+                    <a
+                      key={idx}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-blue-600 hover:text-white transition-all"
+                    >
+                      <social.icon className="h-3.5 w-3.5" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Links (in-page) */}
+              <div className="space-y-3">
+                <h3 className="text-xs font-black text-white tracking-wider uppercase">
+                  On This Page
+                </h3>
+                <ul className="space-y-2">
+                  {[
+                    { name: "SAP Courses", to: "#sap-courses" },
+                    { name: "Why Eklabya", to: "#why-sap" },
+                    { name: "Learning Path", to: "#learning-path" },
+                    { name: "Career Opportunities", to: "#careers" },
+                    { name: "Reviews", to: "#reviews" },
+                    { name: "FAQs", to: "#faq" },
+                    { name: "Enquire Now", to: "#enquire" },
+                  ].map((link, idx) => (
+                    <li key={idx}>
+                      <a
+                        href={link.to}
+                        className="text-xs sm:text-sm text-slate-400 hover:text-blue-400 transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* SAP Courses */}
+              <div className="space-y-3">
+                <h3 className="text-xs font-black text-white tracking-wider uppercase">
+                  SAP Programmes
+                </h3>
+                <ul className="space-y-2">
+                  {sapCourses.map((course, idx) => (
+                    <li key={idx}>
+                      <a
+                        href="#sap-courses"
+                        className="text-xs sm:text-sm text-slate-400 hover:text-blue-400 transition-colors"
+                      >
+                        {course.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Contact */}
+              <div className="space-y-3">
+                <h3 className="text-xs font-black text-white tracking-wider uppercase">
+                  Contact Us
+                </h3>
+                <ul className="space-y-3 text-xs sm:text-sm text-slate-400">
+                  <li className="flex items-start gap-2.5">
+                    <FaMapMarkerAlt className="h-4 w-4 text-blue-500 shrink-0 mt-0.5" />
+                    <span>
+                      G-25, Block G, Sector 3, Noida, Uttar Pradesh 201301
+                    </span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <FaPhone className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                    <a href="tel:+919891030303" className="hover:text-blue-400">
+                      +91 9891030303
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <FaEnvelope className="h-3.5 w-3.5 text-purple-500 shrink-0" />
+                    <a
+                      href="mailto:info@eklabya.com"
+                      className="hover:text-blue-400"
+                    >
+                      info@eklabya.com
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+              <p className="text-xs text-slate-500">
+                &copy; {new Date().getFullYear()} eKlabya. All rights reserved.
+              </p>
+              <p className="text-xs text-slate-500">
+                SAP&reg; is a registered trademark of SAP SE. This is an
+                independent training programme.
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </main>
   );

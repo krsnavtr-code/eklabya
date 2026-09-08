@@ -41,6 +41,7 @@ import {
 import StandaloneLeadForm from "../components/standalone/StandaloneLeadForm";
 import StandaloneNavbar from "../components/standalone/StandaloneNavbar";
 import StandaloneLeadModal from "../components/standalone/StandaloneLeadModal";
+import StandaloneFloatingContact from "../components/standalone/StandaloneFloatingContact";
 
 const WHATSAPP_URL =
   "https://wa.me/919891030303?text=Hi%2C%20I%20would%20like%20to%20know%20more%20about%20SAP%20training%20and%20certification%20courses.";
@@ -342,7 +343,7 @@ export default function SapTrainingCertification() {
                 <FaCertificate /> Job-Oriented SAP Program
               </div>
 
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight tracking-tight">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 leading-tight tracking-tight">
                 Fast-Track Your IT Career with{" "}
                 <br className="hidden lg:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
@@ -471,33 +472,6 @@ export default function SapTrainingCertification() {
 
           {/* Trust Strip (ratings, CTAs & accreditations) */}
           <div className="relative z-10 max-w-7xl mx-auto mt-4 lg:mt-6 pt-3 border-t border-white/10">
-            {/* CTA buttons */}
-            {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mt-6">
-              <StandaloneLeadModal
-                redirectTo="/sap-training-certification/thank-you"
-                triggerLabel="PLACEMENT REPORT"
-                triggerClassName="w-full bg-blue-600 text-white px-5 py-3 rounded-lg font-extrabold text-xs sm:text-sm tracking-wide hover:bg-blue-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)] cursor-pointer"
-                heading="Get the Latest Placement Report"
-                subheading="Fill in your details and we'll share the placement report on call."
-                courseKeyword="SAP"
-              />
-              <StandaloneLeadModal
-                redirectTo="/sap-training-certification/thank-you"
-                triggerLabel="GET BROCHURE"
-                triggerClassName="w-full bg-white/5 border border-white/20 text-white px-5 py-3 rounded-lg font-extrabold text-xs sm:text-sm tracking-wide hover:bg-white/10 transition-all cursor-pointer"
-                heading="Download Course Brochure"
-                subheading="Fill in your details and we'll share the SAP brochure with you."
-                courseKeyword="SAP"
-              />
-              <StandaloneLeadModal
-                redirectTo="/sap-training-certification/thank-you"
-                triggerLabel="INTERVIEW QUESTIONS"
-                triggerClassName="w-full bg-white/5 border border-white/20 text-white px-5 py-3 rounded-lg font-extrabold text-xs sm:text-sm tracking-wide hover:bg-white/10 transition-all cursor-pointer"
-                heading="Get SAP Interview Questions"
-                subheading="Fill in your details and we'll share top SAP interview questions."
-                courseKeyword="SAP"
-              />
-            </div> */}
 
             {/* Accreditation badges */}
             <div className="flex flex-wrap items-stretch justify-center gap-3 mt-2">
@@ -960,6 +934,12 @@ export default function SapTrainingCertification() {
             </div>
           </div>
         </footer>
+
+        {/* Floating talk button (WhatsApp / Call) */}
+        <StandaloneFloatingContact
+          whatsappUrl={WHATSAPP_URL}
+          phoneNumber="+919891030303"
+        />
       </div>
     </main>
   );
